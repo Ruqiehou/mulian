@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天狐慕氏联邦帝国铁路票价系统</title>
+    <style>
+        body { font-family: "Microsoft YaHei", sans-serif; text-align: center; padding: 20px; background: #f5f5f5; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        select, button { padding: 10px; margin: 10px; font-size: 16px; border-radius: 5px; }
+        button { background: #1a5fb4; color: white; cursor: pointer; }
+        .result { font-size: 20px; margin: 20px; color: #d32f2f; font-weight: bold; }
+        .tip { color: #666; font-size: 14px; }
+        .seat-option { margin: 10px 0; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🚄 天狐慕氏联邦帝国铁路票价系统</h1>
+    <p class="tip">系统将根据地图与官方票价表，自动计算两地间最便宜的路线</p>
+
+    <div>
+        <label for="start">出发车站:</label>
+        <select id="start"></select>
+    </div>
+
+    <div>
+        <label for="end">到达车站:</label>
+        <select id="end"></select>
+    </div>
+
+    <div class="seat-option">
+        <label>座位等级:</label>
+        <input type="radio" id="yibei" name="seat" value="yibei" checked> <label for="yibei">乙等座</label>
+        <input type="radio" id="jia" name="seat" value="jia"> <label for="jia">甲等座</label>
+    </div>
+
+    <button onclick="findCheapestRoute()">💰 计算最便宜票价</button>
+
+    <div class="result" id="result">结果将显示在这里</div>
+</div>
+
+<script>
+    // ==================================================================================
+    // 1. 【配置区】地区连接关系 (乙等座的跨区加价，根据你提供的名单)
+    // ==================================================================================
+    const connections = {
+        '义安': { '清恒': 300, '景圣': 200, '颜系': 400, '潮州': 200 },
+        '清恒': { '义安': 300, '光辰': 300, '景圣': 200, '颜系': 400 },
+        '光辰': { '清恒': 300, '兴庆': 300, '楚系': 200 },
+        '兴庆': { '光辰': 300, '潮州': 300, '凌系': 300, '云系': 500 },
+        '潮州': { '兴庆': 300, '义安': 200, '云系': 200 },
+        '凌系': { '兴庆': 300, '天轩': 300 },
+        '天轩': { '凌系': 300, '云系': 300, '陇系': 400 },
+        '云系': { '兴庆': 500, '天轩': 300, '潮州': 200 },
+        '楚系': { '光辰': 200, '唐系': 300, '殷系': 300, '景圣': 300, '颜系': 400 },
+        '唐系': { '楚系': 300, '陇系': 300 },
+        '陇系': { '唐系': 300, '天轩': 400 },
+        '殷系': { '楚系': 300, '景圣': 300, '颜系': 400 },
+        '景圣': { '楚系': 300, '殷系': 300, '义安': 200, '清恒': 200 },
+        '颜系': { '楚系': 400, '殷系': 400, '义安': 400, '清恒': 400 }
+    };
+
+    // ==================================================================================
+    // 2. 【配置区】车站归属关系 (根据你提供的“真实车站数据”)
+    // ==================================================================================
+    const stations = {
+        // ■京畿都市圈
+        "义安站": "义安", "义安东站": "义安", "潮阳站": "义安", "澄海站": "义安", "惠来站": "义安", "义安机场站": "义安",
+        "清桓站": "清恒", "清桓机场站": "清恒", "清桓南站": "清恒",
+
+        // ■光潮都市圈
+        "光辰站": "光辰", "光辰东站": "光辰", "上雍站": "光辰", "龙江站": "光辰",
+        "潮州站": "潮州", "饶平站": "潮州",
+        "兴庆站": "兴庆", "兴庆西站": "兴庆",
+
+        // ■其他
+        "广陵站": "凌系",     // 凌系-广陵府-广陵站
+        "青阳站": "楚系",     // 楚系-青阳府-青阳站
+        "青阳机场站": "楚系",  // 楚系-青阳府-青阳机场站
+        "云陵站": "云系",     // 云系-云陵府-云陵站
+        "翎陌站": "云系",     // 云系-翎陌国-翎陌站
+        "天轩站": "天轩",     // 行在-天轩府-天轩站
+        "镇陇站": "陇系",     // 陇系-镇陇府-镇陇站
+        "镇渊站": "殷系",     // 殷系-镇渊府-镇渊站
+        "延平北站": "唐系",   // 唐系-延平府-延平北站
+        "燕云大青站": "景圣", // 景圣-燕云府-燕云大青站
+        "青枢站": "颜系"      // 颜系-青枢府-青枢站
+    };
+
+    // ==================================================================================
+    // 3. 核心计算引擎
+    // ==================================================================================
+    function findCheapestRoute() {
+        const startStation = document.getElementById('start').value;
+        const endStation = document.getElementById('end').value;
+        const seatClass = document.querySelector('input[name="seat"]:checked').value;
+
+        if (!startStation || !endStation) {
+            document.getElementById('result').innerHTML = `❌ 错误：请先选择车站！`;
+            return;
+        }
+
+        const startRegion = stations[startStation];
+        const endRegion = stations[endStation];
+
+        // 1. 同地区判断
+        if (startRegion === endRegion) {
+            const fare = seatClass === 'jia' ? 300 : 200;
+            document.getElementById('result').innerHTML = `✅ 同地区通勤<br>💰 <strong>${fare} 文</strong> (起步价)`;
+            return;
+        }
+
+        // 2. 寻找最短路径
+        const result = findShortestPath(startRegion, endRegion);
+        
+        if (!result) {
+            document.getElementById('result').innerHTML = `❌ 错误：无通路！`;
+            return;
+        }
+
+        const { distance, path, steps } = result;
+        
+        // 3. 计算票价 (关键修改点)
+        // 乙等座总票价 = 200(起步) + distance(各段跨区费之和)
+        // 甲等座总票价 = 300(起步) + (各段跨区费+100)之和
+        // 甲等座也可以理解为：乙等票价 + (100 * 跨区段数)
+        
+        const baseFareYi = 200;
+        const baseFareJia = 300;
+        
+        const yiTotal = baseFareYi + distance;
+        const jiaTotal = baseFareJia + distance + (steps * 100); 
+
+        let displayText = `🛣️ 路线: ${path.join(" → ")}<br>🧮 跨区段数: ${steps} 段`;
+
+        if (seatClass === 'yibei') {
+            displayText += `<br>🎫 乙等座: ${yiTotal} 文`;
+        } else {
+            displayText += `<br>👑 甲等座: ${jiaTotal} 文<br><small>(起步300 + 跨区费${distance} + 服务费${steps * 100})</small>`;
+        }
+
+        document.getElementById('result').innerHTML = displayText;
+    }
+
+    // Dijkstra 算法 (未变)
+    function findShortestPath(start, end) {
+        const distances = {};
+        const previous = {};
+        const visited = new Set();
+        const pq = [];
+
+        for (let node in connections) {
+            distances[node] = Infinity;
+            previous[node] = null;
+        }
+        distances[start] = 0;
+        pq.push({ node: start, dist: 0 });
+
+        while (pq.length > 0) {
+            pq.sort((a, b) => a.dist - b.dist);
+            const { node: current, dist: currentDist } = pq.shift();
+
+            if (visited.has(current)) continue;
+            visited.add(current);
+
+            if (current === end) {
+                const path = [];
+                let step = current;
+                let stepCount = 0;
+                while (step !== null) {
+                    path.unshift(step);
+                    if (previous[step]) stepCount++;
+                    step = previous[step];
+                }
+                return { distance: currentDist, path: path, steps: stepCount };
+            }
+
+            const neighbors = connections[current];
+            for (let neighbor in neighbors) {
+                if (!visited.has(neighbor)) {
+                    const newDist = currentDist + neighbors[neighbor];
+                    if (newDist < distances[neighbor]) {
+                        distances[neighbor] = newDist;
+                        previous[neighbor] = current;
+                        pq.push({ node: neighbor, dist: newDist });
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    // ==================================================================================
+    // 4. 页面初始化
+    // ==================================================================================
+    window.onload = function() {
+        const startSelect = document.getElementById('start');
+        const endSelect = document.getElementById('end');
+
+        for (let code in stations) {
+            const opt1 = new Option(`${code} (${stations[code]})`, code);
+            const opt2 = new Option(`${code} (${stations[code]})`, code);
+            startSelect.add(opt1);
+            endSelect.add(opt2);
+        }
+    };
+</script>
+<style>
+    body::after {
+      content: "版权所有 © 2019-2026 天狐慕氏联邦帝国";
+      background-color: #f5f5f5;
+      padding: 10px;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+    }
+  </style>
+</body>
+</html>
