@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天轩币使用条例 · 慕联官方</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            background-color: #f3f5f0;
+            color: #1e2b2f;
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            background: #fefef7;
+            border-radius: 32px;
+            box-shadow: 0 25px 45px -12px #2b4a3b33;
+            padding: 2.5rem 2.2rem;
+            border: 1px solid #dadfc5;
+        }
+
+        /* 主标题 */
+        h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            color: #2c4a3b;
+            letter-spacing: 1px;
+            border-left: 12px solid #7f9970;
+            padding-left: 1.8rem;
+            margin-bottom: 0.75rem;
+            text-shadow: 1px 2px 0 #dbe6d2;
+        }
+
+        .subhead {
+            font-size: 1.2rem;
+            color: #4b6b53;
+            margin-bottom: 2rem;
+            padding-left: 2.5rem;
+            font-style: italic;
+        }
+
+        /* 一级标题 (章节) */
+        h2 {
+            font-size: 2.4rem;
+            font-weight: 650;
+            margin-top: 2.8rem;
+            margin-bottom: 1.2rem;
+            color: #2d4f3b;
+            border-bottom: 3px solid #bdc9ae;
+            padding-bottom: 0.4rem;
+            scroll-margin-top: 2rem;
+            background: linear-gradient(to right, #f0f5ea, transparent);
+            padding-left: 1rem;
+        }
+
+        /* 二级标题 */
+        h3 {
+            font-size: 1.9rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+            color: #3f6046;
+            padding-left: 0.5rem;
+            border-left: 6px solid #a1b892;
+        }
+
+        /* 三级标题 (用于票价内的小节) */
+        h4 {
+            font-size: 1.5rem;
+            font-weight: 550;
+            margin: 1.5rem 0 0.5rem 0;
+            color: #557358;
+            padding-left: 0.75rem;
+            border-left: 3px dashed #b1c6a5;
+        }
+
+        /* 普通段落 */
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: #25332b;
+        }
+
+        /* 表格风格 (用于价格列表) */
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.2rem 0 1.8rem;
+            background: #fafcf8;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px #d7dfce;
+        }
+
+        .price-table th {
+            background: #708a64;
+            color: white;
+            font-weight: 600;
+            padding: 0.6rem 1rem;
+            text-align: left;
+            font-size: 1rem;
+        }
+
+        .price-table td {
+            border: 1px solid #cbd7bc;
+            padding: 0.6rem 1rem;
+            color: #1e3327;
+        }
+
+        .price-table tr:nth-child(even) {
+            background: #edf3e6;
+        }
+
+        /* 宠物等列表用双列布局 */
+        .grid-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 0.5rem 1.5rem;
+            background: #f2f7ed;
+            padding: 1rem 1.5rem;
+            border-radius: 24px;
+            border: 1px solid #bdd0b0;
+            margin-bottom: 1.5rem;
+        }
+
+        .grid-item {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px dashed #b1c2a2;
+            padding: 0.3rem 0;
+        }
+
+        .grid-item span:first-child {
+            font-weight: 500;
+        }
+
+        .grid-item span:last-child {
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #3b6b47;
+        }
+
+        /* 图片占位区 */
+        .coin-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            margin: 1.5rem 0 1rem;
+            background: #e9efdf;
+            border-radius: 30px;
+            padding: 1.8rem 1.5rem;
+            border: 1px solid #9ab386;
+        }
+
+        .coin-placeholder {
+            background: #c5d6b5;
+            width: 150px;
+            height: 100px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #3f5e3a;
+            font-weight: 500;
+            box-shadow: inset 0 2px 6px #617a55;
+            border: 2px solid #fff6;
+            font-size: 0.9rem;
+            text-align: center;
+            padding: 0.5rem;
+        }
+
+        /* 目录卡片 */
+        .toc-card {
+            background: #eef3e7;
+            border-radius: 32px;
+            padding: 1.8rem 2rem;
+            margin: 2rem 0 2.5rem;
+            border: 1px solid #aabb97;
+            box-shadow: 0 6px 14px #abb89d4d;
+        }
+
+        .toc-card h3 {
+            margin-top: 0;
+            border-left-color: #4d7040;
+        }
+
+        /* 层级导航样式 */
+        .toc-tree {
+            margin-top: 1rem;
+        }
+
+        .toc-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .toc-item > a {
+            color: #2d4f2d;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            transition: background 0.2s;
+            background: #f5f9ef;
+            border: 1px solid #c5d6b5;
+        }
+
+        .toc-item > a:hover {
+            background: #cbdbbc;
+            color: #1d3b1d;
+        }
+
+        .toc-toggle {
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+            cursor: pointer;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #a1b892;
+            border-radius: 50%;
+            color: white;
+            font-size: 0.8rem;
+        }
+
+        .toc-toggle.collapsed {
+            transform: rotate(-90deg);
+        }
+
+        .toc-toggle.hidden {
+            visibility: hidden;
+        }
+
+        .toc-children {
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+            display: block;
+        }
+
+        .toc-children.collapsed {
+            display: none;
+        }
+
+        .toc-children a {
+            color: #3d6f3d;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.3rem 0.6rem;
+            border-radius: 15px;
+            display: block;
+            margin: 0.2rem 0;
+            transition: background 0.2s;
+            background: #fafcf8;
+            border-left: 3px solid #a1b892;
+        }
+
+        .toc-children a:hover {
+            background: #d5e6c5;
+            color: #1d3b1d;
+        }
+
+        /* 响应式优化 */
+        @media (max-width: 768px) {
+            .toc-card {
+                padding: 1.5rem 1.2rem;
+            }
+
+            .toc-children {
+                margin-left: 1rem;
+            }
+
+            .toc-item > a {
+                padding: 0.3rem 0.6rem;
+                font-size: 0.95rem;
+            }
+
+            .toc-children a {
+                font-size: 0.9rem;
+                padding: 0.25rem 0.5rem;
+            }
+        }
+
+        /* 跳转链接卡片 (与之前设计一致) */
+        .fare-link-card {
+            background: #e2ebd8;
+            border-radius: 40px;
+            padding: 2rem 2.5rem;
+            margin: 3rem 0 2rem;
+            border: 1px solid #87a07b;
+            text-align: center;
+            box-shadow: 0 12px 18px -8px #627a57;
+        }
+
+        .btn-fare {
+            display: inline-block;
+            background: #446544;
+            color: white;
+            font-size: 1.7rem;
+            font-weight: 600;
+            padding: 1rem 3.5rem;
+            border-radius: 60px;
+            text-decoration: none;
+            box-shadow: 0 6px 0 #1f331f;
+            transition: 0.1s ease;
+            margin: 1rem 0;
+            border: 2px solid #b7d6a8;
+        }
+
+        .btn-fare:hover {
+            background: #2c4f2c;
+            transform: translateY(2px);
+            box-shadow: 0 4px 0 #1f331f;
+        }
+
+        .footnote {
+            font-size: 0.95rem;
+            color: #557055;
+            background: #f4f9ef;
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            display: inline-block;
+        }
+
+        hr {
+            border: none;
+            border-top: 2px dotted #a6ba99;
+            margin: 2rem 0;
+        }
+
+        /* 小型徽章 */
+        .badge {
+            background: #607d4e;
+            color: white;
+            padding: 0.15rem 0.6rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            margin-right: 0.5rem;
+        }
+
+        /* 处理 toc 锚点 */
+        .anchor {
+            scroll-margin-top: 60px;
+        }
+
+        /* 特殊符号 */
+        .currency-sym {
+            font-family: 'Segoe UI', 'Arial Unicode MS', sans-serif;
+            background: #e0e8d6;
+            padding: 0.1rem 0.3rem;
+            border-radius: 12px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>慕联天轩币使用条例</h1>
+    <div class="subhead">官方符号 <span class="currency-sym">ㄖ</span>  ·  单位为“文”  ·  通行于慕联全境</div>
+
+    <!-- 目录导航 (层级结构) -->
+    <div class="toc-card">
+        <h3 style="margin-top:0;">📖 内容导航</h3>
+        <div class="toc-tree">
+            <div class="toc-item">
+                <a href="#preamble"><span class="toc-toggle hidden">▼</span>序言</a>
+            </div>
+            
+            <div class="toc-item">
+                <a href="#basic-livelihood" onclick="toggleToc(this)"><span class="toc-toggle">▼</span>基础民生</a>
+                <div class="toc-children">
+                    <a href="#real-estate">—— 购置房产</a>
+                    <a href="#pets">—— 宠物购买</a>
+                </div>
+            </div>
+            
+            <div class="toc-item">
+                <a href="#identity" onclick="toggleToc(this)"><span class="toc-toggle">▼</span>身份</a>
+                <div class="toc-children">
+                    <a href="#rename">—— 改名卡</a>
+                    <a href="#reskin">—— 换皮卡</a>
+                    <a href="#marriage">—— 结婚证</a>
+                </div>
+            </div>
+            
+            <div class="toc-item">
+                <a href="#transport" onclick="toggleToc(this)"><span class="toc-toggle">▼</span>交通出行</a>
+                <div class="toc-children">
+                    <a href="#vehicles">—— 购置车船</a>
+                    <a href="#air">—— 航空运输</a>
+                    <a href="#highspeed">—— 高铁运输</a>
+                </div>
+            </div>
+            
+            <div class="toc-item">
+                <a href="#commerce" onclick="toggleToc(this)"><span class="toc-toggle">▼</span>商贸流通</a>
+                <div class="toc-children">
+                    <a href="#shops">—— 商铺</a>
+                    <a href="#factory">—— 工厂</a>
+                    <a href="#other-enterprise">—— 其他企业</a>
+                    <a href="#tariff">—— 关税</a>
+                    <a href="#rent">—— 出租业务</a>
+                    <a href="#agriculture">—— 农业经济</a>
+                </div>
+            </div>
+            
+            <div class="toc-item">
+                <a href="#honor" onclick="toggleToc(this)"><span class="toc-toggle">▼</span>个人荣誉</a>
+                <div class="toc-children">
+                    <a href="#civic-rank">—— 购买民爵</a>
+                    <a href="#novel">—— 小说提名</a>
+                    <a href="#beitou">—— 北都头衔</a>
+                    <a href="#radio">—— 电台宣传</a>
+                    <a href="#official">—— 官方号宣传</a>
+                </div>
+            </div>
+            
+            <div class="toc-item">
+                <a href="#epilogue"><span class="toc-toggle hidden">▼</span>尾声</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 序言 -->
+    <section id="preamble" class="anchor">
+        <h2>序言</h2>
+        <p>天轩币，官方符号记做<span class="currency-sym">"ㄖ"</span>，单位为"文"。通行于慕联全境，一般在天凌戢辰与慕联内藩使用。作为慕联官方货币，最早起自于慕联主体加盟天凌戢辰联邦帝国。款式由慕联天子慕怀宸设计并推广使用。本条例标示着天轩币的使用方式，细分为民生、经济其他等分类。</p>
+
+        <!-- 图片展示区 -->
+        <div class="coin-gallery">
+            <img src="photos/图片 1.png" alt="天轩币样式 正面" style="width: 200px; height: auto; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <img src="photos/图片 2.png" alt="天轩币样式 背面" style="width: 200px; height: auto; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <img src="photos/图片 3.png" alt="天轩币样式 细节" style="width: 200px; height: auto; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <img src="photos/图片 4.png" alt="天轩币样式 套装" style="width: 200px; height: auto; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+        </div>
+    </section>
+
+    <!-- 基础民生 -->
+    <section id="basic-livelihood" class="anchor">
+        <h2>基础民生</h2>
+
+        <h3 id="real-estate">购置房产</h3>
+        <p>房产分为四等：一等房为堂，二等房为阁，三等房为居，四等房为宅。一般情况下，初始住宅为民宅。购置房产后，可给住宅取名（名字不得出现反对天轩主义），并在中都群名片后方住宅一栏加入住宅名。</p>
+        <table class="price-table">
+            <tr><th>房产升级</th><th>费用 (文)</th></tr>
+            <tr><td>四等房（宅）冠名</td><td>30000</td></tr>
+            <tr><td>四等房 → 三等房（居）</td><td>24000</td></tr>
+            <tr><td>三等房 → 二等房（阁）</td><td>43000</td></tr>
+            <tr><td>二等房 → 一等房（堂）</td><td>78000</td></tr>
+        </table>
+        <p>住宅名需三个字，如xx宅、xx堂。皇室、世家、特殊爵位者、活动奖励者住宅后缀不同。购置房产与升级房产后将颁发房产证。有证者才算正式拥有。</p>
+
+        <h3 id="pets">宠物购买</h3>
+        <p>开放宠物购买系统，可供购买动物如下：</p>
+        <div class="grid-list">
+            <div class="grid-item"><span>狗</span><span>6000文</span></div>
+            <div class="grid-item"><span>猫</span><span>4000文</span></div>
+            <div class="grid-item"><span>乌龟</span><span>1000文</span></div>
+            <div class="grid-item"><span>长颈鹿</span><span>60000文</span></div>
+            <div class="grid-item"><span>大象</span><span>100000文</span></div>
+            <div class="grid-item"><span>熊</span><span>50000文</span></div>
+            <div class="grid-item"><span>牛</span><span>15000文</span></div>
+            <div class="grid-item"><span>虎</span><span>25000文</span></div>
+            <div class="grid-item"><span>兔</span><span>1500文</span></div>
+            <div class="grid-item"><span>马</span><span>20000文</span></div>
+            <div class="grid-item"><span>羊</span><span>80000文</span></div>
+            <div class="grid-item"><span>鸡</span><span>1000文</span></div>
+            <div class="grid-item"><span>猪</span><span>5000文</span></div>
+            <div class="grid-item"><span>驴</span><span>6000文</span></div>
+            <div class="grid-item"><span>鹅</span><span>1500文</span></div>
+        </div>
+    </section>
+
+    <!-- 身份 -->
+    <section id="identity" class="anchor">
+        <h2>身份</h2>
+
+        <h3 id="rename">改名卡</h3>
+        <p>改名卡，价格35000文天轩币。该卡可更改自己在天凌戢辰与慕联内藩的圈名。该卡不限购，但更名后需在戢辰全境与慕联内藩诸国共同更改（戏制等特殊群聊除外）。</p>
+
+        <h3 id="reskin">换皮卡</h3>
+        <p>换皮卡，价格80000文天轩币。该卡可更改自己在天凌戢辰与慕联内藩的根本身份。既换皮，更换身份，与创建新的自定义身份。若开通小号求职新身份亦需购买换皮卡。该新皮影响本人在戢辰与慕联内藩仕途等。</p>
+
+        <h3 id="marriage">结婚证</h3>
+        <p>天凌戢辰实行特色婚姻法，双方情投意合者可花费天轩币打结婚证。结婚证一式两份，交给结婚二人，需花费520文天轩币。同性恋者结婚需花费5200文天轩币。戢人与外国人结婚者需花费13140文天轩币。二人结婚可申请举办婚礼，婚礼可在中都举行，若在中都举行婚礼需交付15000文场地租借费。可自行雇中都居民做婚礼司仪等角色。若要申请官办婚礼需额外交付18000文天轩币，并需与官方商议具体时间。</p>
+    </section>
+
+    <!-- 交通出行 -->
+    <section id="transport" class="anchor">
+        <h2>交通出行</h2>
+
+        <h3 id="vehicles">购置车船</h3>
+        <p><strong>车马</strong> (三等电车/油车，不可升级)</p>
+        <table class="price-table">
+            <tr><th>等级</th><th>名称</th><th>价格</th></tr>
+            <tr><td>一等电车</td><td>朱雀天地泰</td><td>69000文</td></tr>
+            <tr><td>二等电车</td><td>朱雀火天有</td><td>30000文</td></tr>
+            <tr><td>三等电车</td><td>朱雀水山蹇</td><td>18000文</td></tr>
+            <tr><td>一等油车</td><td>天启乾为天</td><td>69000文</td></tr>
+            <tr><td>二等油车</td><td>天启地为坤</td><td>30000文</td></tr>
+            <tr><td>三等油车</td><td>天启巽为风</td><td>18000文</td></tr>
+        </table>
+        <p>购买车马后会颁发车证，有证者才算正式拥有。</p>
+
+        <p><strong>船只</strong> (三等，不可升级)</p>
+        <table class="price-table">
+            <tr><th>等级</th><th>名称</th><th>价格</th></tr>
+            <tr><td>一等船</td><td>七杀</td><td>60000文</td></tr>
+            <tr><td>二等船</td><td>食神</td><td>36000文</td></tr>
+            <tr><td>三等船</td><td>伤官</td><td>24000文</td></tr>
+        </table>
+
+        <p><strong>新式交通工具</strong> (试行车牌制)</p>
+        <div class="grid-list" style="grid-template-columns:repeat(2,1fr);">
+            <div class="grid-item"><span>电摩 (病符)</span><span>4000文</span></div>
+            <div class="grid-item"><span>油摩 (天德)</span><span>8000文</span></div>
+            <div class="grid-item"><span>自行车 (红鸾)</span><span>1000文</span></div>
+        </div>
+        <p>购买油摩 电摩后会颁发车牌，有牌者才算正式拥有。自行车无需车牌。</p>
+
+        <h3 id="air">航空运输</h3>
+        <h4>票价</h4>
+        
+        <div style="background:#f6f9f2; padding:1.2rem; border-radius:20px; margin-bottom:1rem; border-left:5px solid #708a64;">
+            <p style="margin-bottom:0.5rem; font-weight:600; color:#2d4f3b;"><span class="badge">甲</span> 主要枢纽航线</p>
+            <p style="margin-bottom:0.5rem; color:#4b6b53;">机场：义安首都国际机场、光辰中慕国际机场、清桓晋州国际机场、潮州龙湖机场</p>
+            <p style="margin:0; font-size:1.05rem;">两两之间：<strong>经济舱 1800文</strong> · <strong>商务舱 3400文</strong></p>
+        </div>
+        
+        <div style="background:#f6f9f2; padding:1.2rem; border-radius:20px; margin-bottom:1rem; border-left:5px solid #708a64;">
+            <p style="margin-bottom:0.5rem; font-weight:600; color:#2d4f3b;"><span class="badge">乙</span> 首都圈航线</p>
+            <p style="margin-bottom:0.5rem; color:#4b6b53;">首都圈来往：云陵寒枫机场、天轩泰清机场、青枢樱城机场</p>
+            <p style="margin-bottom:0.5rem; font-size:1.05rem;"><strong>经济舱 2200文</strong> · <strong>商务舱 3800文</strong></p>
+            <p style="margin-bottom:0.5rem; color:#4b6b53;">云系来往天轩</p>
+            <p style="margin-bottom:0.5rem; font-size:1.05rem;"><strong>经济舱 1200文</strong> · <strong>商务舱 3000文</strong></p>
+            <p style="margin-bottom:0.5rem; color:#4b6b53;">云系、天轩来往颜系</p>
+            <p style="margin:0; font-size:1.05rem;"><strong>经济舱 2200文</strong> · <strong>商务舱 3800文</strong></p>
+        </div>
+        
+        <div style="background:#f6f9f2; padding:1.2rem; border-radius:20px; margin-bottom:1rem; border-left:5px solid #708a64;">
+            <p style="margin-bottom:0.5rem; font-weight:600; color:#2d4f3b;"><span class="badge">丙</span> 区域航线</p>
+            <p style="margin-bottom:0.5rem; color:#4b6b53;">光辰、清恒来往：青阳青北国际机场、镇渊癸卯机场、延平定坤机场</p>
+            <p style="margin-bottom:0.5rem; font-size:1.05rem;"><strong>经济舱 2000文</strong> · <strong>商务舱 3600文</strong></p>
+            <p style="margin-bottom:0.5rem; color:#4b6b53;">义安、潮州来往：青阳青北国际机场、镇渊癸卯机场、延平定坤机场</p>
+            <p style="margin-bottom:0.5rem; font-size:1.05rem;"><strong>经济舱 2400文</strong> · <strong>商务舱 4000文</strong></p>
+            <p style="margin-bottom:0.5rem; color:#4b6b53;">青阳来往镇渊、延平</p>
+            <p style="margin-bottom:0.5rem; font-size:1.05rem;"><strong>经济舱 1200文</strong> · <strong>商务舱 3000文</strong></p>
+            <p style="margin-bottom:0.5rem; color:#4b6b53;">镇渊来往延平</p>
+            <p style="margin:0; font-size:1.05rem;"><strong>经济舱 2200文</strong> · <strong>商务舱 3800文</strong></p>
+        </div>
+        
+        <div style="background:#f6f9f2; padding:1.2rem; border-radius:20px; border-left:5px solid #708a64;">
+            <p style="margin:0; font-weight:600; color:#2d4f3b;"><span class="badge">丁</span> 其余航线暂时需要转机</p>
+        </div>
+
+        <h4>机场名录</h4>
+        <ul style="columns:2; list-style: none; padding-left:0;">
+            <li>义安首都国际机场(NGI)</li><li>光辰中慕国际机场(SEN)</li>
+            <li>清桓晋州国际机场(CEA)</li><li>青阳青北国际机场(COH)</li>
+            <li>云陵寒枫机场(YUN)</li><li>潮州龙湖机场(LNO)</li>
+            <li>镇渊癸卯机场(YUI)</li><li>延平定坤机场(PEN)</li>
+            <li>天轩泰清机场(THG)</li><li>青枢樱城机场(YEN)</li>
+        </ul>
+
+        <h3 id="highspeed">高铁运输</h3>
+        <h4>票价</h4>
+        
+        <div style="background:#e8f3e0; padding:1rem; border-radius:20px; margin-bottom:1rem; border-left:5px solid #5a7a4a;">
+            <p style="margin:0; font-weight:600; color:#2d4f3b;">📊 基础票价：府内 200文</p>
+        </div>
+        
+        <div style="background:#f6f9f2; padding:1.2rem; border-radius:20px; margin-bottom:1rem; border-left:5px solid #708a64;">
+            <p style="margin-bottom:0.8rem; font-weight:600; color:#2d4f3b;">🚄 京畿都市圈线路</p>
+            <p style="margin-bottom:0.3rem; color:#4b6b53;">义安至清恒：<strong>+300文</strong></p>
+            <p style="margin-bottom:0.3rem; color:#4b6b53;">清恒到光辰：<strong>+300文</strong></p>
+            <p style="margin-bottom:0.3rem; color:#4b6b53;">光辰到兴庆：<strong>+300文</strong></p>
+            <p style="margin-bottom:0.3rem; color:#4b6b53;">兴庆到潮州：<strong>+300文</strong></p>
+            <p style="margin-bottom:0.3rem; color:#4b6b53;">潮州到义安：<strong>+200文</strong></p>
+        </div>
+        
+        <div style="background:#f6f9f2; padding:1.2rem; border-radius:20px; margin-bottom:1rem; border-left:5px solid #708a64;">
+            <p style="margin-bottom:0.8rem; font-weight:600; color:#2d4f3b;">🚄 凌系、天轩、云系线路</p>
+            <p style="margin-bottom:0.3rem; color:#4b6b53;">兴庆到凌系任意站：<strong>+300文</strong></p>
+            <p style="margin-bottom:0.3rem; color:#4b6b53;">凌系到天轩任意站：<strong>+300文</strong></p>
+            <p style="margin-bottom:0.3rem; color:#4b6b53;">兴庆到云系：<strong>+500文</strong></p>
+            <p style="margin-bottom:0.3rem; color:#4b6b53;">天轩到云系：<strong>+300文</strong></p>
+            <p style="margin-bottom:0.3rem; color:#4b6b53;">潮州到云系：<strong>+200文</strong></p>
+        </div>
+        
+        <div style="background:#f6f9f2; padding:1.2rem; border-radius:20px; margin-bottom:1rem; border-left:5px solid #708a64;">
+            <p style="margin-bottom:0.8rem; font-weight:600; color:#2d4f3b;">🚄 楚系、唐系、陇系线路</p>
+            <p style="margin-bottom:0.3rem; color:#4b6b53;">光辰到楚系：<strong>+200文</strong></p>
+            <p style="margin-bottom:0.3rem; color:#4b6b53;">楚系到唐系：<strong>+300文</strong></p>
+            <p style="margin-bottom:0.3rem; color:#4b6b53;">唐系到陇系：<strong>+300文</strong></p>
+            <p style="margin-bottom:0.3rem; color:#4b6b53;">楚系到殷系：<strong>+300文</strong></p>
+            <p style="margin-bottom:0.3rem; color:#4b6b53;">天轩到陇系：<strong>+400文</strong></p>
+        </div>
+        
+        <div style="background:#f6f9f2; padding:1.2rem; border-radius:20px; margin-bottom:1rem; border-left:5px solid #708a64;">
+            <p style="margin-bottom:0.8rem; font-weight:600; color:#2d4f3b;">🚄 景圣、颜系线路</p>
+            <p style="margin-bottom:0.3rem; color:#4b6b53;">殷系到景圣/颜系：<strong>+300文</strong></p>
+            <p style="margin-bottom:0.3rem; color:#4b6b53;">楚系到景圣：<strong>+300文</strong></p>
+            <p style="margin-bottom:0.3rem; color:#4b6b53;">楚系到颜系：<strong>+400文</strong></p>
+            <p style="margin-bottom:0.3rem; color:#4b6b53;">义安/清恒到景圣：<strong>+200文</strong></p>
+            <p style="margin:0; color:#4b6b53;">义安/清恒到颜系：<strong>+400文</strong></p>
+        </div>
+        
+        <div style="background:#e8f3e0; padding:1rem; border-radius:20px; border-left:5px solid #5a7a4a;">
+            <p style="margin:0; font-weight:600; color:#2d4f3b;">💡 座位等级说明</p>
+            <p style="margin:0.5rem 0 0 0; color:#4b6b53;">甲等座：在上述票价基础上每段加 <strong>+100文</strong></p>
+            <p style="margin:0; color:#4b6b53;">乙等座：以上述票价为准</p>
+        </div>
+        
+        <h4>站点名录</h4>
+        <div style="background:#fafcf8; padding:1.5rem; border-radius:20px; border:1px solid #cbd7bc;">
+            <p style="margin-bottom:1rem; font-weight:600; color:#2d4f3b; font-size:1.1rem;">📍 京畿都市圈</p>
+            <p style="margin-bottom:1rem; color:#4b6b53;"><strong>义安府：</strong>义安站 · 义安东站 · 潮阳站 · 澄海站 · 惠来站 · 义安机场站</p>
+            <p style="margin-bottom:1.5rem; color:#4b6b53;"><strong>清桓府：</strong>清桓站 · 清桓机场站 · 清桓南站</p>
+            
+            <p style="margin-bottom:1rem; font-weight:600; color:#2d4f3b; font-size:1.1rem;">📍 光潮都市圈</p>
+            <p style="margin-bottom:1rem; color:#4b6b53;"><strong>光辰府：</strong>光辰站 · 光辰东站 · 上雍站 · 龙江站</p>
+            <p style="margin-bottom:1rem; color:#4b6b53;"><strong>潮州府：</strong>潮州站 · 饶平站</p>
+            <p style="margin-bottom:1.5rem; color:#4b6b53;"><strong>兴庆府：</strong>兴庆站 · 兴庆西站</p>
+            
+            <p style="margin-bottom:1rem; font-weight:600; color:#2d4f3b; font-size:1.1rem;">📍 其他站点</p>
+            <p style="margin-bottom:0.5rem; color:#4b6b53;">凌系 - 广陵府：广陵站</p>
+            <p style="margin-bottom:0.5rem; color:#4b6b53;">楚系 - 青阳府：青阳站 / 青阳机场站</p>
+            <p style="margin-bottom:0.5rem; color:#4b6b53;">云系 - 云陵府：云陵站</p>
+            <p style="margin-bottom:0.5rem; color:#4b6b53;">翎陌国：翎陌站</p>
+            <p style="margin-bottom:0.5rem; color:#4b6b53;">行在 - 天轩府：天轩站</p>
+            <p style="margin-bottom:0.5rem; color:#4b6b53;">陇系 - 镇陇府：镇陇站</p>
+            <p style="margin-bottom:0.5rem; color:#4b6b53;">殷系 - 镇渊府：镇渊站</p>
+            <p style="margin-bottom:0.5rem; color:#4b6b53;">唐系 - 延平府：延平北站</p>
+            <p style="margin-bottom:0.5rem; color:#4b6b53;">景圣 - 燕云府：燕云大青站</p>
+            <p style="margin:0; color:#4b6b53;">颜系 - 青枢府：青枢站</p>
+        </div>
+    </section>
+
+    <!-- 跳转链接卡片：在线票价查询系统 (根据之前需求保留) -->
+    <div class="fare-link-card">
+        <h2 style="border-bottom:none; margin-top:0;">🔗 在线票价查询系统</h2>
+        <p style="font-size:1.2rem;">点击下方按钮，在新标签页打开实时票价查询页面（独立系统）</p>
+        <a href="#" class="btn-fare" target="_blank" rel="noopener noreferrer">✈️ 前往查询实时票价</a>
+        <p class="footnote">⚡ 当前为示例链接，请将按钮链接替换为实际的票价查询URL</p>
+    </div>
+
+    <!-- 商贸流通 -->
+    <section id="commerce" class="anchor">
+        <h2>商贸流通</h2>
+
+        <h3 id="shops">商铺</h3>
+        <p>戢辰企业分为"商铺""工厂"与"其他"。商铺起购为50㎡，每㎡售价1000文。商铺类型企业只得开办零售类与服务类行业。如餐饮、杂货店、食杂店等产业。创办企业后需申请得到营业执照，否则视做非法。</p>
+
+        <h3 id="factory">工厂</h3>
+        <p>工厂起购为100㎡，每㎡售价800文。工厂类型企业可开办生产型产业，如钢铁厂，木材厂，食品加工厂等。工厂原材料需向朝廷购买。创办企业后需申请得到营业执照，否则视做非法。</p>
+
+        <h3 id="other-enterprise">其他企业</h3>
+        <p>其他企业起购为50㎡，每㎡售价500文。其他型企业可开办第三产业等其他行业，如中介商，投资商，房地产商等等。创办企业后需申请得到营业执照，否则视做非法。</p>
+
+        <h3 id="tariff">关税</h3>
+        <p>在不免关税地区，跨区域进行经济活动时，需支付交易金额的5%为关税。若两地开通铁路则为4%关税，若用车马船运载货物则为2%关税。单次贸易金额超过8w文天轩币的则必须使用铁路运输。</p>
+
+        <h3 id="rent">出租业务</h3>
+        <p>房产出租。租期一个月起，租金自行商议，手续费为租金10%。将在租房者个人信息中列出。</p>
+
+        <h3 id="agriculture">农业经济</h3>
+        <p><strong>树木板块：</strong> 樱花树，白桦树，橡树，大红袍母树，普洱母树，单枞母树 均为一百文一袋种子 ，每亩收获十棵</p>
+        <p><strong>茶叶板块：</strong> 中都义安府---大红袍，需100棵茶树/亩（50文每棵）（采购价100文/斤，亩200斤）。光辰府---普洱，需100棵茶树/亩（50文每棵）（采购价100文/斤，亩产200斤）。西都潮州府---单枞，需100棵茶树/亩（50文每棵）（采购价200文/斤，亩产150斤）</p>
+        <p><strong>花卉板块：</strong> 月季、向日葵100文/袋，收成100朵/亩；牡丹、茉莉花120文/袋，收成120朵/亩；海棠、芙蓉、玉兰50文/袋，收成150朵/亩；玫瑰花100文/袋，收成100朵/亩；栀子花120文/袋，收成120朵/亩。</p>
+        <p><strong>农业用地：</strong> 一个月起租，租金1000文/亩/月。种茶树需要区分中都义安府，光辰府，西都潮州府的土地。<br>
+        <strong>产品加工：</strong> 花卉可制作香囊，香囊每个需三朵花，辅以丝帛、香料，工费材料费共100文/个，成品市价500文。树木可加工为木雕，因为损耗，两棵树产出一个木雕，加工费2000文/个，成品市价5000文，可选：甲 乙 丙 丁四种。</p>
+    </section>
+
+    <!-- 个人荣誉 -->
+    <section id="honor" class="anchor">
+        <h2>个人荣誉</h2>
+
+        <h3 id="civic-rank">购买民爵</h3>
+        <p>拥有天轩币者可购买相应民爵。民爵不记录在爵位表，但会根据头衔或个人籍贯表方式体现。</p>
+        <table class="price-table">
+            <tr><th>民爵</th><th>待遇</th><th>起步价</th></tr>
+            <tr><td>下等民士</td><td>不入流官员待遇</td><td>2w文</td></tr>
+            <tr><td>中等民士</td><td>从九品官员待遇</td><td>5w文</td></tr>
+            <tr><td>上等民士</td><td>正九品待遇 (同庶士)</td><td>10w文</td></tr>
+        </table>
+
+        <h3 id="novel">小说提名</h3>
+        <p>每周更新官方番茄小说《戢辰番外传》。可花费30000-80000文不等的天轩币，购买在周更小说的出场率。并根据支付金额大小提供出场率大小。</p>
+
+        <h3 id="beitou">北都头衔</h3>
+        <p>北都头衔可自定义，每次自定义更换需花费10000文天轩币。头衔内容不得出现违反国家法律与天轩主义的内容。</p>
+
+        <h3 id="radio">电台宣传</h3>
+        <p>电台宣传，价格（一次）10000文天轩币。购买后可在慕联官方电视台观闻阁进行宣传事物（不得出现反对天轩主义与反对国家法律公序良俗内容）。</p>
+
+        <h3 id="official">官方号宣传</h3>
+        <p>官方号宣传，价格（一次）20000文天轩币。购买后可在慕联/天凌戢辰官方号空间进行宣传。不得出现反对天轩主义、国家法律、公序良俗之内容。</p>
+    </section>
+
+    <!-- 尾声 -->
+    <section id="epilogue" class="anchor">
+        <h2>尾声</h2>
+        <p>慕联境内凡注册个人籍贯表者都可进行自由贸易，具体贸易汇款等经济来往需前往天凌戢辰度舶司发送，审批通过后由官员更改。交易过程不得出现违反天轩主义的内容与目的。</p>
+        <p style="font-size:1.5rem; font-weight:500; background:#dde8d2; padding:1.5rem; border-radius:60px; text-align:center;">我们欢迎天轩币成为各位网络虚拟国生活中的习惯性货币。请认准天轩币！</p>
+    </section>
+
+    <hr>
+    <footer style="text-align:center; color:#567349; padding:1rem;">
+        慕联官方 · 天轩币使用条例 · 所有价格单位为文(ㄖ) 
+    </footer>
+</div>
+
+<script>
+    function toggleToc(element) {
+        event.preventDefault();
+        const toggle = element.querySelector('.toc-toggle');
+        const children = element.nextElementSibling;
+        
+        if (children && children.classList.contains('toc-children')) {
+            toggle.classList.toggle('collapsed');
+            children.classList.toggle('collapsed');
+        }
+    }
+</script>
+</body>
+</html>
