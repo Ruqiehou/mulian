@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天狐慕氏联邦帝国机票票价查询系统</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 2.2rem;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
+        
+        .search-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        label {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #2c3e50;
+        }
+        
+        select, button {
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        select:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+        
+        button {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            grid-column: 1 / -1;
+            margin-top: 10px;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        .cabin-options {
+            grid-column: 1 / -1;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        
+        .cabin-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .cabin-option:hover {
+            border-color: #3498db;
+        }
+        
+        .cabin-option.selected {
+            border-color: #3498db;
+            background-color: #f0f8ff;
+        }
+        
+        .cabin-option input {
+            margin: 0;
+        }
+        
+        .result {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 5px solid #3498db;
+        }
+        
+        .result h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .flight-info {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #e74c3c;
+            text-align: center;
+            margin: 15px 0;
+        }
+        
+        .flight-details {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .airport {
+            text-align: center;
+        }
+        
+        .airport-name {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .airport-code {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        .flight-path {
+            text-align: center;
+            color: #3498db;
+            font-size: 1.5rem;
+        }
+        
+        .flight-time {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        .no-results {
+            text-align: center;
+            color: #7f8c8d;
+            font-style: italic;
+            padding: 40px;
+        }
+        
+        .loading {
+            text-align: center;
+            color: #3498db;
+            padding: 20px;
+        }
+        
+        .route-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        
+        .route-item {
+            background: #f1f8ff;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        
+        .route-label {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+        
+        .route-value {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        @media (max-width: 768px) {
+            .search-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .flight-details {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .route-info {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>✈️ 天狐慕氏联邦帝国机票票价查询系统</h1>
+        <p class="subtitle">查询国内各航线固定票价，基于官方票价表</p>
+        
+        <div class="search-form">
+            <div class="form-group">
+                <label for="departure">出发城市:</label>
+                <select id="departure">
+                    <option value="">请选择出发城市</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="arrival">到达城市:</label>
+                <select id="arrival">
+                    <option value="">请选择到达城市</option>
+                </select>
+            </div>
+            
+            <div class="cabin-options">
+                <div class="cabin-option selected" onclick="selectCabin('economy')">
+                    <input type="radio" id="economy" name="cabin" value="economy" checked>
+                    <label for="economy">经济舱</label>
+                </div>
+                <div class="cabin-option" onclick="selectCabin('business')">
+                    <input type="radio" id="business" name="cabin" value="business">
+                    <label for="business">商务舱</label>
+                </div>
+            </div>
+            
+            <button onclick="searchFlights()">💰 查询票价</button>
+        </div>
+        
+        <div class="result" id="result">
+            <div class="no-results">请选择出发和到达城市后点击查询</div>
+        </div>
+    </div>
+
+    <script>
+        // ==================================================================================
+        // 1. 【配置区】机场数据 - 基于新的票价规则
+        // ==================================================================================
+        const airports = {
+            // 甲类机场 - 首都圈核心机场
+            '义安首都国际机场': { code: 'YIA', city: '义安', region: '首都圈', type: '甲' },
+            '光辰中慕国际机场': { code: 'GCM', city: '光辰', region: '首都圈', type: '甲' },
+            '清桓晋州国际机场': { code: 'QHJ', city: '清恒', region: '首都圈', type: '甲' },
+            '潮州龙湖机场': { code: 'CZL', city: '潮州', region: '首都圈', type: '甲' },
+            
+            // 乙类机场 - 首都圈外围机场
+            '云陵寒枫机场': { code: 'YLH', city: '云陵', region: '云系', type: '乙' },
+            '天轩泰清机场': { code: 'TXT', city: '天轩', region: '天轩', type: '乙' },
+            '青枢樱城机场': { code: 'QSY', city: '青枢', region: '颜系', type: '乙' },
+            
+            // 丙类机场 - 其他地区机场
+            '青阳青北国际机场': { code: 'QYQ', city: '青阳', region: '楚系', type: '丙' },
+            '镇渊癸卯机场': { code: 'ZYG', city: '镇渊', region: '殷系', type: '丙' },
+            '延平定坤机场': { code: 'YPD', city: '延平', region: '唐系', type: '丙' }
+        };
+
+        // ==================================================================================
+        // 2. 【配置区】固定票价数据 - 基于新的票价规则
+        // ==================================================================================
+        const fixedFares = {
+            // 甲类：首都圈四机场两两之间
+            '义安首都国际机场-光辰中慕国际机场': { economy: 1800, business: 3400 },
+            '义安首都国际机场-清桓晋州国际机场': { economy: 1800, business: 3400 },
+            '义安首都国际机场-潮州龙湖机场': { economy: 1800, business: 3400 },
+            '光辰中慕国际机场-清桓晋州国际机场': { economy: 1800, business: 3400 },
+            '光辰中慕国际机场-潮州龙湖机场': { economy: 1800, business: 3400 },
+            '清桓晋州国际机场-潮州龙湖机场': { economy: 1800, business: 3400 },
+            
+            // 乙类：首都圈来往乙类三机场
+            '义安首都国际机场-云陵寒枫机场': { economy: 2200, business: 3800 },
+            '义安首都国际机场-天轩泰清机场': { economy: 2200, business: 3800 },
+            '义安首都国际机场-青枢樱城机场': { economy: 2200, business: 3800 },
+            '光辰中慕国际机场-云陵寒枫机场': { economy: 2200, business: 3800 },
+            '光辰中慕国际机场-天轩泰清机场': { economy: 2200, business: 3800 },
+            '光辰中慕国际机场-青枢樱城机场': { economy: 2200, business: 3800 },
+            '清桓晋州国际机场-云陵寒枫机场': { economy: 2200, business: 3800 },
+            '清桓晋州国际机场-天轩泰清机场': { economy: 2200, business: 3800 },
+            '清桓晋州国际机场-青枢樱城机场': { economy: 2200, business: 3800 },
+            '潮州龙湖机场-云陵寒枫机场': { economy: 2200, business: 3800 },
+            '潮州龙湖机场-天轩泰清机场': { economy: 2200, business: 3800 },
+            '潮州龙湖机场-青枢樱城机场': { economy: 2200, business: 3800 },
+            
+            // 乙类：云系来往天轩
+            '云陵寒枫机场-天轩泰清机场': { economy: 1200, business: 3000 },
+            
+            // 乙类：云系、天轩来往颜系
+            '云陵寒枫机场-青枢樱城机场': { economy: 2200, business: 3800 },
+            '天轩泰清机场-青枢樱城机场': { economy: 2200, business: 3800 },
+            
+            // 丙类：光辰、清恒来往丙类三机场
+            '光辰中慕国际机场-青阳青北国际机场': { economy: 2000, business: 3600 },
+            '光辰中慕国际机场-镇渊癸卯机场': { economy: 2000, business: 3600 },
+            '光辰中慕国际机场-延平定坤机场': { economy: 2000, business: 3600 },
+            '清桓晋州国际机场-青阳青北国际机场': { economy: 2000, business: 3600 },
+            '清桓晋州国际机场-镇渊癸卯机场': { economy: 2000, business: 3600 },
+            '清桓晋州国际机场-延平定坤机场': { economy: 2000, business: 3600 },
+            
+            // 丙类：义安、潮州来往丙类三机场
+            '义安首都国际机场-青阳青北国际机场': { economy: 2400, business: 4000 },
+            '义安首都国际机场-镇渊癸卯机场': { economy: 2400, business: 4000 },
+            '义安首都国际机场-延平定坤机场': { economy: 2400, business: 4000 },
+            '潮州龙湖机场-青阳青北国际机场': { economy: 2400, business: 4000 },
+            '潮州龙湖机场-镇渊癸卯机场': { economy: 2400, business: 4000 },
+            '潮州龙湖机场-延平定坤机场': { economy: 2400, business: 4000 },
+            
+            // 丙类：青阳来往镇渊、延平
+            '青阳青北国际机场-镇渊癸卯机场': { economy: 1200, business: 3000 },
+            '青阳青北国际机场-延平定坤机场': { economy: 1200, business: 3000 },
+            
+            // 丙类：镇渊来往延平
+            '镇渊癸卯机场-延平定坤机场': { economy: 2200, business: 3800 }
+        };
+
+        // ==================================================================================
+        // 3. 【配置区】航线互通关系 - 基于新的票价规则
+        // ==================================================================================
+        const routeConnections = {
+            // 甲类机场互通关系
+            '义安首都国际机场': ['光辰中慕国际机场', '清桓晋州国际机场', '潮州龙湖机场', '云陵寒枫机场', '天轩泰清机场', '青枢樱城机场', '青阳青北国际机场', '镇渊癸卯机场', '延平定坤机场'],
+            '光辰中慕国际机场': ['义安首都国际机场', '清桓晋州国际机场', '潮州龙湖机场', '云陵寒枫机场', '天轩泰清机场', '青枢樱城机场', '青阳青北国际机场', '镇渊癸卯机场', '延平定坤机场'],
+            '清桓晋州国际机场': ['义安首都国际机场', '光辰中慕国际机场', '潮州龙湖机场', '云陵寒枫机场', '天轩泰清机场', '青枢樱城机场', '青阳青北国际机场', '镇渊癸卯机场', '延平定坤机场'],
+            '潮州龙湖机场': ['义安首都国际机场', '光辰中慕国际机场', '清桓晋州国际机场', '云陵寒枫机场', '天轩泰清机场', '青枢樱城机场', '青阳青北国际机场', '镇渊癸卯机场', '延平定坤机场'],
+            
+            // 乙类机场互通关系
+            '云陵寒枫机场': ['义安首都国际机场', '光辰中慕国际机场', '清桓晋州国际机场', '潮州龙湖机场', '天轩泰清机场', '青枢樱城机场'],
+            '天轩泰清机场': ['义安首都国际机场', '光辰中慕国际机场', '清桓晋州国际机场', '潮州龙湖机场', '云陵寒枫机场', '青枢樱城机场'],
+            '青枢樱城机场': ['义安首都国际机场', '光辰中慕国际机场', '清桓晋州国际机场', '潮州龙湖机场', '云陵寒枫机场', '天轩泰清机场'],
+            
+            // 丙类机场互通关系
+            '青阳青北国际机场': ['义安首都国际机场', '光辰中慕国际机场', '清桓晋州国际机场', '潮州龙湖机场', '镇渊癸卯机场', '延平定坤机场'],
+            '镇渊癸卯机场': ['义安首都国际机场', '光辰中慕国际机场', '清桓晋州国际机场', '潮州龙湖机场', '青阳青北国际机场', '延平定坤机场'],
+            '延平定坤机场': ['义安首都国际机场', '光辰中慕国际机场', '清桓晋州国际机场', '潮州龙湖机场', '青阳青北国际机场', '镇渊癸卯机场']
+        };
+
+        // ==================================================================================
+        // 4. 核心查询功能
+        // ==================================================================================
+        function searchFlights() {
+            const departure = document.getElementById('departure').value;
+            const arrival = document.getElementById('arrival').value;
+            const cabin = document.querySelector('input[name="cabin"]:checked').value;
+            
+            if (!departure || !arrival) {
+                showResult('❌ 请选择出发和到达机场');
+                return;
+            }
+            
+            if (departure === arrival) {
+                showResult('❌ 出发和到达机场不能相同');
+                return;
+            }
+            
+            // 显示加载状态
+            showResult('<div class="loading">正在查询票价...</div>');
+            
+            // 模拟查询延迟
+            setTimeout(() => {
+                const fareInfo = calculateFare(departure, arrival, cabin);
+                displayFare(fareInfo, departure, arrival, cabin);
+            }, 300);
+        }
+
+        function calculateFare(departure, arrival, cabin) {
+            // 检查是否互通
+            if (!isConnected(departure, arrival)) {
+                return { connected: false };
+            }
+            
+            // 生成航线键
+            const routeKey1 = `${departure}-${arrival}`;
+            const routeKey2 = `${arrival}-${departure}`;
+            
+            // 查找票价
+            let fareData;
+            if (fixedFares[routeKey1]) {
+                fareData = fixedFares[routeKey1];
+            } else if (fixedFares[routeKey2]) {
+                fareData = fixedFares[routeKey2];
+            } else {
+                return { connected: false };
+            }
+            
+            // 根据舱位选择票价
+            const fare = cabin === 'economy' ? fareData.economy : fareData.business;
+            
+            return {
+                connected: true,
+                fare: fare,
+                economyFare: fareData.economy,
+                businessFare: fareData.business,
+                departureType: airports[departure].type,
+                arrivalType: airports[arrival].type
+            };
+        }
+
+        function isConnected(departure, arrival) {
+            return routeConnections[departure] && routeConnections[departure].includes(arrival);
+        }
+
+
+
+        function displayFare(fareInfo, departure, arrival, cabin) {
+            const resultDiv = document.getElementById('result');
+            
+            if (!fareInfo.connected) {
+                resultDiv.innerHTML = `
+                    <div class="no-results">
+                        ❌ 未找到直达航线<br>
+                        <small>${airports[departure].city} 与 ${airports[arrival].city} 之间暂无直飞航班</small>
+                    </div>
+                `;
+                return;
+            }
+            
+            const cabinName = cabin === 'economy' ? '经济舱' : '商务舱';
+            
+            let html = `
+                <h3>✈️ ${airports[departure].city} → ${airports[arrival].city}</h3>
+                <div class="flight-info">
+                    <div class="flight-details">
+                        <div class="airport">
+                            <div class="airport-name">${airports[departure].city}</div>
+                            <div class="airport-code">${airports[departure].code}</div>
+                        </div>
+                        
+                        <div class="flight-path">→</div>
+                        
+                        <div class="airport">
+                            <div class="airport-name">${airports[arrival].city}</div>
+                            <div class="airport-code">${airports[arrival].code}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="route-info">
+                        <div class="route-item">
+                            <div class="route-label">机场类型</div>
+                            <div class="route-value">${fareInfo.departureType}类 → ${fareInfo.arrivalType}类</div>
+                        </div>
+                        <div class="route-item">
+                            <div class="route-label">舱位等级</div>
+                            <div class="route-value">${cabinName}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="price">💰 ${fareInfo.fare} 文</div>
+                    
+                    <div style="text-align: center; color: #7f8c8d; font-size: 0.9rem; margin-top: 10px;">
+                        ${cabinName}票价：${fareInfo.fare} 文<br>
+                        ${cabin === 'economy' ? `商务舱票价：${fareInfo.businessFare} 文` : `经济舱票价：${fareInfo.economyFare} 文`}
+                    </div>
+                    
+                    <div style="text-align: center; color: #7f8c8d; font-size: 0.8rem; margin-top: 5px;">
+                        此为官方固定票价，基于天狐慕氏联邦帝国航空票价表
+                    </div>
+                </div>
+            `;
+            
+            resultDiv.innerHTML = html;
+        }
+
+        function showResult(message) {
+            document.getElementById('result').innerHTML = message;
+        }
+
+        function selectCabin(cabinType) {
+            // 更新单选按钮状态
+            document.getElementById(cabinType).checked = true;
+            
+            // 更新UI样式
+            document.querySelectorAll('.cabin-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            document.querySelector(`.cabin-option[onclick="selectCabin('${cabinType}')"]`).classList.add('selected');
+            
+            // 如果已经选择了出发和到达城市，重新查询票价
+            const departure = document.getElementById('departure').value;
+            const arrival = document.getElementById('arrival').value;
+            
+            if (departure && arrival && departure !== arrival) {
+                searchFlights();
+            }
+        }
+
+        // ==================================================================================
+        // 5. 页面初始化
+        // ==================================================================================
+        window.onload = function() {
+            // 初始化机场选择框
+            const departureSelect = document.getElementById('departure');
+            const arrivalSelect = document.getElementById('arrival');
+            
+            // 添加机场选项
+            Object.keys(airports).forEach(airport => {
+                const option1 = document.createElement('option');
+                option1.value = airport;
+                option1.textContent = `${airports[airport].city} - ${airport} (${airports[airport].code})`;
+                departureSelect.appendChild(option1);
+                
+                const option2 = document.createElement('option');
+                option2.value = airport;
+                option2.textContent = `${airports[airport].city} - ${airport} (${airports[airport].code})`;
+                arrivalSelect.appendChild(option2);
+            });
+            
+            // 添加城市选择变化监听
+            departureSelect.addEventListener('change', function() {
+                if (this.value && document.getElementById('arrival').value) {
+                    searchFlights();
+                }
+            });
+            
+            arrivalSelect.addEventListener('change', function() {
+                if (this.value && document.getElementById('departure').value) {
+                    searchFlights();
+                }
+            });
+        };
+    </script>
+</body>
+</html>
