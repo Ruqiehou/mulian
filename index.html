@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>慕联门户网站</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            background-color: #f9fafc;
+            color: #1e293b;
+            padding: 2rem 1rem;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.15);
+            padding: 2.5rem 2rem;
+        }
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            background: linear-gradient(145deg, #0f2b4b, #1e4a6f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            border-left: 8px solid #2563eb;
+            padding-left: 1.5rem;
+            line-height: 1.2;
+        }
+        h2 {
+            font-size: 2.2rem;
+            font-weight: 650;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            color: #0b2b40;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.4rem;
+            scroll-margin-top: 2rem;
+        }
+        h3 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-top: 1.8rem;
+            margin-bottom: 0.75rem;
+            color: #1e3a5f;
+            padding-left: 0.75rem;
+            border-left: 4px solid #7aa7c9;
+        }
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            color: #2d3c4b;
+        }
+        section {
+            margin-bottom: 2rem;
+        }
+        /* 链接卡片样式（替代之前的嵌入区域） */
+        .fare-link-card {
+            background: #f0f4fe;
+            border-radius: 32px;
+            padding: 2rem 2.5rem;
+            margin-top: 3rem;
+            border: 1px solid #cbd5e1;
+            box-shadow: 0 8px 20px rgba(0,20,40,0.1);
+            text-align: center;
+        }
+        .fare-link-card h2 {
+            margin-top: 0;
+            border-bottom-color: #2563eb;
+            color: #0c4a6e;
+        }
+        .btn-fare {
+            display: inline-block;
+            background: #1e4a6f;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+            padding: 1rem 3rem;
+            border-radius: 60px;
+            text-decoration: none;
+            box-shadow: 0 8px 14px -6px #0b2b40;
+            transition: background 0.2s, transform 0.1s;
+            margin: 1rem 0 0.5rem 0;
+            border: 2px solid #2563eb;
+        }
+        .btn-fare:hover {
+            background: #0b2b40;
+            transform: scale(1.02);
+        }
+        .btn-fare:active {
+            transform: scale(0.98);
+        }
+        .fare-note {
+            font-size: 0.95rem;
+            color: #3b5c7a;
+            margin-top: 1rem;
+        }
+        @media (max-width: 680px) {
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.8rem; }
+            h3 { font-size: 1.4rem; }
+            .btn-fare { font-size: 1.2rem; padding: 0.8rem 2rem; }
+        }
+        .badge {
+            background-color: #dbeafe;
+            color: #1e40af;
+            font-size: 0.9rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            display: inline-block;
+            margin-right: 0.5rem;
+        }
+        hr {
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #94a3b8, transparent);
+            margin: 2rem 0 0.5rem 0;
+        }
+    </style>
+
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1> 慕联门户网站</h1>
+        <p style="font-size: 1.2rem; color: #335b73;">慕联在线生活一站式平台</p>
+    </header>
+
+    <!-- ===== 票价查询卡片 ===== -->
+    <div class="fare-link-card">
+        <h2>🔗 在线票价查询系统</h2>
+        <p style="margin-bottom: 0.5rem;">点击下方按钮，打开相应的票价查询页面。</p>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem;">
+            <a href="price_railway.html" target="_blank" rel="noopener noreferrer" class="btn-fare" style="font-size: 1.3rem; padding: 0.8rem 1.5rem;">
+                🚄 铁路票价查询
+            </a>
+            
+            <a href="price_flight.html" target="_blank" rel="noopener noreferrer" class="btn-fare" style="font-size: 1.3rem; padding: 0.8rem 1.5rem; background: #0f766e; border-color: #14b8a6;">
+                ✈️ 机票票价查询
+            </a>
+        </div>
+        
+        <p class="fare-note">铁路票价查询系统 | 机票票价查询系统</p>
+    </div>
+
+    <!-- ===== 政策文件卡片 ===== -->
+    <div class="fare-link-card" style="margin-top: 2rem;">
+        <h2>📄 政策文件中心</h2>
+        <p style="margin-bottom: 0.5rem;">查看最新的经济购买，商贸流通，个人荣誉等。</p>
+        <a href="tiaoli.html" target="_blank" rel="noopener noreferrer" class="btn-fare" style="background: #0d9488; border-color: #14b8a6;">
+            📋 查看政策文件
+        </a>
+        
+    </div>
+
+    <!-- ===== 行政区划查询卡片 ===== -->
+    <div class="fare-link-card" style="margin-top: 2rem;">
+        <h2>🗺️ 行政区划查询</h2>
+        <p style="margin-bottom: 0.5rem;">查询慕联各级行政区划信息。</p>
+        <a href="quhua_query.html" target="_blank" rel="noopener noreferrer" class="btn-fare" style="background: #7c3aed; border-color: #8b5cf6;">
+            📍 行政区划查询
+        </a>
+        
+    </div>
+</div>
+</body>
+</html>

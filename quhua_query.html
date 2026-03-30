@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>行政区划查询</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 32px;
+            font-weight: 700;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        .search-box {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+        .search-box input {
+            flex: 1;
+            padding: 18px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s;
+            background: #f8f9fa;
+        }
+        .search-box input:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        }
+        .search-box button {
+            padding: 18px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        .search-box button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+        }
+        .search-box button:active {
+            transform: translateY(0);
+        }
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .result-count {
+            font-size: 14px;
+            color: #666;
+            font-weight: 600;
+        }
+        .result-count span {
+            color: #667eea;
+            font-size: 18px;
+            font-weight: 700;
+        }
+        .result {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            min-height: 100px;
+        }
+        .result-item {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            transition: all 0.3s;
+            border-left: 5px solid;
+        }
+        .result-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        .result-item:last-child {
+            margin-bottom: 0;
+        }
+        .result-item.level-1 {
+            border-left-color: #667eea;
+        }
+        .result-item.level-2 {
+            border-left-color: #10b981;
+        }
+        .result-item.level-3 {
+            border-left-color: #f59e0b;
+        }
+        .result-name {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #1a1a1a;
+        }
+        .result-item.level-1 .result-name {
+            color: #667eea;
+        }
+        .result-item.level-2 .result-name {
+            color: #10b981;
+        }
+        .result-item.level-3 .result-name {
+            color: #f59e0b;
+        }
+        .result-meta {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .level-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .result-item.level-1 .level-badge {
+            background: #e0e7ff;
+            color: #667eea;
+        }
+        .result-item.level-2 .level-badge {
+            background: #d1fae5;
+            color: #10b981;
+        }
+        .result-item.level-3 .level-badge {
+            background: #fef3c7;
+            color: #f59e0b;
+        }
+        .result-path {
+            display: flex;
+            align-items: center;
+            font-size: 13px;
+            color: #666;
+            background: #f8f9fa;
+            padding: 8px 12px;
+            border-radius: 8px;
+            margin-top: 12px;
+        }
+        .result-path::before {
+            content: '📍';
+            margin-right: 8px;
+        }
+        .result-note {
+            display: inline-block;
+            padding: 6px 12px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 12px;
+            box-shadow: 0 2px 8px rgba(245, 87, 108, 0.3);
+        }
+        .result-note::before {
+            content: 'ℹ️ ';
+        }
+        .loading {
+            text-align: center;
+            color: #666;
+            padding: 40px;
+            font-size: 16px;
+        }
+        .loading::before {
+            content: '';
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border: 3px solid #667eea;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .error {
+            text-align: center;
+            color: #ef4444;
+            padding: 40px;
+            font-size: 16px;
+        }
+        .error::before {
+            content: '❌';
+            display: block;
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        .no-result {
+            text-align: center;
+            color: #999;
+            padding: 40px;
+            font-size: 16px;
+        }
+        .no-result::before {
+            content: '🔍';
+            display: block;
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        .empty-input {
+            text-align: center;
+            color: #999;
+            padding: 40px;
+            font-size: 16px;
+        }
+        .empty-input::before {
+            content: '✏️';
+            display: block;
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px;
+            }
+            h1 {
+                font-size: 26px;
+            }
+            .search-box {
+                flex-direction: column;
+            }
+            .search-box button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>行政区划查询</h1>
+        <p class="subtitle">快速查询慕联各级行政区划信息</p>
+        
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="请输入地名（如：楚系、青阳府）">
+            <button onclick="searchPlace()">查询</button>
+        </div>
+        
+        <div class="result" id="result">
+            <div class="empty-input">请输入关键词开始查询</div>
+        </div>
+    </div>
+
+    <script>
+        let quhuaData = null;
+
+        async function loadQuhuaData() {
+            try {
+                const response = await fetch('quhua.json');
+                quhuaData = await response.json();
+                return true;
+            } catch (error) {
+                console.error('加载数据失败:', error);
+                return false;
+            }
+        }
+
+        function searchInNode(node, keyword, results = [], parentPath = []) {
+            if (node.name && node.name.includes(keyword)) {
+                results.push({
+                    name: node.name,
+                    level: node.level,
+                    path: [...parentPath].join(' > '),
+                    note: node.note || null
+                });
+            }
+            if (node.children) {
+                node.children.forEach(child => searchInNode(child, keyword, results, [...parentPath, node.name]));
+            }
+            return results;
+        }
+
+        function getPath(node, data = quhuaData) {
+            if (!data) return '';
+            const path = [];
+            let current = data;
+            
+            function findPath(targetNode, currentNode, currentPath) {
+                if (currentNode === targetNode) {
+                    path.push(...currentPath);
+                    return true;
+                }
+                if (currentNode.children) {
+                    for (let child of currentNode.children) {
+                        if (findPath(targetNode, child, [...currentPath, currentNode.name])) {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+            
+            findPath(node, current, []);
+            return path.filter(p => p && p !== 'root').join(' > ');
+        }
+
+        function getLevelName(level) {
+            const levelNames = {
+                1: '一级区划',
+                2: '二级区划',
+                3: '三级区划'
+            };
+            return levelNames[level] || '未知级别';
+        }
+
+        async function searchPlace() {
+            const keyword = document.getElementById('searchInput').value.trim();
+            const resultDiv = document.getElementById('result');
+                    
+            if (!keyword) {
+                resultDiv.innerHTML = '<div class="empty-input">请输入关键词开始查询</div>';
+                return;
+            }
+        
+            resultDiv.innerHTML = '<div class="loading">正在查询...</div>';
+        
+            if (!quhuaData) {
+                const loaded = await loadQuhuaData();
+                if (!loaded) {
+                    resultDiv.innerHTML = '<div class="error">加载数据失败，请检查 quhua.json 文件</div>';
+                    return;
+                }
+            }
+        
+            const results = searchInNode(quhuaData, keyword);
+        
+            if (results.length === 0) {
+                resultDiv.innerHTML = '<div class="no-result">未找到匹配的地名</div>';
+                return;
+            }
+        
+            let html = `<div class="result-header">
+                <div class="result-count">找到 <span>${results.length}</span> 个结果</div>
+            </div>`;
+                    
+            results.forEach(item => {
+                html += `<div class="result-item level-${item.level}">
+                    <div class="result-name">${item.name}</div>
+                    <div class="result-meta">
+                        <span class="level-badge">${getLevelName(item.level)}</span>
+                    </div>
+                    ${item.path ? `<div class="result-path">${item.path}</div>` : ''}
+                    ${item.note ? `<div class="result-note">${item.note}</div>` : ''}
+                </div>`;
+            });
+                    
+            resultDiv.innerHTML = html;
+        }
+
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchPlace();
+            }
+        });
+    </script>
+</body>
+</html>
