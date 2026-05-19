@@ -2,930 +2,6 @@
   "name": "root",
   "children": [
     {
-      "name": "楚系",
-      "level": 1,
-      "children": [
-        {
-          "name": "青阳府",
-          "level": 2,
-          "children": [
-            {
-              "name": "楚城坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "鄂城坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "平武坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "青中坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "蔫坏坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "青南县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "鄂州县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "青东县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "青北县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "青西县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            }
-          ]
-        },
-        {
-          "name": "青阴府",
-          "level": 2,
-          "children": [
-            {
-              "name": "楚川坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "新政坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "甘棠坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "张掖县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "安西县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "楚流县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            }
-          ]
-        },
-        {
-          "name": "北楚府",
-          "level": 2,
-          "children": [
-            {
-              "name": "通津坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "扶疏坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "无宵坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "西乡县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "兴禾县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "楚乡县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "荆州县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            }
-          ]
-        },
-        {
-          "name": "暮日府",
-          "level": 2,
-          "children": [
-            {
-              "name": "流楚坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "流逆坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "平逆县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "兴楚县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "永安县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "吕梁县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            }
-          ]
-        },
-        {
-          "name": "陈留府",
-          "level": 2,
-          "children": [
-            {
-              "name": "邺城坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "南留坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "魏武坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "陈幽县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "新流县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "新陈县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "殷系",
-      "level": 1,
-      "children": [
-        {
-          "name": "镇渊府",
-          "level": 2,
-          "children": [
-            {
-              "name": "殷城坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "承明坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "渊郊坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "明渊坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "殷公坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "壬寅坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "丙戌县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "癸卯县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "甲申县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "甲寅县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "癸亥县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "壬辰县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "壬申县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            }
-          ]
-        },
-        {
-          "name": "南殷府",
-          "level": 2,
-          "children": [
-            {
-              "name": "商都坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "盘庚坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "星夜坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "癸酉县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "朝歌县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "商丘县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "殷明县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            }
-          ]
-        },
-        {
-          "name": "殷西府",
-          "level": 2,
-          "children": [
-            {
-              "name": "乐土坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "乐昌坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "大商县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "甲子县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "甲午县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "丁亥县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            }
-          ]
-        },
-        {
-          "name": "南明府",
-          "level": 2,
-          "children": [
-            {
-              "name": "隆武坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "弘光坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "永历坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "哄武县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "清明县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "副明县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            }
-          ]
-        },
-        {
-          "name": "大明府",
-          "level": 2,
-          "children": [
-            {
-              "name": "嘉靖坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "万历坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "隆庆坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "主明坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "永乐县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "洪武县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "成化县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "弘治县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "陇系",
-      "level": 1,
-      "children": [
-        {
-          "name": "镇陇府",
-          "level": 2,
-          "children": [
-            {
-              "name": "陇城坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "越陇坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "日南坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "九真坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "镇郊坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "电音县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "苏县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "江县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "临洮县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            }
-          ]
-        },
-        {
-          "name": "淮安府",
-          "level": 2,
-          "children": [
-            {
-              "name": "淮阴坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "淮城坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "清江浦坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "洪泽坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "右谷县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "桃源县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "南江县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "清河县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "浦阳县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "睢宁县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            }
-          ]
-        },
-        {
-          "name": "勇安府",
-          "level": 2,
-          "children": [
-            {
-              "name": "勇城坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "后建坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "西山坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "北秦县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "江山县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "薇妍县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "陇绵县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "西夷县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            }
-          ]
-        },
-        {
-          "name": "天水府",
-          "level": 2,
-          "children": [
-            {
-              "name": "秦城坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "上邽坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "白水县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "冷成县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "黑水县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "潜水县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "蒸汽县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "洛系",
-      "level": 1,
-      "children": [
-        {
-          "name": "江陵府",
-          "level": 2,
-          "children": [
-            {
-              "name": "渝城坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "庆璟坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "潮声坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "巴陵坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "嘉会坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "南秦县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "芸熙县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "安陵县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "东安县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "甘县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            }
-          ]
-        },
-        {
-          "name": "定边府",
-          "level": 2,
-          "children": [
-            {
-              "name": "益城坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "成都坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "北充坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "蜀郡坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "洛水县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "南陈县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "充州县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "南洛县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "慧远县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            }
-          ]
-        },
-        {
-          "name": "北江府",
-          "level": 2,
-          "children": [
-            {
-              "name": "琥珀坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "书肆坊",
-              "level": 3,
-              "is_fucheng": true,
-              "children": []
-            },
-            {
-              "name": "新禾县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "北陇县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            },
-            {
-              "name": "自昌县",
-              "level": 3,
-              "is_shuxian": true,
-              "children": []
-            }
-          ]
-        }
-      ]
-    },
-    {
       "name": "国系",
       "level": 1,
       "children": []
@@ -1866,7 +942,7 @@
       ]
     },
     {
-      "name": "凌系行司",
+      "name": "凌系道",
       "level": 1,
       "children": [
         {
@@ -2082,7 +1158,7 @@
       ]
     },
     {
-      "name": "南辰行司",
+      "name": "南辰道",
       "level": 1,
       "children": [
         {
@@ -2472,7 +1548,7 @@
       ]
     },
     {
-      "name": "北辰行司",
+      "name": "北辰道",
       "level": 1,
       "children": [
         {
@@ -2616,7 +1692,7 @@
       ]
     },
     {
-      "name": "戏制行司",
+      "name": "戏制道",
       "level": 1,
       "children": [
         {
@@ -2850,7 +1926,7 @@
       ]
     },
     {
-      "name": "永鸿行司",
+      "name": "永鸿道",
       "level": 1,
       "children": [
         {
@@ -3000,7 +2076,7 @@
       ]
     },
     {
-      "name": "东官行司",
+      "name": "东官道",
       "level": 1,
       "children": [
         {
@@ -4549,6 +3625,666 @@
               "is_shuxian": true,
               "children": []
             }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "内藩总督区",
+      "level": 1,
+      "children": [
+        {
+          "name": "青阳府",
+          "level": 2,
+          "children": [
+            {
+              "name": "楚城坊",
+              "level": 3,
+              "is_fucheng": true,
+              "children": []
+            },
+            {
+              "name": "鄂城坊",
+              "level": 3,
+              "is_fucheng": true,
+              "children": []
+            },
+            {
+              "name": "平武坊",
+              "level": 3,
+              "is_fucheng": true,
+              "children": []
+            },
+            {
+              "name": "青中坊",
+              "level": 3,
+              "is_fucheng": true,
+              "children": []
+            },
+            {
+              "name": "青西县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            },
+            {
+              "name": "青东县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            },
+            {
+              "name": "癸酉县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            },
+            {
+              "name": "青南县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            },
+            {
+              "name": "陇绵县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            },
+            {
+              "name": "鄂州县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            },
+            {
+              "name": "苏县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "成都府",
+          "level": 2,
+          "children": [
+            {
+              "name": "蜀城坊",
+              "level": 3,
+              "is_fucheng": true,
+              "children": []
+            },
+            {
+              "name": "锦官坊",
+              "level": 3,
+              "is_fucheng": true,
+              "children": []
+            },
+            {
+              "name": "华阳坊",
+              "level": 3,
+              "is_fucheng": true,
+              "children": []
+            },
+            {
+              "name": "安陵县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            },
+            {
+              "name": "剑门县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            },
+            {
+              "name": "南陈县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            },
+            {
+              "name": "洛水县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            },
+            {
+              "name": "充州县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            },
+            {
+              "name": "汉中县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "镇陇府",
+          "level": 2,
+          "children": [
+            {
+              "name": "陇城坊",
+              "level": 3,
+              "is_fucheng": true,
+              "children": []
+            },
+            {
+              "name": "日南坊",
+              "level": 3,
+              "is_fucheng": true,
+              "children": []
+            },
+            {
+              "name": "越边坊",
+              "level": 3,
+              "is_fucheng": true,
+              "children": []
+            },
+            {
+              "name": "临洮县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            },
+            {
+              "name": "江县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            },
+            {
+              "name": "右谷县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            },
+            {
+              "name": "电音县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "镇渊府",
+          "level": 2,
+          "children": [
+            {
+              "name": "殷城坊",
+              "level": 3,
+              "is_fucheng": true,
+              "children": []
+            },
+            {
+              "name": "承明坊",
+              "level": 3,
+              "is_fucheng": true,
+              "children": []
+            },
+            {
+              "name": "明渊坊",
+              "level": 3,
+              "is_fucheng": true,
+              "children": []
+            },
+            {
+              "name": "甲申县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            },
+            {
+              "name": "殷明县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            },
+            {
+              "name": "甲寅县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            },
+            {
+              "name": "癸亥县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "勇安府",
+          "level": 2,
+          "children": [
+            {
+              "name": "西山坊",
+              "level": 3,
+              "is_fucheng": true,
+              "children": []
+            },
+            {
+              "name": "后建坊",
+              "level": 3,
+              "is_fucheng": true,
+              "children": []
+            },
+            {
+              "name": "薇妍县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            },
+            {
+              "name": "北秦县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            },
+            {
+              "name": "江山县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            },
+            {
+              "name": "四夷县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "大明府",
+          "level": 2,
+          "children": [
+            {
+              "name": "万历坊",
+              "level": 3,
+              "is_fucheng": true,
+              "children": []
+            },
+            {
+              "name": "永历坊",
+              "level": 3,
+              "is_fucheng": true,
+              "children": []
+            },
+            {
+              "name": "丙戌县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            },
+            {
+              "name": "成化县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            },
+            {
+              "name": "兴禾县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            },
+            {
+              "name": "洪武县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            },
+            {
+              "name": "弘治县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "天水府",
+          "level": 2,
+          "children": [
+            {
+              "name": "上邽坊",
+              "level": 3,
+              "is_fucheng": true,
+              "children": []
+            },
+            {
+              "name": "秦水坊",
+              "level": 3,
+              "is_fucheng": true,
+              "children": []
+            },
+            {
+              "name": "黑水县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            },
+            {
+              "name": "冷成县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            },
+            {
+              "name": "张掖县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            },
+            {
+              "name": "白水县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            },
+            {
+              "name": "南江县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            },
+            {
+              "name": "潜水县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            },
+            {
+              "name": "蒸汽县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "殷西府",
+          "level": 2,
+          "children": [
+            {
+              "name": "乐土坊",
+              "level": 3,
+              "is_fucheng": true,
+              "children": []
+            },
+            {
+              "name": "乐昌坊",
+              "level": 3,
+              "is_fucheng": true,
+              "children": []
+            },
+            {
+              "name": "甲午县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            },
+            {
+              "name": "商丘县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            },
+            {
+              "name": "朝歌县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            },
+            {
+              "name": "甲子县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "江陵府",
+          "level": 2,
+          "children": [
+            {
+              "name": "庆景坊",
+              "level": 3,
+              "is_fucheng": true,
+              "children": []
+            },
+            {
+              "name": "潮声坊",
+              "level": 3,
+              "is_fucheng": true,
+              "children": []
+            },
+            {
+              "name": "巴陵坊",
+              "level": 3,
+              "is_fucheng": true,
+              "children": []
+            },
+            {
+              "name": "芸熙县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            },
+            {
+              "name": "南秦县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            },
+            {
+              "name": "南洛县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            },
+            {
+              "name": "甘县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            },
+            {
+              "name": "自昌县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            },
+            {
+              "name": "东安县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            },
+            {
+              "name": "北陇县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "暮日府",
+          "level": 2,
+          "children": [
+            {
+              "name": "流逆坊",
+              "level": 3,
+              "is_fucheng": true,
+              "children": []
+            },
+            {
+              "name": "吕梁县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            },
+            {
+              "name": "永安县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            },
+            {
+              "name": "兴楚县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            },
+            {
+              "name": "平逆县",
+              "level": 3,
+              "is_shuxian": true,
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "九真道",
+      "level": 1,
+      "children": [
+        {
+          "name": "交趾府",
+          "level": 2,
+          "children": [
+            { "name": "栖榆坊", "level": 3, "is_fucheng": true, "children": [] },
+            { "name": "缔泽坊", "level": 3, "is_fucheng": true, "children": [] },
+            { "name": "钦禾坊", "level": 3, "is_fucheng": true, "children": [] },
+            { "name": "续昼坊", "level": 3, "is_fucheng": true, "children": [] },
+            { "name": "日南县", "level": 3, "is_shuxian": true, "children": [] },
+            { "name": "越东县", "level": 3, "is_shuxian": true, "children": [] },
+            { "name": "越北县", "level": 3, "is_shuxian": true, "children": [] },
+            { "name": "安南县", "level": 3, "is_shuxian": true, "children": [] },
+            { "name": "越南县", "level": 3, "is_shuxian": true, "children": [] }
+          ]
+        },
+        {
+          "name": "河内府",
+          "level": 2,
+          "children": [
+            { "name": "阳宫坊", "level": 3, "is_fucheng": true, "children": [] },
+            { "name": "锦澜坊", "level": 3, "is_fucheng": true, "children": [] },
+            { "name": "渡酒坊", "level": 3, "is_fucheng": true, "children": [] },
+            { "name": "镇南县", "level": 3, "is_shuxian": true, "children": [] },
+            { "name": "平南县", "level": 3, "is_shuxian": true, "children": [] },
+            { "name": "谅山县", "level": 3, "is_shuxian": true, "children": [] },
+            { "name": "南关县", "level": 3, "is_shuxian": true, "children": [] }
+          ]
+        },
+        {
+          "name": "淮安府",
+          "level": 2,
+          "children": [
+            { "name": "淮阴坊", "level": 3, "is_fucheng": true, "children": [] },
+            { "name": "盱眙坊", "level": 3, "is_fucheng": true, "children": [] },
+            { "name": "泗阳坊", "level": 3, "is_fucheng": true, "children": [] },
+            { "name": "清河县", "level": 3, "is_shuxian": true, "children": [] },
+            { "name": "沭阳县", "level": 3, "is_shuxian": true, "children": [] },
+            { "name": "桃源县", "level": 3, "is_shuxian": true, "children": [] },
+            { "name": "睢宁县", "level": 3, "is_shuxian": true, "children": [] }
+          ]
+        },
+        {
+          "name": "清化府",
+          "level": 2,
+          "children": [
+            { "name": "天干坊", "level": 3, "is_fucheng": true, "children": [] },
+            { "name": "地支坊", "level": 3, "is_fucheng": true, "children": [] },
+            { "name": "温清坊", "level": 3, "is_fucheng": true, "children": [] },
+            { "name": "广河县", "level": 3, "is_shuxian": true, "children": [] },
+            { "name": "广南县", "level": 3, "is_shuxian": true, "children": [] },
+            { "name": "潮越县", "level": 3, "is_shuxian": true, "children": [] },
+            { "name": "清成县", "level": 3, "is_shuxian": true, "children": [] }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "定方总督区",
+      "level": 1,
+      "children": [
+        {
+          "name": "咸阳府",
+          "level": 2,
+          "children": [
+            { "name": "渭城坊", "level": 3, "is_fucheng": true, "children": [] },
+            { "name": "秦都坊", "level": 3, "is_fucheng": true, "children": [] },
+            { "name": "杨陵坊", "level": 3, "is_fucheng": true, "children": [] },
+            { "name": "大商县", "level": 3, "is_shuxian": true, "children": [] },
+            { "name": "丁亥县", "level": 3, "is_shuxian": true, "children": [] },
+            { "name": "沙州县", "level": 3, "is_shuxian": true, "children": [] },
+            { "name": "镇西县", "level": 3, "is_shuxian": true, "children": [] },
+            { "name": "陇县", "level": 3, "is_shuxian": true, "children": [] }
+          ]
+        },
+        {
+          "name": "河西府",
+          "level": 2,
+          "children": [
+            { "name": "奚岑坊", "level": 3, "is_fucheng": true, "children": [] },
+            { "name": "吟秋坊", "level": 3, "is_fucheng": true, "children": [] },
+            { "name": "絮词坊", "level": 3, "is_fucheng": true, "children": [] },
+            { "name": "癸卯县", "level": 3, "is_shuxian": true, "children": [] },
+            { "name": "水木县", "level": 3, "is_shuxian": true, "children": [] },
+            { "name": "壬申县", "level": 3, "is_shuxian": true, "children": [] }
+          ]
+        },
+        {
+          "name": "关西府",
+          "level": 2,
+          "children": [
+            { "name": "浔陵坊", "level": 3, "is_fucheng": true, "children": [] },
+            { "name": "韶岐坊", "level": 3, "is_fucheng": true, "children": [] },
+            { "name": "漓灼坊", "level": 3, "is_fucheng": true, "children": [] },
+            { "name": "壬辰县", "level": 3, "is_shuxian": true, "children": [] },
+            { "name": "萧县", "level": 3, "is_shuxian": true, "children": [] },
+            { "name": "清明县", "level": 3, "is_shuxian": true, "children": [] }
+          ]
+        },
+        {
+          "name": "秦鳌府",
+          "level": 2,
+          "children": [
+            { "name": "蒙田坊", "level": 3, "is_fucheng": true, "children": [] },
+            { "name": "溪美坊", "level": 3, "is_fucheng": true, "children": [] },
+            { "name": "崇武坊", "level": 3, "is_fucheng": true, "children": [] },
+            { "name": "武萧县", "level": 3, "is_shuxian": true, "children": [] },
+            { "name": "太白县", "level": 3, "is_shuxian": true, "children": [] },
+            { "name": "西兰花县", "level": 3, "is_shuxian": true, "children": [] },
+            { "name": "函谷县", "level": 3, "is_shuxian": true, "children": [] },
+            { "name": "潼县", "level": 3, "is_shuxian": true, "children": [] }
+          ]
+        },
+        {
+          "name": "铜川府",
+          "level": 2,
+          "children": [
+            { "name": "遂川坊", "level": 3, "is_fucheng": true, "children": [] },
+            { "name": "茗川坊", "level": 3, "is_fucheng": true, "children": [] },
+            { "name": "南屿坊", "level": 3, "is_fucheng": true, "children": [] },
+            { "name": "甘州县", "level": 3, "is_shuxian": true, "children": [] },
+            { "name": "秦州县", "level": 3, "is_shuxian": true, "children": [] },
+            { "name": "甘宁县", "level": 3, "is_shuxian": true, "children": [] },
+            { "name": "定安县", "level": 3, "is_shuxian": true, "children": [] },
+            { "name": "哈密县", "level": 3, "is_shuxian": true, "children": [] }
           ]
         }
       ]
