@@ -11,7 +11,8 @@
             background: #0a0a0a;
             color: #e0e0e0;
             min-height: 100vh;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
         }
 
         .bg-particles {
@@ -45,6 +46,7 @@
             justify-content: center;
             min-height: 100vh;
             padding: 2rem;
+            width: 100%;
         }
 
         .logo-ring {
@@ -206,13 +208,55 @@
         }
 
         @media (max-width: 680px) {
-            .title-main { font-size: 2.8rem; letter-spacing: 0.6rem; }
-            .coming-soon { font-size: 1.6rem; letter-spacing: 0.5rem; padding: 0.8rem 2rem; }
-            .coming-soon::before, .coming-soon::after { width: 30px; }
-            .schedule-grid { gap: 0.6rem; }
-            .schedule-item { padding: 0.8rem 1rem; min-width: 100px; }
-            .logo-ring { width: 120px; height: 120px; }
-            .logo-ring .icon { font-size: 3rem; }
+            body { overflow-y: auto; }
+            .main-view {
+                min-height: auto;
+                padding: 2rem 1rem 4rem;
+                justify-content: flex-start;
+                padding-top: 3rem;
+            }
+            .title-main {
+                font-size: 2.2rem;
+                letter-spacing: 0.4rem;
+            }
+            .subtitle {
+                font-size: 0.95rem;
+                letter-spacing: 0.2rem;
+                margin-bottom: 2rem;
+            }
+            .logo-ring {
+                width: 100px;
+                height: 100px;
+                margin-bottom: 1.5rem;
+            }
+            .logo-ring .icon { font-size: 2.5rem; }
+            .coming-soon {
+                font-size: 1.6rem;
+                letter-spacing: 0.4rem;
+                padding: 0.8rem 1.5rem;
+            }
+            .coming-soon::before, .coming-soon::after { display: none; }
+            .schedule { margin-top: 2rem; }
+            .schedule-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.5rem;
+            }
+            .schedule-item {
+                padding: 0.6rem 0.4rem;
+                min-width: 0;
+            }
+            .schedule-item .time { font-size: 1.2rem; }
+            .divider { width: 120px; margin: 1.5rem 0 1rem; }
+        }
+
+        @media (max-width: 380px) {
+            .title-main { font-size: 1.8rem; letter-spacing: 0.2rem; }
+            .subtitle { font-size: 0.85rem; letter-spacing: 0.1rem; }
+            .coming-soon { font-size: 1.3rem; letter-spacing: 0.2rem; }
+            .schedule-grid { grid-template-columns: repeat(3, 1fr); gap: 0.4rem; }
+            .schedule-item .time { font-size: 1rem; }
+            .schedule-item .day { font-size: 0.75rem; }
         }
 
         /* ===== 隐藏的金价数据区（手动更新） ===== */
