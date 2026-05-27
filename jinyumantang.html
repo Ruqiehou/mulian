@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>金玉满堂 · 慕联金价发布</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Microsoft YaHei', system-ui, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .bg-particles {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #ffd700;
+            border-radius: 50%;
+            opacity: 0;
+            animation: floatUp linear infinite;
+        }
+        @keyframes floatUp {
+            0% { opacity: 0; transform: translateY(100vh) scale(0); }
+            10% { opacity: 1; }
+            90% { opacity: 0.6; }
+            100% { opacity: 0; transform: translateY(-10vh) scale(1); }
+        }
+
+        .main-view {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .logo-ring {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            border: 3px solid rgba(255, 215, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2.5rem;
+            position: relative;
+            animation: ringPulse 3s ease-in-out infinite;
+        }
+        .logo-ring::before {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            animation: ringSpin 12s linear infinite;
+        }
+        .logo-ring::after {
+            content: '';
+            position: absolute;
+            inset: -18px;
+            border-radius: 50%;
+            border: 1px dashed rgba(255, 215, 0, 0.08);
+            animation: ringSpin 20s linear infinite reverse;
+        }
+        .logo-ring .icon {
+            font-size: 4rem;
+            animation: iconGlow 2s ease-in-out infinite alternate;
+        }
+        @keyframes ringPulse {
+            0%, 100% { border-color: rgba(255, 215, 0, 0.2); box-shadow: 0 0 30px rgba(255, 215, 0, 0.05); }
+            50% { border-color: rgba(255, 215, 0, 0.4); box-shadow: 0 0 60px rgba(255, 215, 0, 0.1); }
+        }
+        @keyframes ringSpin { 100% { transform: rotate(360deg); } }
+        @keyframes iconGlow {
+            0% { filter: brightness(1) drop-shadow(0 0 10px rgba(255,215,0,0.3)); }
+            100% { filter: brightness(1.2) drop-shadow(0 0 25px rgba(255,215,0,0.6)); }
+        }
+
+        .title-main {
+            font-size: 4.5rem;
+            font-weight: 800;
+            letter-spacing: 1.2rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, #ffd700, #fff8dc, #ffd700, #ffaa00, #ffd700);
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: goldShimmer 4s linear infinite;
+        }
+        @keyframes goldShimmer {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 300% 50%; }
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: #8a7a5a;
+            letter-spacing: 0.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .coming-soon {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #ffd700;
+            letter-spacing: 1rem;
+            position: relative;
+            padding: 1rem 3rem;
+        }
+        .coming-soon::before,
+        .coming-soon::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ffd700, transparent);
+            top: 50%;
+        }
+        .coming-soon::before { left: -20px; }
+        .coming-soon::after { right: -20px; }
+        .coming-soon .char {
+            display: inline-block;
+            animation: charBounce 2s ease-in-out infinite;
+        }
+        @keyframes charBounce {
+            0%, 100% { transform: translateY(0); opacity: 0.7; }
+            50% { transform: translateY(-8px); opacity: 1; }
+        }
+
+        .schedule {
+            margin-top: 3rem;
+            text-align: center;
+        }
+        .schedule-title {
+            font-size: 1rem;
+            color: #6a5a3a;
+            letter-spacing: 0.3rem;
+            margin-bottom: 1.2rem;
+        }
+        .schedule-grid {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .schedule-item {
+            background: rgba(255, 215, 0, 0.04);
+            border: 1px solid rgba(255, 215, 0, 0.12);
+            border-radius: 14px;
+            padding: 1rem 1.5rem;
+            min-width: 120px;
+            transition: border-color 0.3s;
+        }
+        .schedule-item:hover {
+            border-color: rgba(255, 215, 0, 0.35);
+        }
+        .schedule-item .day {
+            font-size: 0.85rem;
+            color: #8a7a5a;
+            letter-spacing: 0.2rem;
+        }
+        .schedule-item .time {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffd700;
+            margin-top: 0.3rem;
+        }
+
+        .divider {
+            width: 200px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,215,0,0.3), transparent);
+            margin: 2.5rem 0 1.5rem;
+        }
+
+        .hint {
+            font-size: 0.9rem;
+            color: #4a4a4a;
+            letter-spacing: 0.2rem;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+            padding: 1rem;
+            color: #333;
+            font-size: 0.8rem;
+            z-index: 1;
+        }
+
+        @media (max-width: 680px) {
+            .title-main { font-size: 2.8rem; letter-spacing: 0.6rem; }
+            .coming-soon { font-size: 1.6rem; letter-spacing: 0.5rem; padding: 0.8rem 2rem; }
+            .coming-soon::before, .coming-soon::after { width: 30px; }
+            .schedule-grid { gap: 0.6rem; }
+            .schedule-item { padding: 0.8rem 1rem; min-width: 100px; }
+            .logo-ring { width: 120px; height: 120px; }
+            .logo-ring .icon { font-size: 3rem; }
+        }
+
+        /* ===== 隐藏的金价数据区（手动更新） ===== */
+        .price-data-hidden { display: none; }
+    </style>
+</head>
+<body>
+
+<div class="bg-particles" id="particles"></div>
+
+<div class="main-view">
+    <div class="logo-ring">
+        <span class="icon">🏪</span>
+    </div>
+
+    <div class="title-main">金玉满堂</div>
+    <div class="subtitle">慕 联 金 价 发 布 平 台</div>
+
+    <div class="coming-soon">
+        <span class="char" style="animation-delay:0s">敬</span>
+        <span class="char" style="animation-delay:0.15s">请</span>
+        <span class="char" style="animation-delay:0.3s">期</span>
+        <span class="char" style="animation-delay:0.45s">待</span>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="schedule">
+        <div class="schedule-title">每 周 发 布 时 间</div>
+        <div class="schedule-grid">
+            <div class="schedule-item">
+                <div class="day">周六</div>
+                <div class="time">15:00</div>
+            </div>
+            <div class="schedule-item">
+                <div class="day">周六</div>
+                <div class="time">17:00</div>
+            </div>
+            <div class="schedule-item">
+                <div class="day">周六</div>
+                <div class="time">19:00</div>
+            </div>
+            <div class="schedule-item">
+                <div class="day">周日</div>
+                <div class="time">15:00</div>
+            </div>
+            <div class="schedule-item">
+                <div class="day">周日</div>
+                <div class="time">17:00</div>
+            </div>
+            <div class="schedule-item">
+                <div class="day">周日</div>
+                <div class="time">19:00</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="hint">首次发布即将开启 · 敬请关注</div>
+</div>
+
+<div class="price-data-hidden" id="priceData">
+    <h2>金价数据（手动更新区）</h2>
+    <p>以下数据由管理员手动更新，上线后将替换敬请期待页面。</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>发布日期</th>
+                <th>时间</th>
+                <th>金价（文天轩币/克）</th>
+                <th>涨跌</th>
+                <th>备注</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>2026-05-31</td>
+                <td>15:00</td>
+                <td>—</td>
+                <td>—</td>
+                <td>待发布</td>
+            </tr>
+            <tr>
+                <td>2026-05-31</td>
+                <td>17:00</td>
+                <td>—</td>
+                <td>—</td>
+                <td>待发布</td>
+            </tr>
+            <tr>
+                <td>2026-05-31</td>
+                <td>19:00</td>
+                <td>—</td>
+                <td>—</td>
+                <td>待发布</td>
+            </tr>
+            <tr>
+                <td>2026-06-01</td>
+                <td>15:00</td>
+                <td>—</td>
+                <td>—</td>
+                <td>待发布</td>
+            </tr>
+            <tr>
+                <td>2026-06-01</td>
+                <td>17:00</td>
+                <td>—</td>
+                <td>—</td>
+                <td>待发布</td>
+            </tr>
+            <tr>
+                <td>2026-06-01</td>
+                <td>19:00</td>
+                <td>—</td>
+                <td>—</td>
+                <td>待发布</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<footer>版权所有 © 2019-2026 天狐慕氏联邦帝国 · 金玉满堂</footer>
+
+<script>
+    (function() {
+        const container = document.getElementById('particles');
+        const count = 40;
+        for (let i = 0; i < count; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            p.style.left = Math.random() * 100 + '%';
+            p.style.animationDuration = (5 + Math.random() * 10) + 's';
+            p.style.animationDelay = (Math.random() * 8) + 's';
+            p.style.width = p.style.height = (2 + Math.random() * 3) + 'px';
+            container.appendChild(p);
+        }
+    })();
+</script>
+</body>
+</html>
