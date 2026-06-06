@@ -259,8 +259,58 @@
             .schedule-item .day { font-size: 0.75rem; }
         }
 
-        /* ===== 隐藏的金价数据区（手动更新） ===== */
-        .price-data-hidden { display: none; }
+        /* ===== 金价数据区 ===== */
+        .price-data-hidden {
+            display: block;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 6rem;
+        }
+        .price-data-hidden h2 {
+            font-size: 1.6rem;
+            color: #ffd700;
+            text-align: center;
+            margin-bottom: 0.3rem;
+            letter-spacing: 0.3rem;
+        }
+        .price-data-hidden > p {
+            text-align: center;
+            color: #6a5a3a;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(255, 215, 0, 0.03);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .price-table th {
+            background: rgba(255, 215, 0, 0.1);
+            color: #ffd700;
+            padding: 0.8rem 1rem;
+            text-align: center;
+            font-size: 0.9rem;
+            letter-spacing: 0.1rem;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        .price-table td {
+            padding: 0.7rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.06);
+            font-size: 0.95rem;
+        }
+        .price-table tr:hover { background: rgba(255, 215, 0, 0.04); }
+        .price-table .price-val { color: #ffd700; font-weight: 700; font-size: 1.1rem; }
+        .price-table .tag-up { color: #ff6b6b; }
+        .price-table .tag-pending { color: #555; font-size: 0.85rem; }
+        .price-table .note-none { color: #555; }
+        @media (max-width: 680px) {
+            .price-data-hidden { padding: 1.5rem 0.5rem 5rem; }
+            .price-table th, .price-table td { padding: 0.5rem 0.4rem; font-size: 0.8rem; }
+            .price-table .price-val { font-size: 0.95rem; }
+        }
     </style>
 </head>
 <body>
@@ -284,6 +334,7 @@
 
     <div class="divider"></div>
 
+    <!-- ===== 发布时间表（预留位置，暂不显示） =====
     <div class="schedule">
         <div class="schedule-title">每 周 发 布 时 间</div>
         <div class="schedule-grid">
@@ -313,6 +364,7 @@
             </div>
         </div>
     </div>
+    ===== 发布时间表 END ===== -->
 
     <div class="hint">首次发布即将开启 · 敬请关注</div>
 </div>
@@ -333,21 +385,21 @@
         </thead>
         <tbody>
             <tr>
-                <td>2026-05-31</td>
+                <td>2026-06-06</td>
                 <td>15:00</td>
+                <td>642.55</td>
                 <td>—</td>
                 <td>—</td>
-                <td>待发布</td>
             </tr>
             <tr>
-                <td>2026-05-31</td>
+                <td>2026-06-06</td>
                 <td>17:00</td>
                 <td>—</td>
                 <td>—</td>
                 <td>待发布</td>
             </tr>
             <tr>
-                <td>2026-05-31</td>
+                <td>2026-06-06</td>
                 <td>19:00</td>
                 <td>—</td>
                 <td>—</td>
