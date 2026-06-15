@@ -92,6 +92,9 @@
             transition: background 0.2s, transform 0.1s;
             margin: 1rem 0 0.5rem 0;
             border: 2px solid #2563eb;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            user-select: none;
         }
         .btn-fare:hover {
             background: #0b2b40;
@@ -105,11 +108,29 @@
             color: #3b5c7a;
             margin-top: 1rem;
         }
-        @media (max-width: 680px) {
-            h1 { font-size: 2.2rem; }
-            h2 { font-size: 1.8rem; }
-            h3 { font-size: 1.4rem; }
-            .btn-fare { font-size: 1.2rem; padding: 0.8rem 2rem; }
+        @media (max-width: 768px) {
+            body { padding: 1rem 0.75rem; }
+            .container { padding: 1.5rem 1rem; border-radius: 20px; }
+            h1 { font-size: 2rem; padding-left: 1rem; border-left-width: 6px; }
+            h2 { font-size: 1.6rem; }
+            h3 { font-size: 1.25rem; }
+            .fare-link-card { padding: 1.5rem 1.2rem; border-radius: 24px; }
+            .btn-fare { font-size: 1.1rem; padding: 0.7rem 1.5rem; }
+        }
+        @media (max-width: 480px) {
+            body { padding: 0.5rem; }
+            .container { padding: 1rem 0.75rem; border-radius: 16px; }
+            h1 { font-size: 1.6rem; padding-left: 0.75rem; border-left-width: 5px; }
+            h2 { font-size: 1.35rem; }
+            h3 { font-size: 1.1rem; }
+            p { font-size: 1rem; }
+            .fare-link-card { padding: 1.2rem 0.8rem; border-radius: 20px; }
+            .fare-link-card p { font-size: 0.95rem; }
+            .btn-fare { font-size: 1rem; padding: 0.6rem 1.2rem; border-radius: 40px; }
+            .btn-grid { grid-template-columns: 1fr !important; }
+        }
+        @media (max-width: 400px) {
+            .btn-fare { font-size: 0.9rem; padding: 0.5rem 0.8rem; }
         }
         .badge {
             background-color: #dbeafe;
@@ -141,7 +162,7 @@
         <h2>🔗 在线票价查询系统</h2>
         <p style="margin-bottom: 0.5rem;">点击下方按钮，打开相应的票价查询页面。</p>
         
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem;" class="btn-grid">
             <a href="price_railway.html" target="_blank" rel="noopener noreferrer" class="btn-fare" style="font-size: 1.3rem; padding: 0.8rem 1.5rem;">
                 🚄 铁路票价查询
             </a>
