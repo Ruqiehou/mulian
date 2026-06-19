@@ -251,6 +251,95 @@
             font-size: 48px;
             margin-bottom: 15px;
         }
+        .view-children-btn {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 8px 18px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+        }
+        .view-children-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        .view-children-btn.active {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            box-shadow: 0 2px 8px rgba(245, 87, 108, 0.3);
+        }
+        .children-container {
+            margin-top: 12px;
+            padding: 12px 16px;
+            background: #f0f4ff;
+            border-radius: 10px;
+            border: 1px solid #e0e7ff;
+            display: none;
+        }
+        .children-container.open {
+            display: block;
+        }
+        .child-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            margin-bottom: 8px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+            border-left: 4px solid;
+            transition: all 0.2s;
+        }
+        .child-item:last-child {
+            margin-bottom: 0;
+        }
+        .child-item:hover {
+            transform: translateX(4px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .child-item.level-2 {
+            border-left-color: #10b981;
+        }
+        .child-item.level-3 {
+            border-left-color: #f59e0b;
+        }
+        .child-name {
+            font-size: 15px;
+            font-weight: 600;
+            flex: 1;
+        }
+        .child-item.level-2 .child-name {
+            color: #10b981;
+        }
+        .child-item.level-3 .child-name {
+            color: #f59e0b;
+        }
+        .child-item .level-badge {
+            font-size: 11px;
+            padding: 3px 10px;
+        }
+        .child-item .view-children-btn {
+            font-size: 12px;
+            padding: 5px 12px;
+            margin-top: 0;
+        }
+        .child-nested-container {
+            margin-top: 8px;
+            padding: 8px 8px 8px 20px;
+            background: #f8faff;
+            border-radius: 8px;
+            border: 1px solid #e8edff;
+            display: none;
+        }
+        .child-nested-container.open {
+            display: block;
+        }
         @media (max-width: 600px) {
             .container {
                 padding: 25px;
@@ -284,6 +373,7 @@
 
     <script>
         let quhuaData = null;
+        let lastResults = null;
 
         async function loadQuhuaData() {
             try {
@@ -302,7 +392,8 @@
                     name: node.name,
                     level: node.level,
                     path: [...parentPath].join(' > '),
-                    note: node.note || null
+                    note: node.note || null,
+                    node: node
                 });
             }
             if (node.children) {
@@ -370,11 +461,14 @@
                 return;
             }
         
+            lastResults = results;
+        
             let html = `<div class="result-header">
                 <div class="result-count">找到 <span>${results.length}</span> 个结果</div>
             </div>`;
                     
-            results.forEach(item => {
+            results.forEach((item, index) => {
+                const hasChildren = item.node.children && item.node.children.length > 0;
                 html += `<div class="result-item level-${item.level}">
                     <div class="result-name">${item.name}</div>
                     <div class="result-meta">
@@ -382,10 +476,65 @@
                     </div>
                     ${item.path ? `<div class="result-path">${item.path}</div>` : ''}
                     ${item.note ? `<div class="result-note">${item.note}</div>` : ''}
+                    ${hasChildren ? `<button class="view-children-btn" onclick="toggleChildren(${index})" id="toggle-btn-${index}">查看下属 ${item.node.children.length} 个地区 ▾</button>` : ''}
+                    <div class="children-container" id="children-${index}"></div>
                 </div>`;
             });
                     
             resultDiv.innerHTML = html;
+        }
+
+        function toggleChildren(index) {
+            const container = document.getElementById('children-' + index);
+            const btn = document.getElementById('toggle-btn-' + index);
+            if (!container || !btn) return;
+            
+            if (container.classList.contains('open')) {
+                container.classList.remove('open');
+                btn.classList.remove('active');
+                btn.textContent = btn.textContent.replace('▲', '▾');
+                return;
+            }
+            
+            const item = lastResults[index];
+            if (!item || !item.node.children) return;
+            
+            container.innerHTML = renderChildrenList(item.node.children, getLevelName);
+            container.classList.add('open');
+            btn.classList.add('active');
+            btn.textContent = '收起下属地区 ▲';
+        }
+
+        function renderChildrenList(children, getLevelNameFn) {
+            let html = '';
+            children.forEach((child) => {
+                const hasGrandChildren = child.children && child.children.length > 0;
+                html += `<div class="child-item level-${child.level}">
+                    <span class="child-name">${child.name}</span>
+                    <span class="level-badge">${getLevelNameFn(child.level)}</span>
+                    ${hasGrandChildren ? `<button class="view-children-btn" onclick="toggleNestedChildren(this)" data-children='${encodeURIComponent(JSON.stringify(child.children))}' data-count="${child.children.length}">查看下属 ${child.children.length} 个地区 ▾</button>` : ''}
+                    ${hasGrandChildren ? `<div class="child-nested-container"></div>` : ''}
+                </div>`;
+            });
+            return html;
+        }
+
+        function toggleNestedChildren(btn) {
+            const container = btn.nextElementSibling;
+            if (!container) return;
+            
+            if (container.classList.contains('open')) {
+                container.classList.remove('open');
+                btn.classList.remove('active');
+                btn.textContent = '查看下属 ' + btn.dataset.count + ' 个地区 ▾';
+                return;
+            }
+            
+            const childrenData = JSON.parse(decodeURIComponent(btn.dataset.children));
+            container.innerHTML = renderChildrenList(childrenData, getLevelName);
+            container.classList.add('open');
+            btn.classList.add('active');
+            btn.textContent = '收起下属地区 ▲';
         }
 
         document.getElementById('searchInput').addEventListener('keypress', function(e) {
