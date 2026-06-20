@@ -195,6 +195,66 @@
             letter-spacing: 0.2rem;
         }
 
+        /* ===== 地点标签 ===== */
+        .location-group {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+        .location-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(255, 215, 0, 0.08);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 30px;
+            padding: 0.5rem 1.4rem;
+            font-size: 1rem;
+            color: #c8a84e;
+            letter-spacing: 0.15rem;
+        }
+        .location-tag .loc-icon {
+            font-size: 1.1rem;
+        }
+
+        /* ===== 按钮组 ===== */
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 2.5rem;
+        }
+        .btn-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.7rem 2rem;
+            font-size: 0.95rem;
+            color: #c8a84e;
+            background: rgba(255, 215, 0, 0.06);
+            border: 1px solid rgba(255, 215, 0, 0.18);
+            border-radius: 40px;
+            text-decoration: none;
+            letter-spacing: 0.15rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .btn-home:hover {
+            background: rgba(255, 215, 0, 0.12);
+            border-color: rgba(255, 215, 0, 0.4);
+            color: #ffd700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.08);
+        }
+        .btn-home:active {
+            transform: scale(0.97);
+        }
+        .btn-home .home-icon {
+            font-size: 1.1rem;
+        }
+
         footer {
             position: fixed;
             bottom: 0;
@@ -236,6 +296,9 @@
                 padding: 0.8rem 1.5rem;
             }
             .coming-soon::before, .coming-soon::after { display: none; }
+            .location-tag { font-size: 0.85rem; padding: 0.4rem 1rem; }
+            .btn-group { margin-top: 2rem; }
+            .btn-home { font-size: 0.85rem; padding: 0.6rem 1.4rem; }
             .schedule { margin-top: 2rem; }
             .schedule-grid {
                 display: grid;
@@ -325,8 +388,26 @@
     <div class="title-main">金玉满堂</div>
     <div class="subtitle">慕 联 金 价 发 布 平 台</div>
 
+    <div class="location-group">
+        <div class="location-tag">
+            <span class="loc-icon">📍</span>
+            <span>潮交所</span>
+        </div>
+        
+    </div>
+
     <div class="divider"></div>
 
+    <div class="btn-group">
+        <a href="#top" class="btn-home" onclick="event.preventDefault();window.scrollTo({top:0,behavior:'smooth'});">
+            <span class="home-icon">⬆️</span>
+            <span>回到顶部</span>
+        </a>
+        <a href="index.html" class="btn-home">
+            <span class="home-icon">🏠</span>
+            <span>回主页</span>
+        </a>
+    </div>
 
 </div>
 
