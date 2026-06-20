@@ -12,6 +12,9 @@
         .result { font-size: 20px; margin: 20px; color: #d32f2f; font-weight: bold; }
         .tip { color: #666; font-size: 14px; }
         .seat-option { margin: 10px 0; }
+        .btn-home { display: inline-flex; align-items: center; gap: 8px; margin-top: 25px; padding: 12px 28px; font-size: 15px; color: #1a5fb4; background: #e8f0fe; border: 2px solid #1a5fb4; border-radius: 40px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; cursor: pointer; }
+        .btn-home:hover { background: #1a5fb4; color: white; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(26, 95, 180, 0.3); }
+        .btn-home:active { transform: translateY(0); }
     </style>
 </head>
 <body>
@@ -39,6 +42,10 @@
     <button onclick="findCheapestRoute()">💰 计算最便宜票价</button>
 
     <div class="result" id="result">结果将显示在这里</div>
+
+    <div style="text-align: center;">
+        <a href="index.html" class="btn-home">🏠 回主页</a>
+    </div>
 </div>
 
 <script>

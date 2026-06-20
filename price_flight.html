@@ -220,6 +220,32 @@
             color: #2c3e50;
         }
         
+        .btn-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 25px;
+            padding: 12px 28px;
+            font-size: 15px;
+            color: #3498db;
+            background: #f0f8ff;
+            border: 2px solid #3498db;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .btn-home:hover {
+            background: #3498db;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+        .btn-home:active {
+            transform: translateY(0);
+        }
+
         @media (max-width: 768px) {
             .search-form {
                 grid-template-columns: 1fr;
@@ -232,6 +258,11 @@
             
             .route-info {
                 grid-template-columns: 1fr;
+            }
+
+            .btn-home {
+                font-size: 14px;
+                padding: 10px 20px;
             }
         }
     </style>
@@ -272,6 +303,10 @@
         
         <div class="result" id="result">
             <div class="no-results">请选择出发和到达城市后点击查询</div>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="index.html" class="btn-home">🏠 回主页</a>
         </div>
     </div>
 

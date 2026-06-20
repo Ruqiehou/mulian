@@ -353,6 +353,37 @@
             .search-box button {
                 width: 100%;
             }
+            .btn-home {
+                font-size: 14px;
+                padding: 10px 20px;
+            }
+        }
+
+        .btn-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 25px;
+            padding: 12px 28px;
+            font-size: 15px;
+            color: #667eea;
+            background: #f0f4ff;
+            border: 2px solid #667eea;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .btn-home:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: transparent;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        .btn-home:active {
+            transform: translateY(0);
         }
     </style>
 </head>
@@ -368,6 +399,10 @@
         
         <div class="result" id="result">
             <div class="empty-input">请输入关键词开始查询</div>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="index.html" class="btn-home">🏠 回主页</a>
         </div>
     </div>
 
