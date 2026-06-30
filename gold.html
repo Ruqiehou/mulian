@@ -221,24 +221,30 @@
 
         /* ===== 按钮组 ===== */
         .btn-group {
+            position: fixed;
+            right: 1.5rem;
+            bottom: 4.2rem;
+            z-index: 10;
             display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 2.5rem;
+            flex-direction: column;
+            gap: 0.75rem;
+            align-items: flex-end;
         }
         .btn-home {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 0.7rem 2rem;
-            font-size: 0.95rem;
+            justify-content: center;
+            gap: 0.45rem;
+            min-width: 118px;
+            padding: 0.65rem 1.2rem;
+            font-size: 0.9rem;
             color: #c8a84e;
-            background: rgba(255, 215, 0, 0.06);
-            border: 1px solid rgba(255, 215, 0, 0.18);
+            background: rgba(15, 12, 8, 0.86);
+            border: 1px solid rgba(255, 215, 0, 0.22);
             border-radius: 40px;
             text-decoration: none;
-            letter-spacing: 0.15rem;
+            letter-spacing: 0.1rem;
+            backdrop-filter: blur(10px);
             transition: all 0.3s ease;
             cursor: pointer;
         }
@@ -297,8 +303,18 @@
             }
             .coming-soon::before, .coming-soon::after { display: none; }
             .location-tag { font-size: 0.85rem; padding: 0.4rem 1rem; }
-            .btn-group { margin-top: 2rem; }
-            .btn-home { font-size: 0.85rem; padding: 0.6rem 1.4rem; }
+            .btn-group {
+                right: 50%;
+                bottom: 3.6rem;
+                transform: translateX(50%);
+                flex-direction: row;
+                align-items: center;
+            }
+            .btn-home {
+                min-width: auto;
+                font-size: 0.82rem;
+                padding: 0.55rem 1rem;
+            }
             .schedule { margin-top: 2rem; }
             .schedule-grid {
                 display: grid;
@@ -345,30 +361,34 @@
         .price-table {
             width: 100%;
             border-collapse: collapse;
-            background: rgba(255, 215, 0, 0.03);
-            border-radius: 12px;
+            background: rgba(255, 215, 0, 0.04);
+            border: 1px solid rgba(255, 215, 0, 0.14);
+            border-radius: 14px;
             overflow: hidden;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.22);
         }
         .price-table th {
-            background: rgba(255, 215, 0, 0.1);
+            background: rgba(255, 215, 0, 0.12);
             color: #ffd700;
-            padding: 0.8rem 1rem;
+            padding: 0.85rem 1rem;
             text-align: center;
             font-size: 0.9rem;
             letter-spacing: 0.1rem;
-            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.22);
         }
         .price-table td {
-            padding: 0.7rem 1rem;
+            padding: 0.75rem 1rem;
             text-align: center;
-            border-bottom: 1px solid rgba(255, 215, 0, 0.06);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.08);
             font-size: 0.95rem;
         }
-        .price-table tr:hover { background: rgba(255, 215, 0, 0.04); }
-        .price-table .price-val { color: #ffd700; font-weight: 700; font-size: 1.1rem; }
-        .price-table .tag-up { color: #ff6b6b; }
-        .price-table .tag-down { color: #007f3f; }
-        .price-table .tag-pending { color: #555; font-size: 0.85rem; }
+        .price-table tbody tr:nth-child(even) { background: rgba(255, 255, 255, 0.015); }
+        .price-table tbody tr:last-child td { border-bottom: none; }
+        .price-table tr:hover { background: rgba(255, 215, 0, 0.06); }
+        .price-table .price-val { color: #ffd700; font-weight: 700; font-size: 1.08rem; }
+        .price-table .tag-up { color: #ff6b6b; font-weight: 700; }
+        .price-table .tag-down { color: #00a651; font-weight: 700; }
+        .price-table .tag-pending { color: #777; font-size: 0.85rem; }
         .price-table .note-none { color: #555; }
         @media (max-width: 680px) {
             .price-data-hidden { padding: 1.5rem 0.5rem 5rem; }
@@ -448,10 +468,31 @@
                 <td class="tag-pending">开市</td>
             </tr>
             <tr>
+                <td>2026-07-04</td>
+                <td>14:00</td>
+                <td class="price-val">-</td>
+                <td class="note-none">-</td>
+                <td class="tag-pending">未开市</td>
+            </tr>
+            <tr>
+                <td>2026-07-04</td>
+                <td>16:00</td>
+                <td class="price-val">-</td>
+                <td class="note-none">-</td>
+                <td class="tag-pending">未开市</td>
+            </tr>
+            <tr>
+                <td>2026-07-04</td>
+                <td>18:00</td>
+                <td class="price-val">-</td>
+                <td class="note-none">-</td>
+                <td class="tag-pending">未开市</td>
+            </tr>
+            <tr>
                 <td>2026-07-05</td>
                 <td>14:00</td>
                 <td class="price-val">-</td>
-                <td class="tag-up">-</td>
+                <td class="note-none">-</td>
                 <td class="tag-pending">未开市</td>
             </tr>
             <tr>
@@ -465,7 +506,7 @@
                 <td>2026-07-05</td>
                 <td>18:00</td>
                 <td class="price-val">-</td>
-                <td class="tag-up">-</td>
+                <td class="note-none">-</td>
                 <td class="tag-pending">未开市</td>
             </tr>
         </tbody>
