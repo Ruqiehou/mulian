@@ -49,53 +49,13 @@
 </div>
 
 <script>
-    // ==================================================================================
-    // 1. 【配置区】地区连接关系 (乙等座的跨区加价，根据你提供的名单)
-    // ==================================================================================
-    const connections = {
-        '义安府': { '北直隶清恒府': 300, '景圣区': 200, '颜系区': 400, '西直隶潮州府': 200 },
-        '北直隶清恒府': { '义安府': 300, '光辰府': 300, '景圣区': 200, '颜系区': 400 },
-        '光辰府': { '北直隶清恒府': 300, '西直隶兴庆府': 300, '內藩区': 200 },
-        '西直隶兴庆府': { '光辰府': 300, '西直隶潮州府': 300, '凌系道': 300, '云系区': 500 },
-        '西直隶潮州府': { '西直隶兴庆府': 300, '义安府': 200, '云系区': 200 },
-        '凌系道': { '西直隶兴庆府': 300, '戏制道': 300 },
-        '戏制道': { '凌系道': 300, '云系区': 300 },
-        '云系区': { '西直隶兴庆府': 500, '戏制道': 300, '西直隶潮州府': 200 },
-        '內藩区': { '光辰府': 200, '唐系': 300,'景圣区': 300, '颜系区': 400},
-        '景圣区': { '內藩区': 300, '义安府': 200, '北直隶清恒府': 200 },
-        '颜系区': { '內藩区': 400, '义安府': 400, '北直隶清恒府': 400 }
+    let connections = {};
+    let stations = {};
+    let fare = {
+        sameRegion: { yibei: 200, jia: 300 },
+        crossRegion: { baseYibei: 200, baseJia: 300, jiaServicePerStep: 100 }
     };
 
-    // ==================================================================================
-    // 2. 【配置区】车站归属关系 (根据你提供的“真实车站数据”)
-    // ==================================================================================
-    const stations = {
-        // ■京畿都市圈
-        "义安站": "义安府", "义安东站": "义安府", "潮阳站": "义安府", "澄海站": "义安府", "惠来站": "义安府", "义安机场站": "义安府",
-        "清桓站": "北直隶清恒府", "清桓机场站": "北直隶清恒府", "清桓南站": "北直隶清恒府",
-
-        // ■光潮都市圈
-        "光辰站": "光辰府", "光辰东站": "光辰府", "上雍站": "光辰府", "龙江站": "光辰府",
-        "潮州站": "西直隶潮州府", "饶平站": "西直隶潮州府",
-        "兴庆站": "西直隶兴庆府", "兴庆西站": "西直隶兴庆府",
-
-        // ■其他
-        "广陵站": "凌系道",     // 凌系道-广陵府-广陵站
-        "青阳站": "內藩区",     // 内藩区-青阳府-青阳站
-        "青阳机场站": "內藩区",  // 內藩区-青阳府-青阳机场站
-        "云陵站": "云系区",     // 云系区-云陵府-云陵站
-        "翎陌站": "云系区",     // 云系区-翎陌国-翎陌站
-        "天轩站": "戏制道",     // 戏制道-天轩府-天轩站
-        "镇陇站": "內藩区",     // 内藩区-镇陇府-镇陇站
-        "镇渊站": "內藩区",     // 内藩区-镇渊府-镇渊站
-        "延平北站": "唐系",   // 唐系-延平府-延平北站
-        "燕云大青站": "景圣区", // 景圣区-燕云府-燕云大青站
-        "青枢站": "颜系区"      // 颜系区-青枢府-青枢站 
-    };
-
-    // ==================================================================================
-    // 3. 核心计算引擎
-    // ==================================================================================
     function findCheapestRoute() {
         const startStation = document.getElementById('start').value;
         const endStation = document.getElementById('end').value;
@@ -109,46 +69,32 @@
         const startRegion = stations[startStation];
         const endRegion = stations[endStation];
 
-        // 1. 同地区判断
         if (startRegion === endRegion) {
-            const fare = seatClass === 'jia' ? 300 : 200;
-            document.getElementById('result').innerHTML = `✅ 同地区通勤<br>💰 <strong>${fare} 文</strong> (起步价)`;
+            const price = seatClass === 'jia' ? fare.sameRegion.jia : fare.sameRegion.yibei;
+            document.getElementById('result').innerHTML = `✅ 同地区通勤<br>💰 <strong>${price} 文</strong> (起步价)`;
             return;
         }
 
-        // 2. 寻找最短路径
         const result = findShortestPath(startRegion, endRegion);
-        
         if (!result) {
             document.getElementById('result').innerHTML = `❌ 错误：无通路！`;
             return;
         }
 
         const { distance, path, steps } = result;
-        
-        // 3. 计算票价 (关键修改点)
-        // 乙等座总票价 = 200(起步) + distance(各段跨区费之和)
-        // 甲等座总票价 = 300(起步) + (各段跨区费+100)之和
-        // 甲等座也可以理解为：乙等票价 + (100 * 跨区段数)
-        
-        const baseFareYi = 200;
-        const baseFareJia = 300;
-        
-        const yiTotal = baseFareYi + distance;
-        const jiaTotal = baseFareJia + distance + (steps * 100); 
+        const { baseYibei, baseJia, jiaServicePerStep } = fare.crossRegion;
+        const yiTotal = baseYibei + distance;
+        const jiaTotal = baseJia + distance + (steps * jiaServicePerStep);
 
         let displayText = `🛣️ 路线: ${path.join(" → ")}<br>🧮 跨区段数: ${steps} 段`;
-
         if (seatClass === 'yibei') {
             displayText += `<br>🎫 乙等座: ${yiTotal} 文`;
         } else {
-            displayText += `<br>👑 甲等座: ${jiaTotal} 文<br><small>(起步300 + 跨区费${distance} + 服务费${steps * 100})</small>`;
+            displayText += `<br>👑 甲等座: ${jiaTotal} 文<br><small>(起步${baseJia} + 跨区费${distance} + 服务费${steps * jiaServicePerStep})</small>`;
         }
-
         document.getElementById('result').innerHTML = displayText;
     }
 
-    // Dijkstra 算法 (未变)
     function findShortestPath(start, end) {
         const distances = {};
         const previous = {};
@@ -181,7 +127,7 @@
                 return { distance: currentDist, path: path, steps: stepCount };
             }
 
-            const neighbors = connections[current];
+            const neighbors = connections[current] || {};
             for (let neighbor in neighbors) {
                 if (!visited.has(neighbor)) {
                     const newDist = currentDist + neighbors[neighbor];
@@ -196,18 +142,28 @@
         return null;
     }
 
-    // ==================================================================================
-    // 4. 页面初始化
-    // ==================================================================================
-    window.onload = function() {
+    function initStationSelects() {
         const startSelect = document.getElementById('start');
         const endSelect = document.getElementById('end');
-
+        startSelect.innerHTML = '';
+        endSelect.innerHTML = '';
         for (let code in stations) {
-            const opt1 = new Option(`${code} (${stations[code]})`, code);
-            const opt2 = new Option(`${code} (${stations[code]})`, code);
-            startSelect.add(opt1);
-            endSelect.add(opt2);
+            startSelect.add(new Option(`${code} (${stations[code]})`, code));
+            endSelect.add(new Option(`${code} (${stations[code]})`, code));
+        }
+    }
+
+    window.onload = async function() {
+        try {
+            const res = await fetch('price_railway.json');
+            if (!res.ok) throw new Error('加载失败');
+            const data = await res.json();
+            connections = data.connections || {};
+            stations = data.stations || {};
+            if (data.fare) fare = data.fare;
+            initStationSelects();
+        } catch (e) {
+            document.getElementById('result').innerHTML = `❌ 无法加载 price_railway.json`;
         }
     };
 </script>
