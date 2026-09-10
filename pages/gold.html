@@ -4,8 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>金玉满堂 · 慕联金价发布</title>
+    <link rel="stylesheet" href="../assets/common.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* 公共组件主题变量（见 assets/common.css） */
+        :root {
+            --btn-home-color: #c8a84e;
+            --btn-home-bg: rgba(15, 12, 8, 0.86);
+            --btn-home-border-width: 1px;
+            --btn-home-border-color: rgba(255, 215, 0, 0.22);
+            --btn-home-gap: 0.45rem;
+            --btn-home-margin-top: 0;
+            --btn-home-padding: 0.65rem 1.2rem;
+            --btn-home-min-width: 118px;
+            --btn-home-font-size: 0.9rem;
+            --btn-home-font-weight: 400;
+            --btn-home-letter-spacing: 0.1rem;
+            --btn-home-backdrop: blur(10px);
+            --btn-home-hover-color: #ffd700;
+            --btn-home-hover-bg: rgba(255, 215, 0, 0.12);
+            --btn-home-hover-border-color: rgba(255, 215, 0, 0.4);
+            --btn-home-hover-shadow: 0 0 20px rgba(255, 215, 0, 0.08);
+            --btn-home-hover-transform: none;
+            --btn-home-active-transform: scale(0.97);
+            --site-footer-padding: 1rem;
+        }
         body {
             font-family: 'Microsoft YaHei', system-ui, sans-serif;
             background: #0a0a0a;
@@ -231,37 +253,6 @@
             gap: 0.75rem;
             align-items: flex-end;
         }
-        .btn-home {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.45rem;
-            min-width: 118px;
-            padding: 0.65rem 1.2rem;
-            font-size: 0.9rem;
-            font-family: inherit;
-            color: #c8a84e;
-            background: rgba(15, 12, 8, 0.86);
-            border: 1px solid rgba(255, 215, 0, 0.22);
-            border-radius: 40px;
-            text-decoration: none;
-            letter-spacing: 0.1rem;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        .btn-home:hover {
-            background: rgba(255, 215, 0, 0.12);
-            border-color: rgba(255, 215, 0, 0.4);
-            color: #ffd700;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.08);
-        }
-        .btn-home:active {
-            transform: scale(0.97);
-        }
-        .btn-home .home-icon {
-            font-size: 1.1rem;
-        }
 
         /* ===== 移动端浮动菜单 ===== */
         .fab-wrap {
@@ -313,18 +304,6 @@
             font-size: 0.82rem;
             padding: 0.5rem 1rem;
             box-shadow: 0 4px 16px rgba(0,0,0,0.35);
-        }
-
-        footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            text-align: center;
-            padding: 1rem;
-            color: #333;
-            font-size: 0.8rem;
-            z-index: 1;
         }
 
         @media (max-width: 680px) {
@@ -735,7 +714,7 @@
 
 <div class="copy-toast" id="copyToast"></div>
 
-<footer>版权所有 © 2019-2026 天狐慕氏联邦帝国 · 金玉满堂</footer>
+<footer class="site-footer">版权所有 © 2019-2026 天狐慕氏联邦帝国 · 金玉满堂</footer>
 
 <script>
     (function() {

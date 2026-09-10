@@ -4,11 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>行政区划查询</title>
+    <link rel="stylesheet" href="../assets/common.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* 公共组件主题变量（见 assets/common.css） */
+        :root {
+            --btn-home-color: #667eea;
+            --btn-home-bg: #f0f4ff;
+            --btn-home-border-color: #667eea;
+            --btn-home-hover-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --btn-home-hover-color: #fff;
+            --btn-home-hover-border-color: transparent;
+            --btn-home-hover-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
         body {
             font-family: 'Microsoft YaHei', Arial, sans-serif;
@@ -415,38 +421,8 @@
             .search-box button {
                 width: 100%;
             }
-            .btn-home {
-                font-size: 14px;
-                padding: 10px 20px;
-            }
         }
 
-        .btn-home {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 25px;
-            padding: 12px 28px;
-            font-size: 15px;
-            color: #667eea;
-            background: #f0f4ff;
-            border: 2px solid #667eea;
-            border-radius: 40px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        .btn-home:hover {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-color: transparent;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-        .btn-home:active {
-            transform: translateY(0);
-        }
     </style>
 </head>
 <body>

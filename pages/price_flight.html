@@ -4,11 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>慕联航空</title>
+    <link rel="stylesheet" href="../assets/common.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* 公共组件主题变量（见 assets/common.css） */
+        :root {
+            --btn-home-color: #3498db;
+            --btn-home-bg: #f0f8ff;
+            --btn-home-border-color: #3498db;
+            --btn-home-hover-bg: #3498db;
+            --btn-home-hover-color: #fff;
+            --btn-home-hover-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
         }
         
         body {
@@ -219,32 +224,6 @@
             font-weight: bold;
             color: #2c3e50;
         }
-        
-        .btn-home {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 25px;
-            padding: 12px 28px;
-            font-size: 15px;
-            color: #3498db;
-            background: #f0f8ff;
-            border: 2px solid #3498db;
-            border-radius: 40px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        .btn-home:hover {
-            background: #3498db;
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
-        }
-        .btn-home:active {
-            transform: translateY(0);
-        }
 
         @media (max-width: 768px) {
             .search-form {
@@ -258,11 +237,6 @@
             
             .route-info {
                 grid-template-columns: 1fr;
-            }
-
-            .btn-home {
-                font-size: 14px;
-                padding: 10px 20px;
             }
         }
     </style>

@@ -4,7 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>慕联铁路</title>
+    <link rel="stylesheet" href="../assets/common.css">
     <style>
+        /* 公共组件主题变量（见 assets/common.css） */
+        :root {
+            --btn-home-color: #1a5fb4;
+            --btn-home-bg: #e8f0fe;
+            --btn-home-border-color: #1a5fb4;
+            --btn-home-hover-bg: #1a5fb4;
+            --btn-home-hover-color: #fff;
+            --btn-home-hover-shadow: 0 5px 15px rgba(26, 95, 180, 0.3);
+            --site-footer-bg: #f5f5f5;
+            --site-footer-font-size: 1rem;
+        }
         body { font-family: "Microsoft YaHei", sans-serif; text-align: center; padding: 20px; background: #f5f5f5; }
         .container { max-width: 800px; margin: 0 auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
         select, button { padding: 10px; margin: 10px; font-size: 16px; border-radius: 5px; }
@@ -12,9 +24,9 @@
         .result { font-size: 20px; margin: 20px; color: #d32f2f; font-weight: bold; }
         .tip { color: #666; font-size: 14px; }
         .seat-option { margin: 10px 0; }
-        .btn-home { display: inline-flex; align-items: center; gap: 8px; margin-top: 25px; padding: 12px 28px; font-size: 15px; color: #1a5fb4; background: #e8f0fe; border: 2px solid #1a5fb4; border-radius: 40px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; cursor: pointer; }
-        .btn-home:hover { background: #1a5fb4; color: white; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(26, 95, 180, 0.3); }
-        .btn-home:active { transform: translateY(0); }
+        /* 公共重置（common.css）移除了浏览器默认边距，此处按原默认值补偿 */
+        h1 { margin: 0.67em 0; }
+        p { margin: 1em 0; }
     </style>
 </head>
 <body>
@@ -167,18 +179,6 @@
         }
     };
 </script>
-<style>
-    body::after {
-      content: "版权所有 © 2019-2026 天狐慕氏联邦帝国";
-      background-color: #f5f5f5;
-      padding: 10px;
-      text-align: center;
-      font-family: Arial, sans-serif;
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-    }
-  </style>
+<footer class="site-footer">版权所有 © 2019-2026 天狐慕氏联邦帝国</footer>
 </body>
 </html>

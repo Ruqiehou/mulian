@@ -1,0 +1,110 @@
+/* ============================================================
+   慕联网站 · 公共样式
+   适用范围：index.html 及 pages/ 下全部页面
+
+   引用方式：
+     index.html     → <link rel="stylesheet" href="assets/common.css">
+     pages/xx.html  → <link rel="stylesheet" href="../assets/common.css">
+
+   内容：全局重置 / 回主页按钮 / 底部版权栏
+   页面主题差异通过 :root 中的 CSS 变量定制（见各组件注释）
+   ============================================================ */
+
+/* ===== 1. 全局重置 ===== */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===== 2. 回主页按钮（主题化组件） =====
+   用法：<a href="..." class="btn-home"><span class="home-icon">🏠</span><span>回主页</span></a>
+   下列变量均有默认值，页面只需在 :root 中覆盖需要的项：
+     --btn-home-color                主色（文字/描边）
+     --btn-home-bg                   背景色
+     --btn-home-border-color         描边颜色
+     --btn-home-border-width         描边宽度（默认 2px）
+     --btn-home-radius               圆角（默认 40px）
+     --btn-home-padding              内边距（默认 12px 28px）
+     --btn-home-font-size            字号（默认 15px）
+     --btn-home-font-weight          字重（默认 600）
+     --btn-home-gap                  图标与文字间距（默认 8px）
+     --btn-home-margin-top           上外边距（默认 25px）
+     --btn-home-min-width            最小宽度（默认 auto）
+     --btn-home-letter-spacing       字间距（默认 normal）
+     --btn-home-backdrop             背景模糊（默认 none）
+     --btn-home-hover-bg             悬停背景（默认主色）
+     --btn-home-hover-color          悬停文字色（默认 #fff）
+     --btn-home-hover-border-color   悬停描边色（默认主色）
+     --btn-home-hover-shadow         悬停阴影（默认无）
+     --btn-home-hover-transform      悬停位移（默认 translateY(-2px)）
+     --btn-home-active-transform     按下效果（默认 translateY(0)）
+*/
+.btn-home {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--btn-home-gap, 8px);
+    margin-top: var(--btn-home-margin-top, 25px);
+    padding: var(--btn-home-padding, 12px 28px);
+    min-width: var(--btn-home-min-width, auto);
+    font-size: var(--btn-home-font-size, 15px);
+    font-family: inherit;
+    font-weight: var(--btn-home-font-weight, 600);
+    letter-spacing: var(--btn-home-letter-spacing, normal);
+    color: var(--btn-home-color, #1a5fb4);
+    background: var(--btn-home-bg, transparent);
+    border: var(--btn-home-border-width, 2px) solid var(--btn-home-border-color, currentColor);
+    border-radius: var(--btn-home-radius, 40px);
+    text-decoration: none;
+    backdrop-filter: var(--btn-home-backdrop, none);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.btn-home:hover {
+    color: var(--btn-home-hover-color, #fff);
+    background: var(--btn-home-hover-bg, var(--btn-home-color, #1a5fb4));
+    border-color: var(--btn-home-hover-border-color, var(--btn-home-color, #1a5fb4));
+    transform: var(--btn-home-hover-transform, translateY(-2px));
+    box-shadow: var(--btn-home-hover-shadow, none);
+}
+
+.btn-home:active {
+    transform: var(--btn-home-active-transform, translateY(0));
+}
+
+.btn-home .home-icon {
+    font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+    .btn-home {
+        font-size: 14px;
+        padding: 10px 20px;
+    }
+}
+
+/* ===== 3. 底部版权栏 =====
+   用法：<footer class="site-footer">版权所有 © ...</footer>
+   可覆盖变量：
+     --site-footer-bg           背景（默认透明）
+     --site-footer-color        文字色（默认 #333）
+     --site-footer-padding      内边距（默认 10px）
+     --site-footer-font-size    字号（默认 0.8rem）
+     --site-footer-z            层级（默认 1）
+*/
+.site-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: var(--site-footer-padding, 10px);
+    background: var(--site-footer-bg, transparent);
+    color: var(--site-footer-color, #333);
+    font-size: var(--site-footer-font-size, 0.8rem);
+    z-index: var(--site-footer-z, 1);
+}
