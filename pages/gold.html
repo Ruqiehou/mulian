@@ -495,20 +495,6 @@
             vertical-align: middle;
         }
 
-        /* ===== 发布倒计时 ===== */
-        .countdown-box { text-align: center; }
-        .countdown-label { font-size: 0.95rem; color: #8a7a5a; letter-spacing: 0.25rem; }
-        .countdown-next { color: #ffd700; font-weight: 700; }
-        .countdown-time {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: #ffd700;
-            letter-spacing: 0.2rem;
-            margin-top: 0.4rem;
-            font-variant-numeric: tabular-nums;
-            text-shadow: 0 0 24px rgba(255, 215, 0, 0.35);
-        }
-
         /* ===== 图表悬停提示框 ===== */
         .chart-tooltip {
             position: absolute;
@@ -533,7 +519,6 @@
             .stat-card { padding: 0.7rem 0.5rem; }
             .stat-value { font-size: 1.15rem; }
             .stat-value.small { font-size: 0.9rem; line-height: 1.5rem; }
-            .countdown-time { font-size: 1.6rem; }
         }
 
         /* ===== 复制提示 toast ===== */
@@ -618,11 +603,6 @@
 
 <div class="price-data-hidden" id="priceData">
     <h2>金价数据</h2>
-
-    <div class="countdown-box" id="countdownBox">
-        <div class="countdown-label">距下次发布（<span class="countdown-next" id="nextSlot">--:--</span>）还有</div>
-        <div class="countdown-time" id="countdownTime">--:--:--</div>
-    </div>
 
     <div class="stat-cards" id="statCards">
         <div class="stat-card">
@@ -982,51 +962,6 @@
             const t = e.touches[0];
             if (t) showTooltip(t.clientX, t.clientY);
         }, { passive: true });
-
-        // 下次发布倒计时：基于表格已有时间槽，找到下一个未发布时刻倒计时
-        const pad2 = n => String(n).padStart(2, '0');
-        function tickCountdown() {
-            const all = readAll();
-            const published = all.filter(d => !isNaN(d.price));
-            const nextSlotEl = document.getElementById('nextSlot');
-            const countdownTimeEl = document.getElementById('countdownTime');
-            if (!published.length) {
-                nextSlotEl.textContent = '--:--';
-                countdownTimeEl.textContent = '暂无数据';
-                return;
-            }
-            const now = new Date();
-            const today = now.getFullYear() + '-' + pad2(now.getMonth() + 1) + '-' + pad2(now.getDate());
-            const latest = published[published.length - 1];
-            // 只用今天实际存在的时间槽
-            const todayAllTimes = [...new Set(all.filter(d => d.date === today).map(d => d.time))].sort();
-            const todayPublishedTimes = new Set(
-                published.filter(d => d.date === today).map(d => d.time)
-            );
-            // 找今天还没发布的时间槽
-            let nextTime = todayAllTimes.find(t => !todayPublishedTimes.has(t));
-            let target = null;
-            if (nextTime) {
-                target = new Date(today + 'T' + nextTime);
-                if (target <= now) target = null;
-            }
-            if (!target) {
-                nextSlotEl.textContent = '已停止';
-                countdownTimeEl.textContent = '今日已全部发布';
-                return;
-            }
-            nextSlotEl.textContent = nextTime;
-            let s = Math.floor((target - now) / 1000);
-            if (s <= 0) {
-                countdownTimeEl.textContent = '00:00:00';
-                return;
-            }
-            const h = Math.floor(s / 3600); s %= 3600;
-            const m = Math.floor(s / 60); s %= 60;
-            countdownTimeEl.textContent = pad2(h) + ':' + pad2(m) + ':' + pad2(s);
-        }
-        setInterval(tickCountdown, 1000);
-        tickCountdown();
 
         // 全量刷新：统计卡片 + 表格涨跌额/高亮 + 折线图
         function refresh() {
