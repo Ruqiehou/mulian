@@ -945,7 +945,7 @@
                         if (cls) td.className = cls;
                         return td;
                     };
-                    tr.appendChild(cell().textContent = p.date);
+                    const dc = cell(); dc.textContent = p.date; tr.appendChild(dc);
                     const tc = cell(); tc.textContent = p.time; tr.appendChild(tc);
                     const pc = cell('price-val'); pc.textContent = p.price.toFixed ? p.price.toFixed(2) : p.price; tr.appendChild(pc);
                     const vc = cell(p.trend === '涨' ? 'tag-up' : (p.trend === '跌' ? 'tag-down' : 'tag-pending'));
