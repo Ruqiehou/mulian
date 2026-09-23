@@ -1,4 +1,5 @@
-{
+// 金价数据：页面对外脚本加载，兼容 file:// 与 http 环境
+window.GOLD_PRICES = {
   "meta": {
     "title": "金玉满堂 · 慕联金价发布",
     "currency": "文/克"

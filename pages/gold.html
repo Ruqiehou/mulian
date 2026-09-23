@@ -654,6 +654,7 @@
 
 <footer class="site-footer">版权所有 © 2019-2026 天狐慕氏联邦帝国 · 金玉满堂</footer>
 
+<script src="../data/gold_prices.js"></script>
 <script>
     (function() {
         const container = document.getElementById('particles');
@@ -931,40 +932,34 @@
         observer.observe(tbody, { childList: true, subtree: true, characterData: true });
         window.addEventListener('resize', draw);
 
-        // 从数据文件加载金价并构建表格行
-        async function loadData() {
-            try {
-                const res = await fetch('../data/gold_prices.json');
-                if (!res.ok) throw new Error('HTTP ' + res.status);
-                const json = await res.json();
-                const rows = json.prices || [];
-                for (const p of rows) {
-                    const tr = document.createElement('tr');
-                    const cell = (cls) => {
-                        const td = document.createElement('td');
-                        if (cls) td.className = cls;
-                        return td;
-                    };
-                    const dc = cell(); dc.textContent = p.date; tr.appendChild(dc);
-                    const tc = cell(); tc.textContent = p.time; tr.appendChild(tc);
-                    const pc = cell('price-val'); pc.textContent = p.price.toFixed ? p.price.toFixed(2) : p.price; tr.appendChild(pc);
-                    const vc = cell(p.trend === '涨' ? 'tag-up' : (p.trend === '跌' ? 'tag-down' : 'tag-pending'));
-                    vc.textContent = p.trend; tr.appendChild(vc);
-                    const nc = cell('tag-pending'); nc.textContent = p.note || ''; tr.appendChild(nc);
-                    tbody.appendChild(tr);
-                }
-            } catch (e) {
-                console.error('加载金价数据失败：', e);
+        // 从数据文件（window.GOLD_PRICES）加载金价并构建表格行
+        function loadData() {
+            const rows = (window.GOLD_PRICES && window.GOLD_PRICES.prices) || [];
+            for (const p of rows) {
+                const tr = document.createElement('tr');
+                const cell = (cls) => {
+                    const td = document.createElement('td');
+                    if (cls) td.className = cls;
+                    return td;
+                };
+                const dc = cell(); dc.textContent = p.date; tr.appendChild(dc);
+                const tc = cell(); tc.textContent = p.time; tr.appendChild(tc);
+                const pc = cell('price-val'); pc.textContent = p.price.toFixed ? p.price.toFixed(2) : p.price; tr.appendChild(pc);
+                const vc = cell(p.trend === '涨' ? 'tag-up' : (p.trend === '跌' ? 'tag-down' : 'tag-pending'));
+                vc.textContent = p.trend; tr.appendChild(vc);
+                const nc = cell('tag-pending'); nc.textContent = p.note || ''; tr.appendChild(nc);
+                tbody.appendChild(tr);
+            }
+            if (!rows.length) {
                 const tr = document.createElement('tr');
                 const td = document.createElement('td');
                 td.colSpan = 5;
-                td.textContent = '加载数据失败，请检查 gold_prices.json';
+                td.textContent = '暂无价格数据，请检查 gold_prices.js';
                 td.className = 'tag-pending';
                 tr.appendChild(td);
                 tbody.appendChild(tr);
-            } finally {
-                refresh();
             }
+            refresh();
         }
         loadData();
 
