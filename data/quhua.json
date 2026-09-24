@@ -362,7 +362,8 @@
           "name": "天诏府",
           "level": 2,
           "children": [
-            { "name": "天诏县", "level": 3, "is_fucheng": true, "children": [] },
+            { "name": "诏城坊", "level": 3, "is_fucheng": true, "children": [] },
+            { "name": "圣淳坊", "level": 3, "is_fucheng": true, "children": [] },
             { "name": "洪塘县", "level": 3, "is_shuxian": true, "children": [] },
             { "name": "葵阳县", "level": 3, "is_shuxian": true, "children": [] },
             { "name": "棉湖县", "level": 3, "is_shuxian": true, "children": [] },
