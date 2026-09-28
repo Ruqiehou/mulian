@@ -285,104 +285,42 @@
     </div>
 
     <script>
-        // ==================================================================================
-        // 1. 【配置区】机场数据 - 基于新的票价规则
-        // ==================================================================================
-        const airports = {
-            // 甲类机场 - 首都圈核心机场
-            '义安首都国际机场': { code: 'YIA', city: '义安', region: '首都圈', type: '甲' },
-            '光辰中慕国际机场': { code: 'GCM', city: '光辰', region: '首都圈', type: '甲' },
-            '清桓晋州国际机场': { code: 'QHJ', city: '清恒', region: '首都圈', type: '甲' },
-            '潮州龙湖机场': { code: 'CZL', city: '潮州', region: '首都圈', type: '甲' },
-            
-            // 乙类机场 - 首都圈外围机场
-            '云陵寒枫机场': { code: 'YLH', city: '云陵', region: '云系', type: '乙' },
-            '天轩泰清机场': { code: 'TXT', city: '天轩', region: '天轩', type: '乙' },
-            '青枢樱城机场': { code: 'QSY', city: '青枢', region: '颜系', type: '乙' },
-            
-            // 丙类机场 - 其他地区机场
-            '青阳青北国际机场': { code: 'QYQ', city: '青阳', region: '楚系', type: '丙' },
-            '镇渊癸卯机场': { code: 'ZYG', city: '镇渊', region: '殷系', type: '丙' },
-            '延平定坤机场': { code: 'YPD', city: '延平', region: '唐系', type: '丙' }
-        };
+        // 数据从 price_flight.json 加载
+        let airports = {};
+        let fixedFares = {};
+        let routeConnections = {};
 
-        // ==================================================================================
-        // 2. 【配置区】固定票价数据 - 基于新的票价规则
-        // ==================================================================================
-        const fixedFares = {
-            // 甲类：首都圈四机场两两之间
-            '义安首都国际机场-光辰中慕国际机场': { economy: 1800, business: 3400 },
-            '义安首都国际机场-清桓晋州国际机场': { economy: 1800, business: 3400 },
-            '义安首都国际机场-潮州龙湖机场': { economy: 1800, business: 3400 },
-            '光辰中慕国际机场-清桓晋州国际机场': { economy: 1800, business: 3400 },
-            '光辰中慕国际机场-潮州龙湖机场': { economy: 1800, business: 3400 },
-            '清桓晋州国际机场-潮州龙湖机场': { economy: 1800, business: 3400 },
-            
-            // 乙类：首都圈来往乙类三机场
-            '义安首都国际机场-云陵寒枫机场': { economy: 2200, business: 3800 },
-            '义安首都国际机场-天轩泰清机场': { economy: 2200, business: 3800 },
-            '义安首都国际机场-青枢樱城机场': { economy: 2200, business: 3800 },
-            '光辰中慕国际机场-云陵寒枫机场': { economy: 2200, business: 3800 },
-            '光辰中慕国际机场-天轩泰清机场': { economy: 2200, business: 3800 },
-            '光辰中慕国际机场-青枢樱城机场': { economy: 2200, business: 3800 },
-            '清桓晋州国际机场-云陵寒枫机场': { economy: 2200, business: 3800 },
-            '清桓晋州国际机场-天轩泰清机场': { economy: 2200, business: 3800 },
-            '清桓晋州国际机场-青枢樱城机场': { economy: 2200, business: 3800 },
-            '潮州龙湖机场-云陵寒枫机场': { economy: 2200, business: 3800 },
-            '潮州龙湖机场-天轩泰清机场': { economy: 2200, business: 3800 },
-            '潮州龙湖机场-青枢樱城机场': { economy: 2200, business: 3800 },
-            
-            // 乙类：云系来往天轩
-            '云陵寒枫机场-天轩泰清机场': { economy: 1200, business: 3000 },
-            
-            // 乙类：云系、天轩来往颜系
-            '云陵寒枫机场-青枢樱城机场': { economy: 2200, business: 3800 },
-            '天轩泰清机场-青枢樱城机场': { economy: 2200, business: 3800 },
-            
-            // 丙类：光辰、清恒来往丙类三机场
-            '光辰中慕国际机场-青阳青北国际机场': { economy: 2000, business: 3600 },
-            '光辰中慕国际机场-镇渊癸卯机场': { economy: 2000, business: 3600 },
-            '光辰中慕国际机场-延平定坤机场': { economy: 2000, business: 3600 },
-            '清桓晋州国际机场-青阳青北国际机场': { economy: 2000, business: 3600 },
-            '清桓晋州国际机场-镇渊癸卯机场': { economy: 2000, business: 3600 },
-            '清桓晋州国际机场-延平定坤机场': { economy: 2000, business: 3600 },
-            
-            // 丙类：义安、潮州来往丙类三机场
-            '义安首都国际机场-青阳青北国际机场': { economy: 2400, business: 4000 },
-            '义安首都国际机场-镇渊癸卯机场': { economy: 2400, business: 4000 },
-            '义安首都国际机场-延平定坤机场': { economy: 2400, business: 4000 },
-            '潮州龙湖机场-青阳青北国际机场': { economy: 2400, business: 4000 },
-            '潮州龙湖机场-镇渊癸卯机场': { economy: 2400, business: 4000 },
-            '潮州龙湖机场-延平定坤机场': { economy: 2400, business: 4000 },
-            
-            // 丙类：青阳来往镇渊、延平
-            '青阳青北国际机场-镇渊癸卯机场': { economy: 1200, business: 3000 },
-            '青阳青北国际机场-延平定坤机场': { economy: 1200, business: 3000 },
-            
-            // 丙类：镇渊来往延平
-            '镇渊癸卯机场-延平定坤机场': { economy: 2200, business: 3800 }
-        };
+        // 页面加载时初始化数据
+        async function loadData() {
+            try {
+                const res = await fetch('../data/price_flight.json');
+                const data = await res.json();
+                airports = data.airports || {};
+                fixedFares = data.fixedFares || {};
+                routeConnections = data.routeConnections || {};
+                initSelects();
+            } catch (e) {
+                document.getElementById('result').innerHTML = `❌ 无法加载 price_flight.json`;
+            }
+        }
 
-        // ==================================================================================
-        // 3. 【配置区】航线互通关系 - 基于新的票价规则
-        // ==================================================================================
-        const routeConnections = {
-            // 甲类机场互通关系
-            '义安首都国际机场': ['光辰中慕国际机场', '清桓晋州国际机场', '潮州龙湖机场', '云陵寒枫机场', '天轩泰清机场', '青枢樱城机场', '青阳青北国际机场', '镇渊癸卯机场', '延平定坤机场'],
-            '光辰中慕国际机场': ['义安首都国际机场', '清桓晋州国际机场', '潮州龙湖机场', '云陵寒枫机场', '天轩泰清机场', '青枢樱城机场', '青阳青北国际机场', '镇渊癸卯机场', '延平定坤机场'],
-            '清桓晋州国际机场': ['义安首都国际机场', '光辰中慕国际机场', '潮州龙湖机场', '云陵寒枫机场', '天轩泰清机场', '青枢樱城机场', '青阳青北国际机场', '镇渊癸卯机场', '延平定坤机场'],
-            '潮州龙湖机场': ['义安首都国际机场', '光辰中慕国际机场', '清桓晋州国际机场', '云陵寒枫机场', '天轩泰清机场', '青枢樱城机场', '青阳青北国际机场', '镇渊癸卯机场', '延平定坤机场'],
-            
-            // 乙类机场互通关系
-            '云陵寒枫机场': ['义安首都国际机场', '光辰中慕国际机场', '清桓晋州国际机场', '潮州龙湖机场', '天轩泰清机场', '青枢樱城机场'],
-            '天轩泰清机场': ['义安首都国际机场', '光辰中慕国际机场', '清桓晋州国际机场', '潮州龙湖机场', '云陵寒枫机场', '青枢樱城机场'],
-            '青枢樱城机场': ['义安首都国际机场', '光辰中慕国际机场', '清桓晋州国际机场', '潮州龙湖机场', '云陵寒枫机场', '天轩泰清机场'],
-            
-            // 丙类机场互通关系
-            '青阳青北国际机场': ['义安首都国际机场', '光辰中慕国际机场', '清桓晋州国际机场', '潮州龙湖机场', '镇渊癸卯机场', '延平定坤机场'],
-            '镇渊癸卯机场': ['义安首都国际机场', '光辰中慕国际机场', '清桓晋州国际机场', '潮州龙湖机场', '青阳青北国际机场', '延平定坤机场'],
-            '延平定坤机场': ['义安首都国际机场', '光辰中慕国际机场', '清桓晋州国际机场', '潮州龙湖机场', '青阳青北国际机场', '镇渊癸卯机场']
-        };
+        function initSelects() {
+            const dep = document.getElementById('departure');
+            const arr = document.getElementById('arrival');
+            Object.keys(airports).forEach(airport => {
+                const label = `${airports[airport].city} - ${airport} (${airports[airport].code})`;
+                dep.add(new Option(label, airport));
+                arr.add(new Option(label, airport));
+            });
+            dep.addEventListener('change', function() {
+                if (this.value && document.getElementById('arrival').value) searchFlights();
+            });
+            arr.addEventListener('change', function() {
+                if (this.value && document.getElementById('departure').value) searchFlights();
+            });
+        }
+
+        loadData();
 
         // ==================================================================================
         // 4. 核心查询功能
@@ -533,40 +471,7 @@
             }
         }
 
-        // ==================================================================================
-        // 5. 页面初始化
-        // ==================================================================================
-        window.onload = function() {
-            // 初始化机场选择框
-            const departureSelect = document.getElementById('departure');
-            const arrivalSelect = document.getElementById('arrival');
-            
-            // 添加机场选项
-            Object.keys(airports).forEach(airport => {
-                const option1 = document.createElement('option');
-                option1.value = airport;
-                option1.textContent = `${airports[airport].city} - ${airport} (${airports[airport].code})`;
-                departureSelect.appendChild(option1);
-                
-                const option2 = document.createElement('option');
-                option2.value = airport;
-                option2.textContent = `${airports[airport].city} - ${airport} (${airports[airport].code})`;
-                arrivalSelect.appendChild(option2);
-            });
-            
-            // 添加城市选择变化监听
-            departureSelect.addEventListener('change', function() {
-                if (this.value && document.getElementById('arrival').value) {
-                    searchFlights();
-                }
-            });
-            
-            arrivalSelect.addEventListener('change', function() {
-                if (this.value && document.getElementById('departure').value) {
-                    searchFlights();
-                }
-            });
-        };
+
     </script>
 </body>
 </html>
