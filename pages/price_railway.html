@@ -87,71 +87,66 @@
             return;
         }
 
-        const result = findShortestPath(startRegion, endRegion);
-        if (!result) {
+        const cheapestPaths = findAllCheapestPaths(startRegion, endRegion);
+        if (!cheapestPaths || cheapestPaths.length === 0) {
             document.getElementById('result').innerHTML = `❌ 错误：无通路！`;
             return;
         }
 
-        const { distance, path, steps } = result;
         const { baseYibei, baseJia, jiaServicePerStep } = fare.crossRegion;
-        const yiTotal = baseYibei + distance;
-        const jiaTotal = baseJia + distance + (steps * jiaServicePerStep);
+        const first = cheapestPaths[0];
+        const yiTotal = baseYibei + first.distance;
+        const jiaTotal = baseJia + first.distance + (first.steps * jiaServicePerStep);
 
-        let displayText = `🛣️ 路线: ${path.join(" → ")}<br>🧮 跨区段数: ${steps} 段`;
-        if (seatClass === 'yibei') {
-            displayText += `<br>🎫 乙等座: ${yiTotal} 文`;
-        } else {
-            displayText += `<br>👑 甲等座: ${jiaTotal} 文<br><small>(起步${baseJia} + 跨区费${distance} + 服务费${steps * jiaServicePerStep})</small>`;
-        }
+        let displayText = `💰 最便宜票价：共 ${cheapestPaths.length} 条路线<br><br>`;
+        cheapestPaths.forEach((p, i) => {
+            const yi = baseYibei + p.distance;
+            const jia = baseJia + p.distance + (p.steps * jiaServicePerStep);
+            displayText += `🛣️ 路线${i + 1}: ${p.path.join(" → ")}<br>`;
+            displayText += `🧮 跨区段数: ${p.steps} 段`;
+            if (seatClass === 'yibei') {
+                displayText += ` | 🎫 乙等座: ${yi} 文`;
+            } else {
+                displayText += ` | 👑 甲等座: ${jia} 文`;
+            }
+            displayText += `<br><br>`;
+        });
         document.getElementById('result').innerHTML = displayText;
     }
 
-    function findShortestPath(start, end) {
-        const distances = {};
-        const previous = {};
-        const visited = new Set();
-        const pq = [];
+    function findAllCheapestPaths(start, end, maxDepth = 10) {
+        const allPaths = [];
+        const queue = [{ current: start, path: [start], distance: 0 }];
 
-        for (let node in connections) {
-            distances[node] = Infinity;
-            previous[node] = null;
-        }
-        distances[start] = 0;
-        pq.push({ node: start, dist: 0 });
-
-        while (pq.length > 0) {
-            pq.sort((a, b) => a.dist - b.dist);
-            const { node: current, dist: currentDist } = pq.shift();
-
-            if (visited.has(current)) continue;
-            visited.add(current);
+        while (queue.length > 0) {
+            const { current, path, distance } = queue.shift();
 
             if (current === end) {
-                const path = [];
-                let step = current;
-                let stepCount = 0;
-                while (step !== null) {
-                    path.unshift(step);
-                    if (previous[step]) stepCount++;
-                    step = previous[step];
-                }
-                return { distance: currentDist, path: path, steps: stepCount };
+                allPaths.push({ path, distance, steps: path.length - 1 });
+                continue;
             }
+
+            if (path.length > maxDepth) continue;
 
             const neighbors = connections[current] || {};
             for (let neighbor in neighbors) {
-                if (!visited.has(neighbor)) {
-                    const newDist = currentDist + neighbors[neighbor];
-                    if (newDist < distances[neighbor]) {
-                        distances[neighbor] = newDist;
-                        previous[neighbor] = current;
-                        pq.push({ node: neighbor, dist: newDist });
-                    }
+                if (!path.includes(neighbor)) {
+                    queue.push({
+                        current: neighbor,
+                        path: [...path, neighbor],
+                        distance: distance + neighbors[neighbor]
+                    });
                 }
             }
         }
-        return null;
+
+        if (allPaths.length === 0) return null;
+
+        // 找最便宜的价格
+        const minCost = Math.min(...allPaths.map(p => p.distance));
+
+        // 筛选所有最便宜的路径
+        return allPaths.filter(p => p.distance === minCost);
     }
 
     function initStationSelects() {
