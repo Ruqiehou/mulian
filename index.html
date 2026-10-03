@@ -4,254 +4,119 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>慕联门户网站</title>
-    <link rel="stylesheet" href="assets/common.css">
     <style>
-        body {
-            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-            line-height: 1.6;
-            background-color: #f9fafc;
-            color: #1e293b;
-            padding: 2rem 1rem;
+        :root {
+            color-scheme: light;
+            font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+            color: #1b2926;
+            background: #f3f6f4;
         }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 28px;
-            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.15);
-            padding: 2.5rem 2rem;
-        }
-        h1 {
-            font-size: 2.8rem;
-            font-weight: 700;
-            background: linear-gradient(145deg, #0f2b4b, #1e4a6f);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-            border-left: 8px solid #2563eb;
-            padding-left: 1.5rem;
-            line-height: 1.2;
-        }
-        h2 {
-            font-size: 2.2rem;
-            font-weight: 650;
-            margin-top: 2.5rem;
-            margin-bottom: 1rem;
-            color: #0b2b40;
-            border-bottom: 3px solid #e2e8f0;
-            padding-bottom: 0.4rem;
-            scroll-margin-top: 2rem;
-        }
-        h3 {
-            font-size: 1.6rem;
-            font-weight: 600;
-            margin-top: 1.8rem;
-            margin-bottom: 0.75rem;
-            color: #1e3a5f;
-            padding-left: 0.75rem;
-            border-left: 4px solid #7aa7c9;
-        }
-        p {
-            margin-bottom: 1.2rem;
-            font-size: 1.1rem;
-            color: #2d3c4b;
-        }
-        section {
-            margin-bottom: 2rem;
-        }
-        /* 搜索框 */
-        .search-wrap {
-            max-width: 520px;
-            margin: 1.5rem 0 0.5rem;
-            position: relative;
-        }
-        .search-wrap input {
-            width: 100%;
-            padding: 0.75rem 1.2rem 0.75rem 2.8rem;
-            font-size: 1rem;
-            font-family: inherit;
-            color: #1e293b;
-            background: #f0f4fe;
-            border: 1.5px solid #cbd5e1;
-            border-radius: 14px;
-            outline: none;
-            transition: all 0.3s;
-        }
-        .search-wrap input::placeholder { color: #94a3b8; }
-        .search-wrap input:focus {
-            border-color: #2563eb;
-            background: #fff;
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-        }
-        .search-wrap .search-icon {
-            position: absolute;
-            left: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1rem;
-            opacity: 0.45;
-        }
-        /* 链接卡片样式 */
-        .fare-link-card {
-            background: #f0f4fe;
-            border-radius: 32px;
-            padding: 2rem 2.5rem;
-            margin-top: 3rem;
-            border: 1px solid #cbd5e1;
-            box-shadow: 0 8px 20px rgba(0,20,40,0.1);
-            text-align: center;
-        }
-        .fare-link-card h2 {
-            margin-top: 0;
-            border-bottom-color: #2563eb;
-            color: #0c4a6e;
-        }
-        .btn-fare {
-            display: inline-block;
-            background: #1e4a6f;
-            color: white;
-            font-size: 1.5rem;
-            font-weight: 600;
-            padding: 1rem 3rem;
-            border-radius: 60px;
-            text-decoration: none;
-            box-shadow: 0 8px 14px -6px #0b2b40;
-            transition: background 0.2s, transform 0.1s;
-            margin: 1rem 0 0.5rem 0;
-            border: 2px solid #2563eb;
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
-            user-select: none;
-        }
-        .btn-fare:hover {
-            background: #0b2b40;
-            transform: scale(1.02);
-        }
-        .btn-fare:active {
-            transform: scale(0.98);
-        }
-        .fare-note {
-            font-size: 0.95rem;
-            color: #3b5c7a;
-            margin-top: 1rem;
-        }
-        @media (max-width: 768px) {
-            body { padding: 1rem 0.75rem; }
-            .container { padding: 1.5rem 1rem; border-radius: 20px; }
-            h1 { font-size: 2rem; padding-left: 1rem; border-left-width: 6px; }
-            h2 { font-size: 1.6rem; }
-            h3 { font-size: 1.25rem; }
-            .fare-link-card { padding: 1.5rem 1.2rem; border-radius: 24px; }
-            .btn-fare { font-size: 1.1rem; padding: 0.7rem 1.5rem; }
-        }
-        @media (max-width: 480px) {
-            body { padding: 0.5rem; }
-            .container { padding: 1rem 0.75rem; border-radius: 16px; }
-            h1 { font-size: 1.6rem; padding-left: 0.75rem; border-left-width: 5px; }
-            h2 { font-size: 1.35rem; }
-            h3 { font-size: 1.1rem; }
-            p { font-size: 1rem; }
-            .fare-link-card { padding: 1.2rem 0.8rem; border-radius: 20px; }
-            .fare-link-card p { font-size: 0.95rem; }
-            .btn-fare { font-size: 1rem; padding: 0.6rem 1.2rem; border-radius: 40px; }
-            .btn-grid { grid-template-columns: 1fr !important; }
-        }
-        @media (max-width: 400px) {
-            .btn-fare { font-size: 0.9rem; padding: 0.5rem 0.8rem; }
-        }
-        .badge {
-            background-color: #dbeafe;
-            color: #1e40af;
-            font-size: 0.9rem;
-            padding: 0.2rem 0.8rem;
-            border-radius: 20px;
-            display: inline-block;
-            margin-right: 0.5rem;
-        }
-        hr {
-            border: none;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #94a3b8, transparent);
-            margin: 2rem 0 0.5rem 0;
+        * { box-sizing: border-box; }
+        body { margin: 0; min-width: 320px; }
+        .shell { width: min(100% - 40px, 960px); margin: 0 auto; padding: 36px 0 52px; }
+        .topline { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-bottom: 20px; border-bottom: 1px solid #dce5e0; }
+        .brand { display: flex; align-items: center; gap: 12px; font-size: 15px; font-weight: 650; }
+        .brand-mark { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 8px; color: #fff; background: #176b55; font-size: 15px; }
+        h1 { margin: 30px 0 6px; font-size: 28px; line-height: 1.25; font-weight: 680; letter-spacing: 0; }
+        .intro { margin: 0; color: #65736d; font-size: 15px; }
+        .tools { display: flex; align-items: center; gap: 12px; margin: 26px 0 14px; }
+        .search { flex: 1; position: relative; }
+        .search input { width: 100%; height: 44px; padding: 0 42px 0 14px; border: 1px solid #cbd7d1; border-radius: 8px; outline: none; background: #fff; color: #1b2926; font: inherit; font-size: 14px; }
+        .search input:focus { border-color: #176b55; box-shadow: 0 0 0 3px rgb(23 107 85 / 12%); }
+        .clear { position: absolute; top: 50%; right: 8px; width: 30px; height: 30px; transform: translateY(-50%); border: 0; border-radius: 6px; color: #52615b; background: transparent; cursor: pointer; font-size: 18px; }
+        .clear:hover { background: #edf2ef; }
+        .section-label { margin: 22px 0 10px; color: #65736d; font-size: 13px; font-weight: 600; }
+        .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid #dce5e0; border-left: 1px solid #dce5e0; background: #fff; }
+        .entry { display: flex; align-items: center; gap: 14px; min-height: 88px; padding: 16px; border-right: 1px solid #dce5e0; border-bottom: 1px solid #dce5e0; color: inherit; text-decoration: none; transition: background 120ms ease; }
+        .entry:hover { background: #f5f8f6; }
+        .entry:focus-visible { position: relative; outline: 2px solid #176b55; outline-offset: -2px; }
+        .icon { display: grid; flex: 0 0 40px; place-items: center; width: 40px; height: 40px; border-radius: 8px; background: #e7f1ec; color: #176b55; font-size: 18px; }
+        .entry-copy { flex: 1; min-width: 0; }
+        .entry-title { display: block; font-size: 15px; font-weight: 620; }
+        .entry-desc { display: block; margin-top: 4px; color: #65736d; font-size: 13px; line-height: 1.45; }
+        .arrow { color: #82918a; font-size: 18px; }
+        .empty { display: none; padding: 22px 16px; border: 1px solid #dce5e0; border-top: 0; color: #65736d; background: #fff; font-size: 14px; }
+        footer { margin-top: 28px; padding-top: 16px; border-top: 1px solid #dce5e0; color: #77847e; font-size: 12px; }
+        @media (max-width: 600px) {
+            .shell { width: min(100% - 28px, 960px); padding-top: 20px; }
+            h1 { margin-top: 24px; font-size: 24px; }
+            .grid { grid-template-columns: 1fr; }
+            .entry { min-height: 76px; padding: 12px; }
         }
     </style>
-
 </head>
 <body>
-<div class="container">
-    <header>
-        <h1> 慕联门户网站</h1>
-        <p style="font-size: 1.2rem; color: #335b73;">慕联在线生活一站式平台</p>
-
-        <!-- 搜索框 -->
-        <div class="search-wrap">
-            <span class="search-icon"></span>
-            <input type="text" id="searchInput" placeholder="搜索功能…（铁路、机票、区划、金价）" autocomplete="off">
+    <main class="shell">
+        <div class="topline">
+            <div class="brand"><span class="brand-mark" aria-hidden="true">慕</span><span>慕联门户</span></div>
         </div>
-    </header>
 
-    <!-- ===== 票价查询卡片 ===== -->
-    <div class="fare-link-card" data-keywords="铁路 火车 票价 慕联铁路">
-        <h2>🔗 在线票价查询系统</h2>
-        <p style="margin-bottom: 0.5rem;">点击下方按钮，打开相应的票价查询页面。</p>
-        
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem;" class="btn-grid">
-            <a href="pages/price_railway.html" target="_blank" rel="noopener noreferrer" class="btn-fare" style="font-size: 1.3rem; padding: 0.8rem 1.5rem;">
-                🚄 铁路票价查询
-            </a>
-            
-            <a href="pages/price_flight.html" target="_blank" rel="noopener noreferrer" class="btn-fare" style="font-size: 1.3rem; padding: 0.8rem 1.5rem; background: #0f766e; border-color: #14b8a6;">
-                ✈️ 机票票价查询
-            </a>
+        <header>
+            <h1>慕联在线服务</h1>
+            <p class="intro">选择服务以继续</p>
+        </header>
+
+        <div class="tools">
+            <label class="search">
+                <input id="serviceSearch" type="search" placeholder="搜索服务，例如：铁路、区划、金价" autocomplete="off" aria-label="搜索服务">
+                <button class="clear" id="clearSearch" type="button" aria-label="清空搜索" title="清空搜索">×</button>
+            </label>
         </div>
-        
-        <p class="fare-note">铁路票价查询系统 | 机票票价查询系统</p>
-    </div>
 
-    <!-- ===== 政策文件卡片 ===== -->
-    <div class="fare-link-card" style="margin-top: 2rem;" data-keywords="政策 条例 文件 商贸 经济">
-        <h2>📄 政策文件中心</h2>
-        <p style="margin-bottom: 0.5rem;">查看最新的经济购买，商贸流通，个人荣誉等。</p>
-        <a href="pages/tiaoli.html" target="_blank" rel="noopener noreferrer" class="btn-fare" style="background: #0d9488; border-color: #14b8a6;">
-            📋 查看政策文件
-        </a>
-        
-    </div>
+        <p class="section-label">全部服务</p>
+        <nav class="grid" id="serviceGrid" aria-label="门户服务">
+            <a class="entry" href="pages/price_railway.html" data-keywords="铁路 火车 车站 票价 路线 慕联铁路">
+                <span class="icon" aria-hidden="true">铁</span>
+                <span class="entry-copy"><span class="entry-title">铁路票价查询</span><span class="entry-desc">查询车站、路线与最低票价</span></span>
+                <span class="arrow" aria-hidden="true">›</span>
+            </a>
+            <a class="entry" href="pages/price_flight.html" data-keywords="机票 航空 机场 航线 票价">
+                <span class="icon" aria-hidden="true">航</span>
+                <span class="entry-copy"><span class="entry-title">机票票价查询</span><span class="entry-desc">查询机场航线与舱位价格</span></span>
+                <span class="arrow" aria-hidden="true">›</span>
+            </a>
+            <a class="entry" href="pages/quhua_query.html" data-keywords="区划 行政 地区 府 道 查询 地图">
+                <span class="icon" aria-hidden="true">区</span>
+                <span class="entry-copy"><span class="entry-title">行政区划查询</span><span class="entry-desc">浏览各级行政区划信息</span></span>
+                <span class="arrow" aria-hidden="true">›</span>
+            </a>
+            <a class="entry" href="pages/gold.html" data-keywords="金价 黄金 金玉满堂 价格 行情 交易">
+                <span class="icon" aria-hidden="true">金</span>
+                <span class="entry-copy"><span class="entry-title">金玉满堂</span><span class="entry-desc">查看金价行情与商品价格</span></span>
+                <span class="arrow" aria-hidden="true">›</span>
+            </a>
+            <a class="entry" href="pages/tiaoli.html" data-keywords="条例 政策 文件 商贸 经济 荣誉">
+                <span class="icon" aria-hidden="true">文</span>
+                <span class="entry-copy"><span class="entry-title">政策文件中心</span><span class="entry-desc">查看政策文件、商贸与个人荣誉信息</span></span>
+                <span class="arrow" aria-hidden="true">›</span>
+            </a>
+        </nav>
+        <div class="empty" id="emptyState" role="status">没有找到匹配的服务。</div>
+        <footer>版权所有 © 2019-2026 天狐慕氏联邦帝国</footer>
+    </main>
+    <script>
+        const search = document.getElementById('serviceSearch');
+        const entries = [...document.querySelectorAll('.entry')];
+        const empty = document.getElementById('emptyState');
+        const clear = document.getElementById('clearSearch');
 
-    <!-- ===== 行政区划查询卡片 ===== -->
-    <div class="fare-link-card" style="margin-top: 2rem;" data-keywords="区划 行政 地区 查询 地图">
-        <h2>️ 行政区划查询</h2>
-        <p style="margin-bottom: 0.5rem;">查询慕联各级行政区划信息。</p>
-        <a href="pages/quhua_query.html" target="_blank" rel="noopener noreferrer" class="btn-fare" style="background: #7c3aed; border-color: #8b5cf6;">
-             行政区划查询
-        </a>
-        
-    </div>
+        function filterEntries() {
+            const query = search.value.trim().toLocaleLowerCase();
+            let visible = 0;
+            entries.forEach(entry => {
+                const match = !query || `${entry.dataset.keywords} ${entry.textContent}`.toLocaleLowerCase().includes(query);
+                entry.hidden = !match;
+                if (match) visible++;
+            });
+            empty.style.display = visible ? 'none' : 'block';
+        }
 
-    <!-- ===== 金玉满堂卡片 ===== -->
-    <div class="fare-link-card" style="margin-top: 2rem;" data-keywords="金价 黄金 交易 金玉满堂 价格">
-        <h2>🏪 金玉满堂</h2>
-        <p style="margin-bottom: 0.5rem;">慕联官方交易平台，查看商品与服务价格。</p>
-        <a href="pages/gold.html" target="_blank" rel="noopener noreferrer" class="btn-fare" style="background: #b8860b; border-color: #daa520;">
-            💰 进入金玉满堂
-        </a>
-    </div>
-</div>
-
-<script>
-(function() {
-    const searchInput = document.getElementById('searchInput');
-    const cards = document.querySelectorAll('.fare-link-card');
-
-    searchInput.addEventListener('input', function() {
-        const q = this.value.toLowerCase().trim();
-        cards.forEach(card => {
-            const keywords = (card.dataset.keywords || '') + ' ' + card.textContent.toLowerCase();
-            card.style.display = (!q || keywords.includes(q)) ? '' : 'none';
+        search.addEventListener('input', filterEntries);
+        clear.addEventListener('click', () => {
+            search.value = '';
+            filterEntries();
+            search.focus();
         });
-    });
-})();
-</script>
+    </script>
 </body>
 </html>
