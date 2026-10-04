@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>慕联门户 - 主页测试版</title>
+    <style>
+        :root {
+            color-scheme: light;
+            font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+            color: #1b2926;
+            background: #f3f6f4;
+        }
+        * { box-sizing: border-box; }
+        body { margin: 0; min-width: 320px; }
+        .shell { width: min(100% - 40px, 960px); margin: 0 auto; padding: 36px 0 52px; }
+        .topline { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-bottom: 20px; border-bottom: 1px solid #dce5e0; }
+        .brand { display: flex; align-items: center; gap: 12px; font-size: 15px; font-weight: 650; }
+        .brand-mark { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 8px; color: #fff; background: #176b55; font-size: 15px; }
+        .version { color: #65736d; font-size: 13px; }
+        h1 { margin: 30px 0 6px; font-size: 28px; line-height: 1.25; font-weight: 680; letter-spacing: 0; }
+        .intro { margin: 0; color: #65736d; font-size: 15px; }
+        .tools { display: flex; align-items: center; gap: 12px; margin: 26px 0 14px; }
+        .search { flex: 1; position: relative; }
+        .search input { width: 100%; height: 44px; padding: 0 42px 0 14px; border: 1px solid #cbd7d1; border-radius: 8px; outline: none; background: #fff; color: #1b2926; font: inherit; font-size: 14px; }
+        .search input:focus { border-color: #176b55; box-shadow: 0 0 0 3px rgb(23 107 85 / 12%); }
+        .clear { position: absolute; top: 50%; right: 8px; width: 30px; height: 30px; transform: translateY(-50%); border: 0; border-radius: 6px; color: #52615b; background: transparent; cursor: pointer; font-size: 18px; }
+        .clear:hover { background: #edf2ef; }
+        .section-label { margin: 22px 0 10px; color: #65736d; font-size: 13px; font-weight: 600; }
+        .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid #dce5e0; border-left: 1px solid #dce5e0; background: #fff; }
+        .entry { display: flex; align-items: center; gap: 14px; min-height: 88px; padding: 16px; border-right: 1px solid #dce5e0; border-bottom: 1px solid #dce5e0; color: inherit; text-decoration: none; transition: background 120ms ease; }
+        .entry:hover { background: #f5f8f6; }
+        .entry:focus-visible { position: relative; outline: 2px solid #176b55; outline-offset: -2px; }
+        .icon { display: grid; flex: 0 0 40px; place-items: center; width: 40px; height: 40px; border-radius: 8px; background: #e7f1ec; color: #176b55; font-size: 18px; }
+        .entry-copy { flex: 1; min-width: 0; }
+        .entry-title { display: block; font-size: 15px; font-weight: 620; }
+        .entry-desc { display: block; margin-top: 4px; color: #65736d; font-size: 13px; line-height: 1.45; }
+        .arrow { color: #82918a; font-size: 18px; }
+        .empty { display: none; padding: 22px 16px; border: 1px solid #dce5e0; border-top: 0; color: #65736d; background: #fff; font-size: 14px; }
+        footer { margin-top: 28px; padding-top: 16px; border-top: 1px solid #dce5e0; color: #77847e; font-size: 12px; }
+        @media (max-width: 600px) {
+            .shell { width: min(100% - 28px, 960px); padding-top: 20px; }
+            h1 { margin-top: 24px; font-size: 24px; }
+            .grid { grid-template-columns: 1fr; }
+            .entry { min-height: 76px; padding: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <main class="shell">
+        <div class="topline">
+            <div class="brand"><span class="brand-mark" aria-hidden="true">慕</span><span>慕联门户</span></div>
+            <span class="version">主页测试版</span>
+        </div>
+
+        <header>
+            <h1>慕联在线服务</h1>
+            <p class="intro">选择服务以继续</p>
+        </header>
+
+        <div class="tools">
+            <label class="search">
+                <input id="serviceSearch" type="search" placeholder="搜索服务，例如：铁路、区划、金价" autocomplete="off" aria-label="搜索服务">
+                <button class="clear" id="clearSearch" type="button" aria-label="清空搜索" title="清空搜索">×</button>
+            </label>
+        </div>
+
+        <p class="section-label">全部服务</p>
+        <nav class="grid" id="serviceGrid" aria-label="门户服务">
+            <a class="entry" href="pages/price_railway.html" data-keywords="铁路 火车 车站 票价 路线">
+                <span class="icon" aria-hidden="true">铁</span>
+                <span class="entry-copy"><span class="entry-title">铁路票价</span><span class="entry-desc">查询车站、路线与最低票价</span></span>
+                <span class="arrow" aria-hidden="true">›</span>
+            </a>
+            <a class="entry" href="pages/price_flight.html" data-keywords="机票 航空 机场 航线 票价">
+                <span class="icon" aria-hidden="true">航</span>
+                <span class="entry-copy"><span class="entry-title">机票票价</span><span class="entry-desc">查询机场航线与舱位价格</span></span>
+                <span class="arrow" aria-hidden="true">›</span>
+            </a>
+            <a class="entry" href="pages/quhua_query.html" data-keywords="区划 行政 地区 府 道 查询">
+                <span class="icon" aria-hidden="true">区</span>
+                <span class="entry-copy"><span class="entry-title">行政区划</span><span class="entry-desc">浏览各级行政区划信息</span></span>
+                <span class="arrow" aria-hidden="true">›</span>
+            </a>
+            <a class="entry" href="pages/gold.html" data-keywords="金价 黄金 金玉满堂 价格 行情">
+                <span class="icon" aria-hidden="true">金</span>
+                <span class="entry-copy"><span class="entry-title">金玉满堂</span><span class="entry-desc">查看金价行情与商品价格</span></span>
+                <span class="arrow" aria-hidden="true">›</span>
+            </a>
+            <a class="entry" href="pages/tiaoli.html" data-keywords="条例 政策 文件 商贸 经济 荣誉">
+                <span class="icon" aria-hidden="true">文</span>
+                <span class="entry-copy"><span class="entry-title">政策与条例</span><span class="entry-desc">查看公示文件与相关条例</span></span>
+                <span class="arrow" aria-hidden="true">›</span>
+            </a>
+        </nav>
+        <div class="empty" id="emptyState" role="status">没有找到匹配的服务。</div>
+        <footer>慕联门户网站 · 主页布局预览</footer>
+    </main>
+    <script>
+        const search = document.getElementById('serviceSearch');
+        const entries = [...document.querySelectorAll('.entry')];
+        const empty = document.getElementById('emptyState');
+        const clear = document.getElementById('clearSearch');
+
+        function filterEntries() {
+            const query = search.value.trim().toLocaleLowerCase();
+            let visible = 0;
+            entries.forEach(entry => {
+                const match = !query || `${entry.dataset.keywords} ${entry.textContent}`.toLocaleLowerCase().includes(query);
+                entry.hidden = !match;
+                if (match) visible++;
+            });
+            empty.style.display = visible ? 'none' : 'block';
+        }
+
+        search.addEventListener('input', filterEntries);
+        clear.addEventListener('click', () => {
+            search.value = '';
+            filterEntries();
+            search.focus();
+        });
+    </script>
+</body>
+</html>
