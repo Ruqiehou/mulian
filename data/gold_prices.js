@@ -10,5 +10,6 @@ window.GOLD_PRICES = {
     { "date": "2026-10-06", "time": "08:18", "price": 625.23, "trend": "涨", "note": "开市" },
     { "date": "2026-10-06", "time": "22:45", "price": 952.32, "trend": "涨", "note": "开市" },
     { "date": "2026-10-07", "time": "10:45", "price": 489.28, "trend": "跌", "note": "开市" },
+    { "date": "2026-10-11", "time": "22:40", "price": 530.13, "trend": "涨", "note": "实时金价" },
   ]
 }
