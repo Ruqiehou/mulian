@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>京畿都市圈 · 慕联</title>
+    <link rel="stylesheet" href="../../assets/common.css">
+    <style id="theme-vars">
+/* ============================================
+   京畿都市圈 - 东方古韵主题
+   主色：朱红 + 金棕
+   ============================================ */
+
+:root {
+  /* 品牌主色 - 朱红色系 */
+  --color-primary-50: #FBF2F0;
+  --color-primary-100: #F5E0DB;
+  --color-primary-200: #E8B8AE;
+  --color-primary-300: #D68A7A;
+  --color-primary-400: #C25E4A;
+  --color-primary-500: #A03926;
+  --color-primary-600: #8B2500;
+  --color-primary-700: #701F00;
+  --color-primary-800: #5A1A00;
+  --color-primary-900: #401200;
+
+  /* 中性色 - 宣纸/墨色系 */
+  --color-neutral-50: #FAF6EE;
+  --color-neutral-100: #F2EBDD;
+  --color-neutral-200: #E6DCC6;
+  --color-neutral-300: #D4C6A6;
+  --color-neutral-400: #B8A67D;
+  --color-neutral-500: #8B7A54;
+  --color-neutral-600: #6B5C3E;
+  --color-neutral-700: #4D412C;
+  --color-neutral-800: #332B1D;
+  --color-neutral-900: #1F1A12;
+
+  /* 金色点缀 */
+  --color-gold-300: #E8C97A;
+  --color-gold-500: #C9A227;
+  --color-gold-700: #9C7A12;
+
+  /* 状态色 */
+  --state-success: #2E7D32;
+  --state-warning: #E65100;
+  --state-error: #B71C1C;
+  --state-info: #1565C0;
+
+  /* 语义别名 */
+  --brand-background: var(--color-neutral-50);
+  --brand-foreground: var(--color-neutral-900);
+  --brand-card: #FFFFFF;
+  --brand-card-foreground: var(--color-neutral-900);
+  --brand-popover: #FFFFFF;
+  --brand-popover-foreground: var(--color-neutral-900);
+  --brand-primary: var(--color-primary-600);
+  --brand-primary-foreground: #FFFFFF;
+  --brand-muted: var(--color-neutral-100);
+  --brand-muted-foreground: var(--color-neutral-600);
+  --brand-border: var(--color-neutral-200);
+  --brand-input: var(--color-neutral-200);
+  --brand-ring: var(--color-primary-500);
+
+  /* 半径 */
+  --radius-sm: 2px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-full: 9999px;
+
+  /* 半径语义别名 */
+  --brand-radius-sm: 2px;
+  --brand-radius-small: 2px;
+  --brand-radius-md: 6px;
+  --brand-radius-medium: 6px;
+  --brand-radius-lg: 10px;
+  --brand-radius-large: 10px;
+
+  /* 字体 */
+  --font-display: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+  --font-body: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+
+  /* 公共组件主题变量（见 assets/common.css） */
+  --btn-home-color: #8B2500;
+  --btn-home-bg: rgba(250, 246, 238, 0.92);
+  --btn-home-border-color: #8B2500;
+  --btn-home-margin-top: 0;
+  --btn-home-gap: 0.4rem;
+  --btn-home-padding: 10px 18px;
+  --btn-home-font-size: 14px;
+  --btn-home-letter-spacing: 2px;
+  --btn-home-backdrop: blur(8px);
+  --btn-home-hover-color: #FFFFFF;
+  --btn-home-hover-bg: #8B2500;
+  --btn-home-hover-border-color: #8B2500;
+  --btn-home-hover-shadow: 0 6px 16px rgba(139, 37, 0, 0.28);
+  --btn-home-hover-transform: translateY(-2px);
+}
+
+html {
+  font-family: var(--font-body);
+  color: var(--color-neutral-900);
+  background-color: var(--color-neutral-50);
+}
+
+/* 标题字体 */
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+/* 文字颜色工具类 */
+.text-primary { color: var(--color-primary-600); }
+.text-primary-deep { color: var(--color-primary-800); }
+.text-gold { color: var(--color-gold-500); }
+.text-ink { color: var(--color-neutral-900); }
+.text-ink-light { color: var(--color-neutral-600); }
+.text-paper { color: var(--color-neutral-50); }
+
+/* 背景色工具类 */
+.bg-paper { background-color: var(--color-neutral-50); }
+.bg-paper-deep { background-color: var(--color-neutral-100); }
+.bg-card { background-color: #FFFFFF; }
+.bg-primary { background-color: var(--color-primary-600); }
+.bg-primary-light { background-color: var(--color-primary-50); }
+.bg-gold-light { background-color: rgba(201, 162, 39, 0.08); }
+
+/* 边框色工具类 */
+.border-brand { border-color: var(--color-primary-600); }
+.border-gold { border-color: var(--color-gold-500); }
+.border-paper { border-color: var(--color-neutral-200); }
+
+/* 暗色模式 */
+html.dark {
+  --brand-background: var(--color-neutral-900);
+  --brand-foreground: var(--color-neutral-50);
+  --brand-card: var(--color-neutral-800);
+  --brand-card-foreground: var(--color-neutral-50);
+  --brand-popover: var(--color-neutral-800);
+  --brand-popover-foreground: var(--color-neutral-50);
+  --brand-primary: var(--color-primary-400);
+  --brand-primary-foreground: var(--color-neutral-900);
+  --brand-muted: var(--color-neutral-700);
+  --brand-muted-foreground: var(--color-neutral-400);
+  --brand-border: var(--color-neutral-700);
+  --brand-input: var(--color-neutral-700);
+  --brand-ring: var(--color-primary-400);
+}
+
+    </style>
+    <style>
+      /* 基础排版（原 Tailwind 工具类的等价纯 CSS 实现） */
+      body {
+        min-height: 100vh;
+        background: var(--brand-background);
+        color: var(--brand-foreground);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      td, th { overflow-wrap: break-word; word-break: break-all; word-break: auto-phrase; }
+      th { white-space: nowrap; }
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      /* 回主页按钮固定定位 */
+      .btn-home-floating {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 50;
+      }
+      /* 底部版权栏在本页回归文档流，避免遮挡海报 */
+      .site-footer {
+        position: static;
+        padding: 16px 10px 28px;
+        color: var(--color-neutral-500);
+        background: transparent;
+      }
+    </style>
+</head>
+<body>
+    <a href="../../index.html" class="btn-home btn-home-floating">
+        <span class="home-icon">🏠</span>
+        <span>回主页</span>
+    </a>
+    <style>
+        /* ========== critical-layout 关键布局样式 ========== */
+        .poster-wrapper {
+            width: 1200px;
+            margin: 0 auto;
+            min-height: 100vh;
+            background: var(--color-neutral-50);
+            position: relative;
+        }
+
+        /* ========== 装饰纹样 - 回纹边框 ========== */
+        .huiwen-border {
+            position: relative;
+            border: 2px solid var(--color-primary-600);
+        }
+        .huiwen-border::before,
+        .huiwen-border::after {
+            content: '';
+            position: absolute;
+            left: 8px;
+            right: 8px;
+            height: 2px;
+            background:
+                repeating-linear-gradient(90deg,
+                    var(--color-primary-600) 0px,
+                    var(--color-primary-600) 12px,
+                    transparent 12px,
+                    transparent 16px,
+                    var(--color-primary-600) 16px,
+                    var(--color-primary-600) 28px,
+                    transparent 28px,
+                    transparent 32px);
+        }
+        .huiwen-border::before { top: 8px; }
+        .huiwen-border::after { bottom: 8px; }
+
+        /* ========== 祥云纹样背景 ========== */
+        .cloud-pattern {
+            background-image:
+                radial-gradient(ellipse 30px 12px at 20% 30%, rgba(201, 162, 39, 0.06) 0%, transparent 70%),
+                radial-gradient(ellipse 40px 15px at 70% 60%, rgba(201, 162, 39, 0.05) 0%, transparent 70%),
+                radial-gradient(ellipse 25px 10px at 40% 80%, rgba(201, 162, 39, 0.06) 0%, transparent 70%),
+                radial-gradient(ellipse 35px 14px at 85% 20%, rgba(201, 162, 39, 0.05) 0%, transparent 70%);
+        }
+
+        /* ========== 标题区 ========== */
+        .poster-header {
+            padding: 60px 60px 40px;
+            text-align: center;
+            position: relative;
+        }
+        .poster-header::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            right: 40px;
+            bottom: 20px;
+            border: 1px solid var(--color-gold-500);
+            pointer-events: none;
+        }
+        .poster-header::after {
+            content: '';
+            position: absolute;
+            top: 36px;
+            left: 46px;
+            right: 46px;
+            bottom: 26px;
+            border: 1px solid var(--color-primary-600);
+            pointer-events: none;
+        }
+
+        #main-title {
+            font-family: var(--font-display);
+            font-size: 72px;
+            font-weight: 900;
+            color: var(--color-primary-700);
+            letter-spacing: 16px;
+            margin: 0 0 16px;
+            text-shadow: 2px 2px 0 rgba(201, 162, 39, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .title-decoration {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .title-line {
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--color-gold-500), transparent);
+        }
+        .title-diamond {
+            width: 10px;
+            height: 10px;
+            background: var(--color-primary-600);
+            transform: rotate(45deg);
+        }
+
+        #sub-title {
+            font-family: var(--font-display);
+            font-size: 22px;
+            color: var(--color-neutral-700);
+            letter-spacing: 6px;
+            margin: 0;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ========== 印章装饰 ========== */
+        .seal {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 64px;
+            height: 64px;
+            background: var(--color-primary-600);
+            color: var(--color-neutral-50);
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 1.2;
+            text-align: center;
+            writing-mode: vertical-rl;
+            letter-spacing: 2px;
+            border: 2px solid var(--color-primary-700);
+            box-shadow: inset 0 0 0 2px var(--color-primary-600), inset 0 0 0 4px var(--color-primary-700);
+            transform: rotate(-3deg);
+            opacity: 0.9;
+        }
+        .seal-header {
+            position: absolute;
+            top: 50px;
+            right: 70px;
+            z-index: 2;
+        }
+
+        /* ========== 内容区 ========== */
+        .content-sections {
+            padding: 20px 50px 60px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+        }
+
+        .section-card {
+            background: #FFFFFF;
+            border: 1px solid var(--color-neutral-200);
+            position: relative;
+            overflow: hidden;
+        }
+        .section-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg,
+                var(--color-primary-600) 0%,
+                var(--color-primary-600) 30%,
+                var(--color-gold-500) 30%,
+                var(--color-gold-500) 60%,
+                var(--color-primary-600) 60%,
+                var(--color-primary-600) 100%);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: flex-start;
+            padding: 24px 28px 12px;
+            gap: 16px;
+            border-bottom: 1px dashed var(--color-neutral-200);
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--color-primary-700);
+            margin: 0;
+            letter-spacing: 4px;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 3px;
+            background: var(--color-gold-500);
+            margin-top: 6px;
+        }
+
+        .section-seal {
+            flex-shrink: 0;
+            width: 44px;
+            height: 44px;
+            background: var(--color-primary-600);
+            color: var(--color-neutral-50);
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--color-primary-700);
+            box-shadow: inset 0 0 0 1px var(--color-primary-600), inset 0 0 0 3px var(--color-primary-700);
+            transform: rotate(-2deg);
+        }
+
+        .section-body {
+            padding: 20px 28px 28px;
+        }
+
+        .section-body p {
+            margin: 0 0 10px;
+            font-size: 15px;
+            line-height: 1.8;
+            color: var(--color-neutral-800);
+        }
+
+        .section-body .label {
+            color: var(--color-primary-600);
+            font-weight: 600;
+            font-family: var(--font-display);
+            margin-right: 4px;
+        }
+
+        /* 行政区列表 */
+        .district-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 8px;
+        }
+        .district-tag {
+            display: inline-block;
+            padding: 3px 10px;
+            font-size: 13px;
+            background: var(--color-primary-50);
+            color: var(--color-primary-700);
+            border: 1px solid var(--color-primary-200);
+            border-radius: 2px;
+            font-family: var(--font-body);
+        }
+        .district-group {
+            margin-bottom: 14px;
+        }
+        .district-group-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-gold-700);
+            margin-bottom: 6px;
+            font-family: var(--font-display);
+        }
+
+        /* 数据高亮 */
+        .data-highlight {
+            display: flex;
+            gap: 20px;
+            margin: 10px 0;
+        }
+        .data-item {
+            flex: 1;
+            text-align: center;
+            padding: 14px 10px;
+            background: linear-gradient(135deg, var(--color-primary-50), var(--color-neutral-50));
+            border: 1px solid var(--color-primary-100);
+        }
+        .data-number {
+            font-family: var(--font-display);
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--color-primary-700);
+            line-height: 1.2;
+        }
+        .data-unit {
+            font-size: 14px;
+            color: var(--color-neutral-600);
+            margin-top: 4px;
+        }
+        .data-label {
+            font-size: 13px;
+            color: var(--color-neutral-500);
+            margin-top: 2px;
+        }
+
+        /* 特色列表 */
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 8px 0 0;
+        }
+        .feature-list li {
+            position: relative;
+            padding-left: 18px;
+            font-size: 14px;
+            line-height: 2;
+            color: var(--color-neutral-800);
+        }
+        .feature-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 12px;
+            width: 6px;
+            height: 6px;
+            background: var(--color-gold-500);
+            transform: rotate(45deg);
+        }
+
+        /* 政治板块特殊样式 */
+        .politics-structure {
+            text-align: center;
+            padding: 14px;
+            background: var(--color-primary-50);
+            border: 1px solid var(--color-primary-200);
+            margin-top: 10px;
+        }
+        .politics-main {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-primary-700);
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+        .politics-divider {
+            width: 60%;
+            height: 1px;
+            background: var(--color-gold-500);
+            margin: 0 auto 10px;
+        }
+        .politics-pivots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .politics-pivot {
+            padding: 6px 12px;
+            background: #FFFFFF;
+            border: 1px solid var(--color-primary-300);
+            font-size: 13px;
+            color: var(--color-primary-700);
+            font-family: var(--font-display);
+        }
+
+        /* 交通板块 */
+        .transport-category {
+            margin-bottom: 12px;
+        }
+        .transport-category-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-primary-600);
+            margin-bottom: 4px;
+            font-family: var(--font-display);
+        }
+        .transport-items {
+            font-size: 13px;
+            line-height: 1.8;
+            color: var(--color-neutral-700);
+        }
+
+        /* 底部落款 */
+        .poster-footer {
+            padding: 30px 60px 50px;
+            text-align: center;
+            position: relative;
+        }
+        .poster-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 60px;
+            right: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--color-gold-500), transparent);
+        }
+        .footer-text {
+            font-family: var(--font-display);
+            font-size: 14px;
+            color: var(--color-neutral-500);
+            letter-spacing: 4px;
+            margin: 0;
+        }
+        .footer-decoration {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 12px;
+        }
+        .footer-cloud {
+            width: 40px;
+            height: 16px;
+            background: var(--color-gold-300);
+            border-radius: 50%;
+            opacity: 0.4;
+            position: relative;
+        }
+        .footer-cloud::before,
+        .footer-cloud::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 12px;
+            background: var(--color-gold-300);
+            border-radius: 50%;
+            opacity: 0.6;
+        }
+        .footer-cloud::before { left: -10px; top: 2px; }
+        .footer-cloud::after { right: -10px; top: 2px; }
+
+        /* 角落装饰 */
+        .corner-ornament {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--color-primary-600);
+        }
+        .corner-tl { top: 20px; left: 30px; border-right: none; border-bottom: none; }
+        .corner-tr { top: 20px; right: 30px; border-left: none; border-bottom: none; }
+        .corner-bl { bottom: 20px; left: 30px; border-right: none; border-top: none; }
+        .corner-br { bottom: 20px; right: 30px; border-left: none; border-top: none; }
+
+        /* 板块跨越 */
+        #section-culture {
+            grid-column: span 2;
+        }
+
+        /* 文化板块内容多列 */
+        .culture-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+        }
+        .culture-column h4 {
+            font-family: var(--font-display);
+            font-size: 16px;
+            color: var(--color-primary-600);
+            margin: 0 0 8px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--color-gold-300);
+            letter-spacing: 2px;
+        }
+
+        /* 经济板块 */
+        .economy-data {
+            display: flex;
+            gap: 16px;
+            margin-top: 8px;
+        }
+        .economy-stat {
+            flex: 1;
+            text-align: center;
+            padding: 16px 12px;
+            background: linear-gradient(180deg, var(--color-primary-50) 0%, #FFFFFF 100%);
+            border-top: 3px solid var(--color-primary-600);
+        }
+        .economy-value {
+            font-family: var(--font-display);
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--color-primary-700);
+        }
+        .economy-desc {
+            font-size: 12px;
+            color: var(--color-neutral-500);
+            margin-top: 4px;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 1240px) {
+            .poster-wrapper { width: 100%; }
+        }
+    </style>
+
+    <main>
+        <div class="poster-wrapper cloud-pattern">
+            <!-- 角落装饰 -->
+            <div class="corner-ornament corner-tl"></div>
+            <div class="corner-ornament corner-tr"></div>
+            <div class="corner-ornament corner-bl"></div>
+            <div class="corner-ornament corner-br"></div>
+
+            <!-- 标题区 -->
+            <header class="poster-header" id="poster-header">
+                <div class="seal seal-header">京畿之印</div>
+                <h1 id="main-title">京畿都市圈</h1>
+                <div class="title-decoration">
+                    <div class="title-line"></div>
+                    <div class="title-diamond"></div>
+                    <div class="title-line"></div>
+                </div>
+                <p id="sub-title">慕联首都都市圈 · 闽潮文化核心区</p>
+            </header>
+
+            <!-- 六大信息板块 -->
+            <div class="content-sections" id="content-sections">
+
+                <!-- 1. 范围 -->
+                <section class="section-card" id="section-scope">
+                    <div class="section-header">
+                        <div class="section-seal">范</div>
+                        <h2 class="section-title">范围</h2>
+                    </div>
+                    <div class="section-body">
+                        <p><span class="label">三府：</span>义安府、天诏府、程乡府</p>
+                        <p><span class="label">三级行政区：</span>共37个</p>
+
+                        <div class="district-group">
+                            <div class="district-group-title">义安府（18个）</div>
+                            <div class="district-list">
+                                <span class="district-tag">皇城坊</span>
+                                <span class="district-tag">青云坊</span>
+                                <span class="district-tag">朝鹤坊</span>
+                                <span class="district-tag">庆安坊</span>
+                                <span class="district-tag">永宜坊</span>
+                                <span class="district-tag">鮀城坊</span>
+                                <span class="district-tag">新政坊</span>
+                                <span class="district-tag">归藩坊</span>
+                                <span class="district-tag">春闱坊</span>
+                                <span class="district-tag">惠来县</span>
+                                <span class="district-tag">地都县</span>
+                                <span class="district-tag">揭阳县</span>
+                                <span class="district-tag">潮安县</span>
+                                <span class="district-tag">丰顺县</span>
+                                <span class="district-tag">诏安县</span>
+                                <span class="district-tag">达濠县</span>
+                                <span class="district-tag">潮阳县</span>
+                                <span class="district-tag">澄海县</span>
+                            </div>
+                        </div>
+
+                        <div class="district-group">
+                            <div class="district-group-title">程乡府（11个）</div>
+                            <div class="district-list">
+                                <span class="district-tag">梅城坊</span>
+                                <span class="district-tag">百里坊</span>
+                                <span class="district-tag">烽火坊</span>
+                                <span class="district-tag">御史坊</span>
+                                <span class="district-tag">元台坊</span>
+                                <span class="district-tag">大埔县</span>
+                                <span class="district-tag">方边县</span>
+                                <span class="district-tag">嘉应县</span>
+                                <span class="district-tag">五华县</span>
+                                <span class="district-tag">蕉岭县</span>
+                                <span class="district-tag">兴宁县</span>
+                            </div>
+                        </div>
+
+                        <div class="district-group">
+                            <div class="district-group-title">天诏府（7个）</div>
+                            <div class="district-list">
+                                <span class="district-tag">诏城坊</span>
+                                <span class="district-tag">圣淳坊</span>
+                                <span class="district-tag">洪塘县</span>
+                                <span class="district-tag">葵阳县</span>
+                                <span class="district-tag">棉湖县</span>
+                                <span class="district-tag">砲台县</span>
+                                <span class="district-tag">潮东县</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 2. 人口 -->
+                <section class="section-card" id="section-population">
+                    <div class="section-header">
+                        <div class="section-seal">人</div>
+                        <h2 class="section-title">人口</h2>
+                    </div>
+                    <div class="section-body">
+                        <div class="data-highlight">
+                            <div class="data-item">
+                                <div class="data-number">1674<span style="font-size:16px">万</span></div>
+                                <div class="data-unit">总人口</div>
+                                <div class="data-label">戢辰八十五年</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-number">400<span style="font-size:16px">万</span></div>
+                                <div class="data-unit">外来人口</div>
+                                <div class="data-label">流动人口</div>
+                            </div>
+                        </div>
+                        <p style="margin-top:16px;"><span class="label">说明：</span>京畿都市圈作为慕联首都圈，人口密集，外来人口占比约24%，彰显首都地区的吸引力与活力。</p>
+                    </div>
+                </section>
+
+                <!-- 3. 文化（跨两列） -->
+                <section class="section-card" id="section-culture">
+                    <div class="section-header">
+                        <div class="section-seal">文</div>
+                        <h2 class="section-title">文化</h2>
+                    </div>
+                    <div class="section-body">
+                        <p style="margin-bottom:16px;"><span class="label">全域通行闽潮文化</span>，程乡府部分地区为潮客文化（山客文化融合闽潮文化）。语言为闽潮语—三都片。</p>
+                        <div class="culture-grid">
+                            <div class="culture-column">
+                                <h4>菜系风味</h4>
+                                <p style="font-size:13px;line-height:1.8;margin:0 0 8px;color:var(--color-neutral-700);">
+                                    潮菜系，偏清淡，讲究食材本味，以海鲜、禽畜见长，刀工精细，调味醇和。
+                                </p>
+                                <h4 style="margin-top:14px;">特色饮食</h4>
+                                <ul class="feature-list">
+                                    <li>潮汕卤鹅</li>
+                                    <li>牛肉火锅</li>
+                                    <li>反沙芋头</li>
+                                    <li>砂锅粥</li>
+                                    <li>潮式甜汤</li>
+                                    <li>潮式月(朥)饼</li>
+                                    <li>咖喱鸡饭</li>
+                                    <li>虎皮烤鸭</li>
+                                    <li>蛇泡酒</li>
+                                </ul>
+                            </div>
+                            <div class="culture-column">
+                                <h4>语言方言</h4>
+                                <p style="font-size:13px;line-height:1.8;margin:0 0 8px;color:var(--color-neutral-700);">
+                                    闽潮语—三都片，为都市圈通用语言。程乡府部分地区兼用潮客方言，形成独特的语言文化景观。
+                                </p>
+                                <h4 style="margin-top:14px;">民俗风情</h4>
+                                <p style="font-size:13px;line-height:1.8;margin:0 0 8px;color:var(--color-neutral-700);">
+                                    闽潮民俗丰富多彩，传统节庆、宗族文化、民间艺术交相辉映，是中华文化的重要组成部分。
+                                </p>
+                            </div>
+                            <div class="culture-column">
+                                <h4>名胜景点</h4>
+                                <ul class="feature-list">
+                                    <li>辰武楼广场</li>
+                                    <li>中都潮剧院</li>
+                                    <li>盛清观</li>
+                                    <li>普光寺</li>
+                                    <li>义安塔</li>
+                                    <li>天轩新城</li>
+                                    <li>慕联国家博物院</li>
+                                    <li>闽潮民俗博物馆</li>
+                                    <li>开国纪念馆</li>
+                                    <li>平步公园</li>
+                                    <li>程乡潮客天下</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 4. 政治 -->
+                <section class="section-card" id="section-politics">
+                    <div class="section-header">
+                        <div class="section-seal">政</div>
+                        <h2 class="section-title">政治</h2>
+                    </div>
+                    <div class="section-body">
+                        <p><span class="label">中央机构：</span>大量朝廷中央部门入驻，聚集于义安府。</p>
+                        <p><span class="label">国立企业：</span>80%国立企业入驻或以京畿都市圈城市为总部。</p>
+                        <p><span class="label">政治核心：</span>皇城坊为皇宫所在与全慕联政治核心。</p>
+                        <div class="politics-structure">
+                            <div class="politics-main">一主三枢</div>
+                            <div class="politics-divider"></div>
+                            <div class="politics-pivots">
+                                <span class="politics-pivot">慕君山内阁</span>
+                                <span class="politics-pivot">宗政院</span>
+                                <span class="politics-pivot">慕戢管会</span>
+                                <span class="politics-pivot">宗慕大殿</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 5. 交通 -->
+                <section class="section-card" id="section-transport">
+                    <div class="section-header">
+                        <div class="section-seal">通</div>
+                        <h2 class="section-title">交通</h2>
+                    </div>
+                    <div class="section-body">
+                        <div class="transport-category">
+                            <div class="transport-category-title">轨道交通</div>
+                            <div class="transport-items">义安地铁集团运营，覆盖义安府、程乡府、天诏府三府</div>
+                        </div>
+                        <div class="transport-category">
+                            <div class="transport-category-title">轨道类型</div>
+                            <div class="transport-items">地铁、轻轨、市域快轨、城际铁路（地铁化运营）、有轨电车</div>
+                        </div>
+                        <div class="transport-category">
+                            <div class="transport-category-title">铁道站点</div>
+                            <div class="transport-items">义安站、义安东站、潮阳站、澄海站、惠来站、义安机场站、程乡站</div>
+                        </div>
+                        <div class="transport-category">
+                            <div class="transport-category-title">主要铁路</div>
+                            <div class="transport-items">京清铁路、京潮光铁路、京燕铁路、京颜铁路</div>
+                        </div>
+                        <div class="transport-category">
+                            <div class="transport-category-title">航空</div>
+                            <div class="transport-items">义安首都国际机场（YIA），年均客流量1000万</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 6. 经济 -->
+                <section class="section-card" id="section-economy" style="grid-column: span 2;">
+                    <div class="section-header">
+                        <div class="section-seal">经</div>
+                        <h2 class="section-title">经济</h2>
+                    </div>
+                    <div class="section-body">
+                        <div class="economy-data">
+                            <div class="economy-stat">
+                                <div class="economy-value">14634.4万文</div>
+                                <div class="economy-desc">义安府名义MGP<br>戢辰八十四年（靖渊十二年）</div>
+                            </div>
+                            <div class="economy-stat">
+                                <div class="economy-value">16000万文</div>
+                                <div class="economy-desc">全都市圈预计名义MGP<br>涵盖三府全域</div>
+                            </div>
+                            <div class="economy-stat">
+                                <div class="economy-value">暂未纳入</div>
+                                <div class="economy-desc">程乡府与天诏府<br>统计数据待完善</div>
+                            </div>
+                        </div>
+                        <p style="margin-top:16px;text-align:center;color:var(--color-neutral-500);font-size:13px;">
+                            京畿都市圈作为慕联政治经济中心，经济实力雄厚，引领全国发展。
+                        </p>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- 底部 -->
+            <footer class="poster-footer" id="poster-footer">
+                <div class="footer-decoration">
+                    <div class="footer-cloud"></div>
+                    <div class="footer-cloud"></div>
+                    <div class="footer-cloud"></div>
+                </div>
+                <p class="footer-text">慕联 · 京畿都市圈</p>
+            </footer>
+        </div>
+    </main>
+
+    <footer class="site-footer">版权所有 © 2019-2026 天狐慕氏联邦帝国 · 京畿都市圈</footer>
+</body>
+</html>
