@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>慕联都市圈系列 · 慕联</title>
+    <link rel="stylesheet" href="../../assets/common.css">
+    <style>
+        /* ============================================
+           慕联都市圈系列 - 导航页
+           东方古韵主题（与各都市圈详情页保持一致）
+           ============================================ */
+        :root {
+            --color-primary-50: #FBF2F0;
+            --color-primary-100: #F5E0DB;
+            --color-primary-200: #E8B8AE;
+            --color-primary-300: #D68A7A;
+            --color-primary-600: #8B2500;
+            --color-primary-700: #701F00;
+            --color-neutral-50: #FAF6EE;
+            --color-neutral-200: #E6DCC6;
+            --color-neutral-500: #8B7A54;
+            --color-neutral-600: #6B5C3E;
+            --color-neutral-700: #4D412C;
+            --color-neutral-900: #1F1A12;
+            --color-gold-500: #C9A227;
+
+            --font-display: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+            --font-body: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+
+            /* 公共组件主题变量（见 assets/common.css） */
+            --btn-home-color: #8B2500;
+            --btn-home-bg: rgba(250, 246, 238, 0.92);
+            --btn-home-border-color: #8B2500;
+            --btn-home-margin-top: 0;
+            --btn-home-gap: 0.4rem;
+            --btn-home-padding: 10px 18px;
+            --btn-home-font-size: 14px;
+            --btn-home-letter-spacing: 2px;
+            --btn-home-backdrop: blur(8px);
+            --btn-home-hover-color: #FFFFFF;
+            --btn-home-hover-bg: #8B2500;
+            --btn-home-hover-border-color: #8B2500;
+            --btn-home-hover-shadow: 0 6px 16px rgba(139, 37, 0, 0.28);
+            --btn-home-hover-transform: translateY(-2px);
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: var(--font-body);
+            color: var(--color-neutral-900);
+            background-color: var(--color-neutral-50);
+            background-image:
+                radial-gradient(ellipse 30px 12px at 20% 30%, rgba(201, 162, 39, 0.06) 0%, transparent 70%),
+                radial-gradient(ellipse 40px 15px at 70% 60%, rgba(201, 162, 39, 0.05) 0%, transparent 70%),
+                radial-gradient(ellipse 25px 10px at 40% 80%, rgba(201, 162, 39, 0.06) 0%, transparent 70%),
+                radial-gradient(ellipse 35px 14px at 85% 20%, rgba(201, 162, 39, 0.05) 0%, transparent 70%);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* 回主页按钮固定定位 */
+        .btn-home-floating { position: fixed; top: 20px; left: 20px; z-index: 50; }
+
+        .series-shell {
+            width: min(100% - 40px, 1000px);
+            margin: 0 auto;
+            padding: 60px 0 80px;
+        }
+
+        /* ========== 标题区 ========== */
+        .series-header {
+            position: relative;
+            text-align: center;
+            padding: 40px 20px 30px;
+        }
+        .series-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 24px;
+            right: 24px;
+            bottom: 0;
+            border: 1px solid var(--color-gold-500);
+            pointer-events: none;
+        }
+        .series-header::after {
+            content: '';
+            position: absolute;
+            top: 6px;
+            left: 30px;
+            right: 30px;
+            bottom: 6px;
+            border: 1px solid var(--color-primary-600);
+            pointer-events: none;
+        }
+        .series-title {
+            position: relative;
+            z-index: 1;
+            font-family: var(--font-display);
+            font-size: 46px;
+            font-weight: 900;
+            color: var(--color-primary-700);
+            letter-spacing: 8px;
+            margin: 0 0 14px;
+            text-shadow: 2px 2px 0 rgba(201, 162, 39, 0.3);
+        }
+        .title-decoration {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin: 16px 0;
+        }
+        .title-line {
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--color-gold-500), transparent);
+        }
+        .title-diamond {
+            width: 10px;
+            height: 10px;
+            background: var(--color-primary-600);
+            transform: rotate(45deg);
+        }
+        .series-subtitle {
+            position: relative;
+            z-index: 1;
+            font-family: var(--font-display);
+            font-size: 17px;
+            letter-spacing: 4px;
+            color: var(--color-neutral-700);
+            margin: 0;
+        }
+
+        /* ========== 都市圈卡片网格 ========== */
+        .series-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 44px;
+        }
+        .circle-card {
+            position: relative;
+            display: block;
+            padding: 28px 28px 26px;
+            background: #FFFFFF;
+            border: 1px solid var(--color-neutral-200);
+            color: inherit;
+            text-decoration: none;
+            overflow: hidden;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+        .circle-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg,
+                var(--color-primary-600) 0%,
+                var(--color-primary-600) 30%,
+                var(--color-gold-500) 30%,
+                var(--color-gold-500) 60%,
+                var(--color-primary-600) 60%,
+                var(--color-primary-600) 100%);
+        }
+        .circle-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--color-primary-300);
+            box-shadow: 0 12px 28px rgba(139, 37, 0, 0.14);
+        }
+        .circle-card:focus-visible {
+            outline: 2px solid var(--color-primary-600);
+            outline-offset: 2px;
+        }
+
+        .circle-seal {
+            position: absolute;
+            top: 20px;
+            right: 22px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            background: var(--color-primary-600);
+            color: var(--color-neutral-50);
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 1.15;
+            text-align: center;
+            writing-mode: vertical-rl;
+            letter-spacing: 2px;
+            border: 2px solid var(--color-primary-700);
+            box-shadow: inset 0 0 0 1px var(--color-primary-600), inset 0 0 0 3px var(--color-primary-700);
+            transform: rotate(-3deg);
+            opacity: 0.92;
+        }
+
+        .circle-name {
+            font-family: var(--font-display);
+            font-size: 27px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            color: var(--color-primary-700);
+            margin: 0 0 4px;
+        }
+        .circle-name::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 3px;
+            background: var(--color-gold-500);
+            margin-top: 8px;
+        }
+        .circle-tagline {
+            margin: 12px 0 16px;
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--color-neutral-600);
+        }
+        .circle-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .circle-tag {
+            display: inline-block;
+            padding: 3px 10px;
+            font-size: 12px;
+            color: var(--color-primary-700);
+            background: var(--color-primary-50);
+            border: 1px solid var(--color-primary-200);
+            border-radius: 2px;
+        }
+        .circle-enter {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 20px;
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: var(--color-primary-600);
+        }
+        .circle-card:hover .circle-enter { color: var(--color-primary-700); }
+        .circle-enter .arrow { transition: transform 0.25s ease; }
+        .circle-card:hover .circle-enter .arrow { transform: translateX(4px); }
+
+        /* 底部版权栏在本页回归文档流 */
+        .site-footer {
+            position: static;
+            padding: 20px 10px 30px;
+            color: var(--color-neutral-500);
+            background: transparent;
+        }
+
+        @media (max-width: 600px) {
+            .series-shell { width: min(100% - 28px, 1000px); padding-top: 40px; }
+            .series-title { font-size: 34px; letter-spacing: 4px; }
+            .series-header::before { left: 8px; right: 8px; }
+            .series-header::after { left: 14px; right: 14px; }
+            .circle-card { padding: 22px; }
+        }
+    </style>
+</head>
+<body>
+    <a href="../../index.html" class="btn-home btn-home-floating">
+        <span class="home-icon">🏠</span>
+        <span>回主页</span>
+    </a>
+
+    <main class="series-shell">
+        <header class="series-header">
+            <h1 class="series-title">慕联都市圈系列</h1>
+            <div class="title-decoration">
+                <div class="title-line"></div>
+                <div class="title-diamond"></div>
+                <div class="title-line"></div>
+            </div>
+            <p class="series-subtitle">辑录联邦各都市圈 · 纵览人口、文化、政治、交通与经济</p>
+        </header>
+
+        <nav class="series-grid" aria-label="都市圈列表">
+            <a class="circle-card" href="jingji.html">
+                <span class="circle-seal" aria-hidden="true">京畿</span>
+                <h2 class="circle-name">京畿都市圈</h2>
+                <p class="circle-tagline">慕联首都都市圈 · 闽潮文化核心区，涵盖义安、程乡、天诏三府。</p>
+                <div class="circle-tags">
+                    <span class="circle-tag">首都圈</span>
+                    <span class="circle-tag">三府</span>
+                    <span class="circle-tag">人口 1674 万</span>
+                    <span class="circle-tag">闽潮文化</span>
+                </div>
+                <span class="circle-enter">进入浏览 <span class="arrow" aria-hidden="true">›</span></span>
+            </a>
+        </nav>
+    </main>
+
+    <footer class="site-footer">版权所有 © 2019-2026 天狐慕氏联邦帝国 · 慕联都市圈系列</footer>
+</body>
+</html>
