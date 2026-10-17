@@ -241,6 +241,34 @@
             font-size: 1.1rem;
         }
 
+        /* ===== 公示栏 ===== */
+        .notice-bar {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 2rem;
+            padding: 0.55rem 1.4rem;
+            background: rgba(255, 215, 0, 0.06);
+            border: 1px solid rgba(255, 215, 0, 0.18);
+            border-radius: 30px;
+            font-size: 0.95rem;
+            letter-spacing: 0.1rem;
+            color: #e0e0e0;
+        }
+        .notice-bar .notice-icon { font-size: 1.05rem; }
+        .notice-bar .notice-label {
+            font-family: "Microsoft YaHei", sans-serif;
+            font-weight: 700;
+            color: #ffd700;
+            letter-spacing: 0.2rem;
+        }
+        .notice-bar .notice-text {
+            color: #c8a84e;
+        }
+        @media (max-width: 680px) {
+            .notice-bar { font-size: 0.85rem; padding: 0.45rem 1rem; }
+        }
+
         /* ===== 按钮组 ===== */
         .btn-group {
             position: fixed;
@@ -562,6 +590,12 @@
             <span>潮交所</span>
         </div>
         
+    </div>
+
+    <div class="notice-bar">
+        <span class="notice-icon" aria-hidden="true">📢</span>
+        <span class="notice-label">公示栏</span>
+        <span class="notice-text">圣淳年第五轮</span>
     </div>
 
     <div class="divider"></div>
