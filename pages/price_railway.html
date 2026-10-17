@@ -63,6 +63,7 @@
 <script>
     let connections = {};
     let stations = {};
+    let stationMeta = {};
     let fare = {
         sameRegion: { yibei: 200, jia: 300 },
         crossRegion: { baseYibei: 200, baseJia: 300, jiaServicePerStep: 100 }
@@ -155,8 +156,13 @@
         startSelect.innerHTML = '';
         endSelect.innerHTML = '';
         for (let code in stations) {
-            startSelect.add(new Option(`${code} (${stations[code]})`, code));
-            endSelect.add(new Option(`${code} (${stations[code]})`, code));
+            const meta = stationMeta[code] || {};
+            // 不客运车站不进入下拉框，但仍保留在 stations 中参与路径计算
+            if (meta.selectable === false) continue;
+            const suffix = meta.service ? ` · ${meta.service}` : '';
+            const label = `${code} (${stations[code]}${suffix})`;
+            startSelect.add(new Option(label, code));
+            endSelect.add(new Option(label, code));
         }
     }
 
@@ -167,6 +173,7 @@
             const data = await res.json();
             connections = data.connections || {};
             stations = data.stations || {};
+            stationMeta = data.stationMeta || {};
             if (data.fare) fare = data.fare;
             initStationSelects();
         } catch (e) {
