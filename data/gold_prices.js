@@ -5,5 +5,7 @@ window.GOLD_PRICES = {
     "title": "金玉满堂 · 慕联金价发布",
     "currency": "文/克"
   },
-  "prices": []
+  "prices": [
+    { "date": "2026-11-01", "time": "11:25", "price": 546.26, "trend": "涨", "note": "实时金价" }
+  ]
 }
