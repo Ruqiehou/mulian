@@ -6,6 +6,7 @@ window.GOLD_PRICES = {
     "currency": "文/克"
   },
   "prices": [
-    { "date": "2026-11-01", "time": "11:25", "price": 546.26, "trend": "涨", "note": "实时金价" }
+    { "date": "2026-11-01", "time": "11:25", "price": 546.26, "trend": "涨", "note": "实时金价" },
+    { "date": "2026-11-05", "time": "16:50", "price": 412.71, "trend": "涨", "note": "实时金价" }
   ]
 }
